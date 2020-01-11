@@ -1,5 +1,6 @@
 {
   "name": "nercadium",
+  "productName": "Nercadium",
   "version": "0.0.1",
   "author": {
     "name": "Timo Müller"
@@ -13,7 +14,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "electron-build": "ng build --prod && electron ."
+    "electron-build": "ng build --prod && electron .",
+    "electron-packager-all": "ng build --prod && electron-packager . --all --no-prune --ignore=/node_modules --ignore=/e2e --ignore=/src --overwrite --out=./electronPackage"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +41,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "electron": "^7.1.8",
+    "electron-packager": "^14.1.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
