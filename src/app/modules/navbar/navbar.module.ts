@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NavbarComponent } from './components/navbar.component';
 import { MinMaxCloseComponent } from './components/min-max-close/min-max-close.component';
+import {RouterModule} from '@angular/router';
 
 
 @NgModule({
@@ -11,8 +12,9 @@ import { MinMaxCloseComponent } from './components/min-max-close/min-max-close.c
     NavbarComponent,
     MinMaxCloseComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule
+    ]
 })
 export class NavbarModule { }
