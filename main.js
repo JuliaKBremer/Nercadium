@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 let win;
 
@@ -8,20 +8,41 @@ function createWindow () {
     width: 600,
     height: 600,
     backgroundColor: '#ffffff',
-    icon: `file://${__dirname}/dist/assets/logo.png`
+    icon: `file://${__dirname}/dist/assets/logo.png`,
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
-
 
   win.loadURL(`file://${__dirname}/dist/Nercadium/index.html`);
 
-  //// uncomment below to open the DevTools.
-  // win.webContents.openDevTools()
+  // uncomment below to open the DevTools.
+  win.webContents.openDevTools();
 
   // Event when the window is closed.
   win.on('closed', function () {
     win = null
-  })
+  });
 }
+
+
+//Mainprozess listeners
+ipcMain.on('close-window', () => {
+  win.close();
+});
+
+ipcMain.on('minimize-window', () => {
+  win.minimize();
+});
+
+ipcMain.on('maximize-window', () => {
+  win.maximize();
+});
+
+ipcMain.on('unmaximize-window', () => {
+  win.unmaximize();
+});
+
 
 // Create window on electron intialization
 app.on('ready', createWindow);
