@@ -1,7 +1,19 @@
- <a routerLink=""  routerLinkActive="active"><h1>Nercadium</h1></a>
- <a routerLink="/editor" routerLinkActive="active">Editor</a>
- <a routerLink="/play" routerLinkActive="active">Play</a>
- <a routerLink="/library" routerLinkActive="active">Library</a>
- <a routerLink="/store" routerLinkActive="active">Store</a>
+<header class="navbar">
+  <a class="navbar__headline" routerLink=""  routerLinkActive="active">
+    <img src="assets/nercadium-logo@0,5x.png" class="navbar__logo" alt="NERCADIUM">
+  </a>
 
-<app-min-max-close></app-min-max-close>
+  <nav class="navbar__navElement">
+    <ul class="navbar__navList">
+      <li class="navbar__listItem" routerLink="/editor" routerLinkActive="navbar__listItem--Active"><a>Editor</a></li>
+      <li class="navbar__listItem" routerLink="/play" routerLinkActive="navbar__listItem--Active"><a>Play</a></li>
+      <li class="navbar__listItem" routerLink="/library" routerLinkActive="navbar__listItem--Active"><a>Library</a></li>
+      <li class="navbar__listItem" routerLink="/store" routerLinkActive="navbar__listItem--Active"><a>Store</a></li>
+    </ul>
+  </nav>
+
+  <div class="navbar_toolbar">
+    <app-min-max-close></app-min-max-close>
+  </div>
+
+</header>
