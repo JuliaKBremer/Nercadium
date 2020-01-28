@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CoreModule} from './core/core.module';
 import {NavbarModule} from './modules/navbar/navbar.module';
+import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
         StorageServiceModule,
         AppRoutingModule,
         CoreModule,
+        HttpClientModule,
         NavbarModule
     ],
   providers: [],

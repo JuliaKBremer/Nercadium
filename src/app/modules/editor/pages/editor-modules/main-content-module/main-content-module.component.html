@@ -1,14 +1,16 @@
 <p>main-content-module works!</p>
 <div>
-  <button >
+  <input [(ngModel)]="Path" />
+  <button (click)="GetTest()">
     Laden
   </button>
-  <button>
+  <button (click)="CreateFile()">
     Speichern
   </button>
   <button>
     Neu
   </button>
-  <label >
+  <label>
+    {{GetResult()}}
   </label>
 </div>
