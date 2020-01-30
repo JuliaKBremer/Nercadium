@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-empty-interface
-export interface IGameScene {
+export interface INote {
   id: number;
   Name: string;
   Descripton: string;
