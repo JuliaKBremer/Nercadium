@@ -6,6 +6,7 @@ import {CoreModule} from './core/core.module';
 import {NavbarModule} from './modules/navbar/navbar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
+import {CKEditor5} from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
