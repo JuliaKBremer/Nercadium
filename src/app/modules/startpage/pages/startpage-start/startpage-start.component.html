@@ -1,9 +1,24 @@
-<div class="flexContainer" style="max-width: 1000px; width:50vw;">
-  <p>startpage-start works!</p>
+<div class="flexContainer startpageContainerToAlign">
 
-  <input type="text" style="margin-bottom: 10px;" placeholder="Ich bin 1 Input">
-  <textarea style="margin-bottom: 10px;">Deine Omma</textarea>
+  <h1 class="startpageSliderContainer__headline">Willkommen</h1>
 
-  <button style="margin-bottom: 10px;">Zerstöre mich</button>
+  <swiper class="startpageSliderContainer" [config]="config" [(index)]="index">
+    <div class="startpageSliderContainer__slide" style="background-color: green;">
+      <p>SCHLEIDER EINSCH</p>
+    </div>
+
+    <div class="startpageSliderContainer__slide" style="background-color: darkred;">
+      <p>SCHLEIDER SCHWAI</p>
+    </div>
+
+    <div class="startpageSliderContainer__slide" style="background-color: darkolivegreen;">
+      <p>SCHLEIDER DRAI</p>
+    </div>
+
+    <div class="startpageSliderContainer__slide" style="background-color: sienna;">
+      <p>SCHLEIDER FIAR</p>
+    </div>
+  </swiper>
+
 </div>
 

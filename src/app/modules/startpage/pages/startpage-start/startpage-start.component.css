@@ -1,0 +1,25 @@
+.startpageContainerToAlign {
+  flex-direction: column;
+  margin: auto;
+}
+
+.startpageSliderContainer {
+  margin:auto;
+}
+
+.startpageSliderContainer {
+  height: 125px;
+  width: 80vw;
+  max-width: 1024px;
+}
+
+.startpageSliderContainer__slide {
+  display: flex;
+  flex-direction: column;
+  width: 55vw;
+  border-radius: 2px;
+}
+
+.startpageSliderContainer__slide p {
+  margin: auto;
+}
