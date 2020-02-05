@@ -1,41 +1,27 @@
 import { Injectable } from '@angular/core';
-import { IpcRenderer } from 'electron';
+import {ElectronAngularCommunicationService} from '../../../../core/service/electron-angular-communication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MinMaxCloseService {
 
-  private ipc: IpcRenderer;
-  constructor() {
-    if ((window as any).require) {
-      try {
-        this.ipc = (window as any).require('electron').ipcRenderer;
-      } catch (error) {
-        throw error;
-      }
-    } else {
-      console.warn('Could not load electron ipc');
-    }
+  constructor(private communicationService: ElectronAngularCommunicationService ) {
   }
 
   public CloseWindow() {
-    console.log('close');
-    this.ipc.send('close-window');
+    this.communicationService.sendEvent('close-window');
   }
 
   public MinimizeWindow() {
-    console.log('minimize');
-    this.ipc.send('minimize-window');
+    this.communicationService.sendEvent('minimize-window');
   }
 
   public MaximizeWindow() {
-    console.log('maximize');
-    this.ipc.send('maximize-window');
+    this.communicationService.sendEvent('maximize-window');
   }
 
   public UnmaximizeWindow() {
-    console.log('unmaximize');
-    this.ipc.send('unmaximize-window');
+    this.communicationService.sendEvent('unmaximize-window');
   }
 }

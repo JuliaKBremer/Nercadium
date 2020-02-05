@@ -25,8 +25,7 @@ class Storage {
   }
 
   writeData(filePath, fileName, fileData) {
-    if(!fs.existsSync(filePath))
-      fs.mkdirSync(filePath, {recursive: true});
+    this.checkDirPath(filePath);
 
     fs.writeFile(path.join(filePath, fileName), JSON.stringify(fileData, null, 2), (err) => {
       if(err) throw err;
@@ -35,8 +34,7 @@ class Storage {
   }
 
   appendData(filePath, fileName, fileText) {
-    if(!fs.existsSync(filePath))
-      fs.mkdirSync(filePath, {recursive: true});
+    this.checkDirPath(filePath);
 
     fs.appendFile(path.join(filePath, fileName), fileText + '\n', (err) => {
       if (err) throw err;
@@ -58,6 +56,12 @@ class Storage {
       if (err) throw err;
       console.log('delet file');
     })
+  }
+
+  // Checking the path from directory, if it no exist it creat the directory.
+  checkDirPath(filePath) {
+    if(!fs.existsSync(filePath))
+      fs.mkdirSync(filePath, {recursive: true});
   }
 }
 
