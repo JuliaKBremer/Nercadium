@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HotkeyService} from '../../../../core/service/hotkey/hotkey.service';
 
 @Component({
   selector: 'app-editor-start',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorStartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private hotkeyService: HotkeyService) {
+  }
 
   ngOnInit() {
+    this.hotkeyService.addShortcut(['a']).subscribe(e => console.log(e));
   }
 
 }

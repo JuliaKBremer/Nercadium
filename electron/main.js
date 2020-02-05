@@ -7,42 +7,55 @@ const storage = new Storage();
 const defaultElectronConfig = {
   width: 1280,
   height: 720,
-  backgroundColor: '#ffffff',
-  icon: `file://${__dirname}/dist/Nercadium/assets/logo.jpg`,
+  minWidth: 800,
+  minHeight: 600,
+  icon: `file://${__dirname}/../dist/Nercadium/assets/logo.jpg`,
   webPreferences: {
     nodeIntegration: true
   },
   frame: false,
-  applicationMenu: false
+  show: false,
+  transparent: true
 };
 
 function createWindow () {
 
+  // Load the config when exist
   let electronConfig = storage.readData(app.getPath('userData') + '/config', 'electronConfig.json' ,defaultElectronConfig);
 
   // Create the browser window.
   win = new BrowserWindow(electronConfig);
 
-  win.loadURL(`file://${__dirname}/dist/Nercadium/index.html`);
+  // Load buildet index.html
+  win.loadURL(`file://${__dirname}/../dist/Nercadium/index.html`);
 
-  win.webContents.openDevTools();
+  win.openDevTools();
 
+  // Window listeners
   // Event when the window is closed.
   win.on('closed', function () {
-    win = null
+    win = null;
   });
 
-  // Event when the window is resized.
+  // Event when the page is full rendered
+  win.on('ready-to-show', () => {
+    win.show();
+  });
+
+  // Event when the window is resized. Save new window size in electron settings.
   win.on('resize', () => {
-    let {width, height}  = win.getBounds();
+    let {width, height, x, y}  = win.getBounds();
     electronConfig.width = width;
     electronConfig.height = height;
+    electronConfig.x = x;
+    electronConfig.y = y;
+
     storage.writeData(app.getPath('userData') + '/config','electronConfig.json', electronConfig);
   });
 }
 
 
-// Mainprozess listeners
+// Mainprozess listeners, listen to events send by angular.
 ipcMain.on('close-window', () => {
   win.close();
 });
@@ -67,6 +80,8 @@ ipcMain.on('open-close-devTools', () => {
     win.openDevTools();
 });
 
+// TODO event listeners to save, load, delete, rename...
+
 
 // App listeners
 // Create window on electron intialization
@@ -77,13 +92,13 @@ app.on('window-all-closed', function () {
 
   // On macOS specific close process
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
 });
 
 app.on('activate', function () {
-  // macOS specific close process
+  // macOS specific open process
   if (win === null) {
-    createWindow()
+    createWindow();
   }
 });
