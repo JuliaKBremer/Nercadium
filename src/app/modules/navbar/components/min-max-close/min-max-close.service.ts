@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {ElectronAngularCommunicationService} from '../../../../core/service/electron-angular-communication.service';
+// tslint:disable-next-line:max-line-length
+import {ElectronAngularCommunicationService} from '../../../../core/service/electronAngularCommunication/electron-angular-communication.service';
 
 @Injectable({
   providedIn: 'root'

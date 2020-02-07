@@ -25,20 +25,18 @@ class Storage {
   }
 
   writeData(filePath, fileName, fileData) {
-    this.checkDirPath(filePath);
+    this.checkDirPathAndCreate(filePath);
 
     fs.writeFile(path.join(filePath, fileName), JSON.stringify(fileData, null, 2), (err) => {
       if(err) throw err;
-      console.log('saved');
     });
   }
 
   appendData(filePath, fileName, fileText) {
-    this.checkDirPath(filePath);
+    this.checkDirPathAndCreate(filePath);
 
     fs.appendFile(path.join(filePath, fileName), fileText + '\n', (err) => {
       if (err) throw err;
-      console.log('append data to file');
     })
   }
 
@@ -47,19 +45,17 @@ class Storage {
     let newFile = path.join(filePath, newFileName);
     fs.rename(oldFile, newFile, (err) => {
       if (err) throw err;
-      console.log('file renamed');
     });
   }
 
   deleteData(filePath, fileName) {
     fs.unlink(path.join(filePath, fileName), (err) => {
       if (err) throw err;
-      console.log('delet file');
     })
   }
 
   // Checking the path from directory, if it no exist it creat the directory.
-  checkDirPath(filePath) {
+  checkDirPathAndCreate(filePath) {
     if(!fs.existsSync(filePath))
       fs.mkdirSync(filePath, {recursive: true});
   }
