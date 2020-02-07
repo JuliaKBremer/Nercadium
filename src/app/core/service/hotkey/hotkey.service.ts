@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {ElectronAngularCommunicationService} from '../electron-angular-communication.service';
+import {ElectronAngularCommunicationService} from '../electronAngularCommunication/electron-angular-communication.service';
 import {Observable} from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import {EventManager} from '@angular/platform-browser';

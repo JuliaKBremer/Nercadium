@@ -80,7 +80,27 @@ ipcMain.on('open-close-devTools', () => {
     win.openDevTools();
 });
 
-// TODO event listeners to save, load, delete, rename...
+ipcMain.on('save-data', (event, data) => {
+  storage.writeData(data[0].filePath, data[0].fileName, data[0].fileData);
+});
+
+ipcMain.handle('load-data', async (event, data) => {
+  let loadedData;
+  loadedData = await storage.readData(data[0].filePath, data[0].fileName);
+  return loadedData;
+});
+
+ipcMain.on('rename-data', (event, data) => {
+  storage.renameData(data[0].filePath, data[0].oldFileName, data[0].newFileName);
+});
+
+ipcMain.on('delete-data', (event, data) => {
+  storage.deleteData(data[0].filePath, data[0].fileName);
+});
+
+ipcMain.on('append-text', ((event, data) => {
+  storage.appendData(data[0].filePath, data[0].fileName, data[0].text);
+}));
 
 
 // App listeners

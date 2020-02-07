@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {HotkeyService} from './core/service/hotkey/hotkey.service';
-import {ElectronAngularCommunicationService} from './core/service/electron-angular-communication.service';
+import {ElectronAngularCommunicationService} from './core/service/electronAngularCommunication/electron-angular-communication.service';
 
 
 @Component({
