@@ -26,10 +26,13 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow(electronConfig);
 
+  // Disable menu
+  win.setMenu(null);
+
   // Load buildet index.html
   win.loadURL(`file://${__dirname}/../dist/Nercadium/index.html`);
 
-  win.openDevTools();
+  // win.openDevTools();
 
   // Window listeners
   // Event when the window is closed.
