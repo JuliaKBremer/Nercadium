@@ -1,0 +1,7 @@
+.navbar__navList{
+  display: flex;
+  flex-direction: row;
+}
+.navbar__listItem{
+  flex-grow: 1;
+}
