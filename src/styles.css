@@ -46,7 +46,9 @@ button {
   background-color: #2e2e2e;
   display: flex;
   flex-direction: row;
-  padding: 5px 0 5px 0; }
+  padding: 5px 0 5px 0;
+  -webkit-app-region: drag;
+}
 
 .navbar__headline {
   margin: 4px 0 0 0; }
@@ -82,7 +84,6 @@ button {
   flex-direction: row; }
 
 .navbar_toolbar {
-  /* TODO: Maybe replace text of toolbar with some icons in the upper right corner? */
-  display: none; }
+  /*display: none;*/ }
 
 /*# sourceMappingURL=styles.css.map */

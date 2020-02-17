@@ -1,4 +1,4 @@
-<p (click)="CloseWindow()">close</p>
+<p (click)="CloseWindow()"><i class="fas fa-window-minimize">Zeige mich</i></p>
 <p (click)="MinimizeWindow()">min</p>
-<p (click)="MaximizeWindow()">max</p>
-<p (click)="UnmaximizeWindow()">unmax</p>
+<p (click)="MaximizeWindow()" *ngIf="!isMaximized">max</p>
+<p (click)="UnmaximizeWindow()" *ngIf="isMaximized">unmax</p>

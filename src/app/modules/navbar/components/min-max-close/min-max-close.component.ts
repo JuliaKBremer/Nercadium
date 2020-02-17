@@ -10,6 +10,8 @@ export class MinMaxCloseComponent implements OnInit {
 
   constructor(private mmcService: MinMaxCloseService) { }
 
+  isMaximized = false;
+
   ngOnInit() {
   }
 
@@ -19,13 +21,16 @@ export class MinMaxCloseComponent implements OnInit {
 
   public MinimizeWindow() {
     this.mmcService.MinimizeWindow();
+    this.isMaximized = false;
   }
 
   public MaximizeWindow() {
     this.mmcService.MaximizeWindow();
+    this.isMaximized = true;
   }
 
   public UnmaximizeWindow() {
     this.mmcService.UnmaximizeWindow();
+    this.isMaximized = false;
   }
 }
