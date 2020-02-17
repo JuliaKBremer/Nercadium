@@ -83,7 +83,25 @@ button {
   display: flex;
   flex-direction: row; }
 
+.navbar__listItem,
+.navbar__logo,
+.navbar__navList,
 .navbar_toolbar {
-  /*display: none;*/ }
+  -webkit-app-region: no-drag;
+}
+
+.navbar_toolbar__icons {
+  display:flex;
+  flex-direction: row;
+}
+
+.navbar_toolbar {
+  margin-left: auto;
+  order: 2;
+}
+
+.navbar_toolbar__toolIcon {
+  padding: 0 10px 0 5px;
+}
 
 /*# sourceMappingURL=styles.css.map */
