@@ -4,7 +4,7 @@ import {IGameCharacter} from '../../../Interfaces/Editor/IGameCharacter';
 import {IGameScene} from '../../../Interfaces/Editor/IGameScene';
 import {IGameScript} from '../../../Interfaces/Editor/IGameScript';
 
-class AdventureObject implements IAdventureObject {
+export class AdventureObject implements IAdventureObject {
 
   // ID of the Adventure.
   public id: number;
