@@ -1,0 +1,8 @@
+<div *ngIf="selectedItem">
+  <div *ngFor="let key of objectKeys(selectedItem.properties)">
+    {{key + ':' + selectedItem.properties[key]}}
+    <label>
+      <input [(ngModel)]="selectedItem.properties[key]">
+    </label>
+  </div>
+</div>

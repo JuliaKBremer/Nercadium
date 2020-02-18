@@ -22,4 +22,7 @@ export class TemplateService {
   public AddObjectToSelectedTemplate(templateId: number, templateObjcet: TemplateObjectBase<any>) {
     this.selectedTemplate.AddObjcet(templateObjcet);
   }
+
+
+
 }

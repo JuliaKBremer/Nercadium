@@ -1,0 +1,10 @@
+<div style="display: flex">
+  <app-sammlung style="width: 250px; flex-shrink: 0"
+                [samlung]="samlung"
+                (itemClicked)="itemClicked($event)"
+                (addTemplate)="addTemplate()"
+                (addComponent)="addComponent($event)"></app-sammlung>
+  <app-main style="width: 100%"></app-main>
+  <app-properties style="width: 250px; flex-shrink: 0"
+                  [selectedItem]="selectedItem"></app-properties>
+</div>
