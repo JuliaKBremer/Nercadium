@@ -7,7 +7,7 @@ export interface IGameChapter {
   Name: string;
 
   // Beschreibung
-  Descripton: string;
+  Description: string;
 
   // Text / Inhalt
   Text: string;

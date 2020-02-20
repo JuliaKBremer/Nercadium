@@ -10,7 +10,7 @@ export interface IGameObject {
   Name: string;
 
   // Beschreibung
-  Descripton: string;
+  Description: string;
 
   // Zugewiesenen Werte / Stats .. whatever
   Properties: Array<IProperty>[];

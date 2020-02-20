@@ -7,7 +7,7 @@ export interface IProperty {
   value: object;
 
   // Beschreibung zu dem Property / was es sein soll..
-  description: string;
+  Description: string;
 
   // Type evtl. hierfür ein Enum?
   type: number;
