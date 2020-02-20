@@ -7,6 +7,7 @@ import {NavbarModule} from './modules/navbar/navbar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {CKEditor5} from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,19 @@
+<div class="flexContainer">
+  <form #articleForm="ngForm" (ngSubmit)="onSubmit()">
+    <input
+      class="form-control" type="text"
+      placeholder="Article Title" id="title"
+      required [(ngModel)]="article.title"
+      name="name"
+      >
+    <ckeditor
+      [config]="editorConfig" [editor]="Editor"
+      required [(ngModel)]="article.text"
+      data="" name="text"
+    ></ckeditor>
+    <button
+      type="submit" class="btn btn-primary"
+      [disabled]="articleForm.invalid"
+    >Submit</button>
+  </form>
+</div>

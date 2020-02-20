@@ -155,4 +155,11 @@ mat-grid-tile{
 }
 
 
+.ck.ck-editor{
+  min-width: 50vw;
+  max-width: 70vw;
+}
+.ck-editor__editable {
+  min-height: 256px;
+}
 /*# sourceMappingURL=styles.css.map */
