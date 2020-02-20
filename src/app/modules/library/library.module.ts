@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { LibraryRoutingModule } from './library-routing.module';
 import { LibraryStartComponent } from './pages/library-start/library-start.component';
+import {MatGridListModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/typings/esm5/card';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { LibraryStartComponent } from './pages/library-start/library-start.compo
   ],
   imports: [
     CommonModule,
-    LibraryRoutingModule
+    LibraryRoutingModule,
+    MatGridListModule,
+    MatCardModule
   ]
 })
 export class LibraryModule { }
