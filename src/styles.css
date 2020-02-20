@@ -39,7 +39,7 @@ button {
 
 .flexContainer {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;}
 
 /* NAVBAR */
 .navbar {
@@ -130,6 +130,25 @@ button {
 .navbar_toolbarDropdownInformations {
   display: flex;
   flex-direction: row;
+}
+
+/*Editor Modules*/
+.alignContent{
+  display: flex;
+  flex-direction: row;
+}
+
+.mainContentModule{
+  margin: auto;
+  width: 1000px;
+}
+
+.contentOrganizerModule{
+  margin: 10px;
+}
+
+.propertiesModule{
+  margin: 10px;
 }
 
 /*# sourceMappingURL=styles.css.map */

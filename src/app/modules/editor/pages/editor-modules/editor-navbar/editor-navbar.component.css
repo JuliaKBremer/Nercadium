@@ -1,3 +1,8 @@
+.editorNavbarList{
+  margin-left: 9px;
+  padding-left: 0;
+}
+
 .navbar__navList{
   display: flex;
   flex-direction: row;

@@ -1,16 +1,24 @@
 <p>main-content-module works!</p>
-<div>
-  <input [(ngModel)]="Path" />
-  <button (click)="GetTest()">
-    Laden
-  </button>
-  <button (click)="CreateFile()">
-    Speichern
-  </button>
-  <button>
-    Neu
-  </button>
-  <label>
-    {{GetResult()}}
-  </label>
-</div>
+
+    <a class="mainEditorContent__anker">bla</a>
+    <div class="mainContent">
+      <label>
+        <input [(ngModel)]="Path" />
+      </label>
+      <button class="mainContent__button" (click)="GetTest()">
+        Laden
+      </button>
+      <button (click)="CreateFile()">
+        Speichern
+      </button>
+      <button>
+        Neu
+      </button>
+      <label>
+        {{GetResult()}}
+      </label>
+    </div>
+
+
+
+
