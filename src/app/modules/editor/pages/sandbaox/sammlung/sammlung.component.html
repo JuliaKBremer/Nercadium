@@ -1,0 +1,4 @@
+<div *ngFor="let item of orderTemplate(samlung.items)">
+  <div (click)="clickItem(item)">{{item.properties.name}}</div>
+</div>
+<div (click)="addTemplate.emit()">+ Add Template</div>
