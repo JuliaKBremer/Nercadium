@@ -39,14 +39,16 @@ button {
 
 .flexContainer {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;}
 
 /* NAVBAR */
 .navbar {
   background-color: #2e2e2e;
   display: flex;
   flex-direction: row;
-  padding: 5px 0 5px 0; }
+  padding: 5px 0 5px 0;
+  -webkit-app-region: drag;
+}
 
 .navbar__headline {
   margin: 4px 0 0 0; }
@@ -81,16 +83,76 @@ button {
   display: flex;
   flex-direction: row; }
 
+.navbar__listItem,
+.navbar__logo,
+.navbar__navList,
+.navbar_toolbar {
+  -webkit-app-region: no-drag;
+}
+
+.navbar_toolbar__icons {
+  display:flex;
+  flex-direction: row;
+}
+
+.navbar_toolbar {
+  margin-left: auto;
+  order: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar_toolbar__toolIcon {
+  padding: 0 10px 0 5px;
+  margin-top: 7px;
+  font-size: 17px;
+}
+
+.navbar_toolbar__toolIcon:hover {
+  color: rgb(201, 171, 83);
+}
+
+.navbar_toolbar__toolIcon--redHover:hover {
+  color: red;
+}
+
+.navbar_toolbarDropdownInformations i {
+  font-size: 33px;
+  margin: 23px 7px 0 0;
+  color: rgb(201, 171, 83);
+}
+
+.navbar_toolbarDropdownInformations p {
+  margin: 30px 35px 0 0;
+}
+
+/* Login In Navbar */
+.navbar_toolbarDropdownInformations {
+  display: flex;
+  flex-direction: row;
+}
+
+/*Editor Modules*/
+.alignContent{
+  display: flex;
+  flex-direction: row;
+}
+
+.mainContentModule{
+  margin: auto;
+  width: 1000px;
+}
+
+.contentOrganizerModule{
+  margin: 10px;
+}
+
+.propertiesModule{
+  margin: 10px;
+}
 mat-grid-tile{
   background-color: dimgrey;
 }
 
 
 /*# sourceMappingURL=styles.css.map */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

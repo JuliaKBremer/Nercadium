@@ -32,7 +32,7 @@ function createWindow () {
   // Load buildet index.html
   win.loadURL(`file://${__dirname}/../dist/Nercadium/index.html`);
 
-  win.openDevTools();
+  // win.openDevTools();
 
   // Window listeners
   // Event when the window is closed.

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
+import { SwiperComponent, SwiperConfigInterface  } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-startpage-start',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./startpage-start.component.css']
 })
 export class StartpageStartComponent implements OnInit {
+  config: any;
+  index: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,0 +1,36 @@
+.startpageContainerToAlign {
+  flex-direction: column;
+}
+
+.startpageContainer{
+  display:flex;
+  flex-direction: column;
+  min-width: 500px;
+  max-width: 1024px;
+  margin:auto;
+  width: 55vw;
+}
+
+.startpageSliderContainer__headline{
+
+}
+
+.startpageSliderContainer {
+  margin:auto;
+}
+
+.startpageSliderContainer {
+  height: 125px;
+  width: 60vw;
+}
+
+.startpageSliderContainer__slide {
+  display: flex;
+  flex-direction: column;
+  width: 55vw;
+  border-radius: 2px;
+}
+
+.startpageSliderContainer__slide p {
+  margin: auto;
+}

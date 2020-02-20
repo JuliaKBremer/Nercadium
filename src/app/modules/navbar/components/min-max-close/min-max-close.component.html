@@ -1,4 +1,6 @@
-<p (click)="CloseWindow()">close</p>
-<p (click)="MinimizeWindow()">min</p>
-<p (click)="MaximizeWindow()">max</p>
-<p (click)="UnmaximizeWindow()">unmax</p>
+<div class="navbar_toolbar__icons">
+  <p class="navbar_toolbar__toolIcon" (click)="MinimizeWindow()"><i class="fas fa-minus"></i></p>
+  <p class="navbar_toolbar__toolIcon" (click)="MaximizeWindow()" *ngIf="!isMaximized"><i class="far fa-window-maximize"></i></p>
+  <p  class="navbar_toolbar__toolIcon" (click)="UnmaximizeWindow()" *ngIf="isMaximized"><i class="fas fa-window-maximize"></i></p>
+  <p class="navbar_toolbar__toolIcon navbar_toolbar__toolIcon--redHover" (click)="CloseWindow()"><i class="far fa-window-close"></i></p>
+</div>
