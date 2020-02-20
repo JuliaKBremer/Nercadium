@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IOServiceService } from './ioservice.service';
+import { LibraryService } from './library.service';
 
-describe('IOServiceService', () => {
+describe('LibraryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: IOServiceService = TestBed.get(IOServiceService);
+    const service: LibraryService = TestBed.get(LibraryService);
     expect(service).toBeTruthy();
   });
 });

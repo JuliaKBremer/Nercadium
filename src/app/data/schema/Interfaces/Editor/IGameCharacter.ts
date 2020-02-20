@@ -10,7 +10,7 @@ export interface IGameCharacter {
   Name: string;
 
   // Beschreibung
-  Descripton: string;
+  Description: string;
 
   // Zugewiesenes Template
   CharacterTemplate: IGameCharacterTemplate;

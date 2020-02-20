@@ -7,5 +7,5 @@ export interface INote {
   Name: string;
 
   // Beschreibung der Notiz / eigentliche Notiz
-  Descripton: string;
+  Description: string;
 }
