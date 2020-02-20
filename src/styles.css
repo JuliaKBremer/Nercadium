@@ -81,8 +81,16 @@ button {
   display: flex;
   flex-direction: row; }
 
-.navbar_toolbar {
-  /* TODO: Maybe replace text of toolbar with some icons in the upper right corner? */
-  display: none; }
+mat-grid-tile{
+  background-color: dimgrey;
+}
+
 
 /*# sourceMappingURL=styles.css.map */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
