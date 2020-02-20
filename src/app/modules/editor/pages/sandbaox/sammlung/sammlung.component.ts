@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IItem, ISamlung} from "../template.service";
+import {ITemplate, ISamlung} from "../template.service";
 
 @Component({
   selector: 'app-sammlung',
@@ -7,9 +7,8 @@ import {IItem, ISamlung} from "../template.service";
   styleUrls: ['./sammlung.component.css']
 })
 export class SammlungComponent implements OnInit {
-  @Output() itemClicked = new EventEmitter<IItem>();
+  @Output() itemClicked = new EventEmitter<ITemplate>();
   @Output() addTemplate = new EventEmitter();
-  @Output() addComponent = new EventEmitter<IItem>();
 
   @Input() samlung: ISamlung;
 
@@ -18,12 +17,11 @@ export class SammlungComponent implements OnInit {
   ngOnInit() {
   }
 
-  public clickItem(item: IItem) {
-    item.isCollapse = !item.isCollapse;
+  public clickItem(item: ITemplate) {
     this.itemClicked.emit(item);
   }
 
-  public orderItem(items: IItem[]): IItem[] {
+  public orderTemplate(items: ITemplate[]): ITemplate[] {
     if(!items)
       return;
 

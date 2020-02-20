@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IItem, ISamlung, TemplateService} from "../template.service";
+import {ITemplate, ISamlung, TemplateService, IComponent, ComponentTypes} from "../template.service";
 
 @Component({
   selector: 'app-template-tab',
@@ -8,26 +8,28 @@ import {IItem, ISamlung, TemplateService} from "../template.service";
 })
 export class TemplateTabComponent implements OnInit {
 
-  public samlung: ISamlung = {items: []};
-  public selectedItem: IItem;
+  public samlung: ISamlung = null;
+  public selectedTemplate: ITemplate;
 
   constructor(private templateService: TemplateService) { }
 
   ngOnInit() {
     this.samlung = this.templateService.getSammlung();
-    this.selectedItem = this.templateService.getSelectedItem();
   }
 
-  public itemClicked(item: IItem) {
-    this.templateService.clickItem(item);
-    this.selectedItem = this.templateService.getSelectedItem();
+  public itemClicked(item: ITemplate) {
+    this.selectedTemplate = item;
   }
 
   public addTemplate() {
     this.templateService.addTemplate();
   }
 
-  public addComponent(item: IItem) {
+  public addComponent(item: ITemplate) {
     this.templateService.addComponent(item);
+  }
+
+  public changeComponentType(IComponent: IComponent, ComponentType: ComponentTypes) {
+    this.templateService.changeComponent(IComponent, ComponentType);
   }
 }

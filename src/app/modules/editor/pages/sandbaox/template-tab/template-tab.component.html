@@ -2,9 +2,10 @@
   <app-sammlung style="width: 250px; flex-shrink: 0"
                 [samlung]="samlung"
                 (itemClicked)="itemClicked($event)"
-                (addTemplate)="addTemplate()"
-                (addComponent)="addComponent($event)"></app-sammlung>
-  <app-main style="width: 100%"></app-main>
+                (addTemplate)="addTemplate()"></app-sammlung>
+  <app-main style="width: 100%"
+            [selectedTemplate]="selectedTemplate"></app-main>
   <app-properties style="width: 250px; flex-shrink: 0"
-                  [selectedItem]="selectedItem"></app-properties>
+                  [selectedTemplate]="selectedTemplate"
+                  (addComponent)="addComponent($event)" (changeComponentType)="changeComponentType($event.IComponent, $event.ComponentType)"></app-properties>
 </div>

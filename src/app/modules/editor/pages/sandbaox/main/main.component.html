@@ -1,1 +1,31 @@
-<p>main works!</p>
+<div *ngIf="selectedTemplate">
+  <div *ngFor="let component of selectedTemplate.components"
+       [ngSwitch]="component.properties.type">
+
+    <div *ngSwitchCase="'textBox'" [style.padding-left.px]="component.properties.paddingLeft">
+      <label>{{component.properties.lable}}
+        <input type="text" [(ngModel)]="component.properties.value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="'number'">
+      <label>{{component.properties.lable}}
+        <input type="number" [(ngModel)]="component.properties.value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="'textArea'">
+      <label>{{component.properties.lable}}
+        <textarea [style.width.px]="component.properties.width"
+                  [style.height.px]="component.properties.height"
+                  [style.resize]="'none'"
+                  [readOnly]="component.properties.readonly"
+                  [(ngModel)]="component.properties.value"
+                  [maxLength]="component.properties.maxlength"
+                  [placeholder]="component.properties.placeholder"></textarea>
+      </label>
+    </div>
+
+    <div *ngSwitchDefault>Null</div>
+  </div>
+</div>

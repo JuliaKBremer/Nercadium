@@ -4,12 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import {ChapterTabComponent} from "./pages/chapter-tab/chapter-tab.component";
 import {CharacterTabComponent} from "./pages/character-tab/character-tab.component";
 import {ObjectTabComponent} from "./pages/object-tab/object-tab.component";
-import {TemplateTabComponent} from "./pages/sandbaox/template-tab/template-tab.component";
+import {EditorStartComponent} from "./pages/editor-start/editor-start.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: TemplateTabComponent
+    component: EditorStartComponent
   },
   {
     path: 'chapter',

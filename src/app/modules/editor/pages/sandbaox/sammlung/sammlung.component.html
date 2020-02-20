@@ -1,10 +1,4 @@
-<div *ngFor="let item of orderItem(samlung.items)">
+<div *ngFor="let item of orderTemplate(samlung.items)">
   <div (click)="clickItem(item)">{{item.properties.name}}</div>
-  <div style="margin-left: 10px" *ngIf="item.isCollapse">
-    <div *ngFor="let child of orderItem(item.components)">
-      <div (click)="clickItem(child)">{{child.properties.name}}</div>
-    </div>
-    <div (click)="addComponent.emit(item)">+ Add Component</div>
-  </div>
 </div>
 <div (click)="addTemplate.emit()">+ Add Template</div>

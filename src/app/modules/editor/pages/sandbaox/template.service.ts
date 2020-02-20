@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 
 export interface ISamlung {
-  items: IItem[];
+  items: ITemplate[];
 }
-export interface IItem {
-  isCollapse: boolean;
-  isSelected: boolean;
+
+export interface ITemplate {
   properties: IProperties;
-  components: IItem[];
+  components: IComponent[];
+}
+
+export interface IComponent {
+  properties: IProperties;
 }
 
 export interface IProperties {
-  name: string;
-  order: number;
+  [key: string]: any;
+}
+
+export enum ComponentTypes {
+  textBox = 'textBox', number = 'number', select = 'select', textArea = 'textArea', table = 'table'
 }
 
 @Injectable({
@@ -25,29 +31,80 @@ export class TemplateService {
     return this.testSamlung;
   }
 
-  public getSelectedItem() {
-    return this.selectedItem;
-  }
-
-  private selectedItem: IItem;
-
-  public clickItem(item: IItem) {
-    if(this.selectedItem)
-      this.selectedItem.isSelected = false;
-
-    this.selectedItem = item;
-    this.selectedItem.isSelected = true;
-  }
-
   public addTemplate() {
     let nextOrderNumber: number = this.testSamlung.items.length;
 
-    this.testSamlung.items.push({isSelected: false, isCollapse: false, components: [], properties: {order: nextOrderNumber, name: 'New Template ' + nextOrderNumber}});
+    this.testSamlung.items.push({components: [], properties: {order: nextOrderNumber, name: 'New Template ' + nextOrderNumber}});
   }
 
-  public addComponent(item: IItem) {
+  public addComponent(item: ITemplate) {
     let nextOrderNumber: number = item.components.length;
 
-    item.components.push({isSelected: false, isCollapse: false, components: [], properties: {order: nextOrderNumber, name: 'New Child ' + nextOrderNumber}});
+    let component: IComponent = {properties: {order: nextOrderNumber, name: 'New Component ' + nextOrderNumber}};
+
+    this.changeComponent(component, ComponentTypes.textBox);
+
+    item.components.push(component);
+  }
+
+  public changeComponent(component: IComponent, type: ComponentTypes) {
+    switch (type) {
+      case ComponentTypes.textBox: {
+        component.properties = {
+          type: type,
+          order: component.properties.order,
+          lable: 'TextBox',
+          value: 'Text',
+          paddingLeft: 0
+        };
+        break;
+      }
+      case ComponentTypes.number: {
+        component.properties = {
+          type: type,
+          order: component.properties.order,
+          lable: 'NumberBox',
+          value: 1337
+        };
+        break;
+      }
+      case ComponentTypes.select: {
+        component.properties = {
+          type: type,
+          order: component.properties.order,
+          lable: 'Select',
+          value: 0,
+          options: ['Option_0', 'Option_1']
+        };
+        break;
+      }
+      case ComponentTypes.textArea: {
+        component.properties = {
+          type: type,
+          order: component.properties.order,
+          lable: 'Text Area',
+          value: '',
+          readonly: false,
+          height: 30,
+          width: 4,
+          maxlength: 100,
+          placeholder: 'Textbox'
+        };
+        break;
+      }
+      case ComponentTypes.table: {
+        component.properties = {
+          type: type,
+          order: component.properties.order,
+          lable: 'Table',
+
+        };
+        break;
+      }
+      default: {
+        this.changeComponent(component, ComponentTypes.textBox);
+        break;
+      }
+    }
   }
 }
