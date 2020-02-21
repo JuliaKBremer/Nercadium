@@ -41,6 +41,7 @@ export class MainContentModuleComponent implements OnInit {
     objTest.ObjectTemplate = objTemp;
     this.libraryService.AddGameObject(objTest);
     this.libraryService.SavePackage(this.FilePath, 'TestPackage.json');
+    this.result = 'done';
   }
 
   ngOnInit() {

@@ -35,7 +35,7 @@ export class AdventureObject implements IAdventureObject, IBaseGameEntity {
   // ALL containing GameScripts.
   public Scripts: IGameScript[];
 
-  GetEntityType(): number {
+  GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.Adventure;
   }
 

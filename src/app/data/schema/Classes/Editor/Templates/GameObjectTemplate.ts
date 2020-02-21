@@ -9,7 +9,7 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
   id: number;
   Description: string;
 
-  GetEntityType(): number {
+  GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.ObjectTemplate;
   }
 }

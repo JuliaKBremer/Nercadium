@@ -1,11 +1,11 @@
 export enum EntityTypeEnum {
-  Object ,
-  Adventure,
-  Chapter ,
-  Character,
-  Note ,
-  Scene ,
-  Script,
-  CharacterTemplate,
-  ObjectTemplate
+  Object = 'Object' ,
+  Adventure = 'Adventure' ,
+  Chapter = 'Chapter' ,
+  Character = 'Character' ,
+  Note = 'Note' ,
+  Scene = 'Scene' ,
+  Script = 'Script' ,
+  CharacterTemplate = 'CharacterTemplate' ,
+  ObjectTemplate = 'ObjectTemplate' ,
 }

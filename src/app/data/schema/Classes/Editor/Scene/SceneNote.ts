@@ -13,7 +13,7 @@ export class NoteObject implements INote, IBaseGameEntity {
   // Text der Notiz
   Description: string;
 
-  GetEntityType(): number {
+  GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.Note;
   }
 

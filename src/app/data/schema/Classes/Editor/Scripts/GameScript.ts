@@ -17,7 +17,7 @@ export class GameScript implements IGameScript, IBaseGameEntity {
   // Kapitel
   Chapters: IGameChapter[];
 
-  GetEntityType(): number {
+  GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.Script;
   }
 

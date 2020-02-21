@@ -25,7 +25,7 @@ export class CharacterObject implements IGameCharacter, IBaseGameEntity {
   // Items die dem Charakter zugewiesen sind.
   Items: IGameObject[];
 
-  GetEntityType(): number {
+  GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.Character;
   }
 
