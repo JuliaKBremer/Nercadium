@@ -7,22 +7,25 @@ import {NavbarModule} from './modules/navbar/navbar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {CKEditor5} from '@ckeditor/ckeditor5-angular';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
-    imports: [
-        BrowserModule,
-        StorageServiceModule,
-        AppRoutingModule,
-        CoreModule,
-        HttpClientModule,
-        NavbarModule,
-        NoopAnimationsModule
-    ],
+  imports: [
+    BrowserModule,
+    StorageServiceModule,
+    AppRoutingModule,
+    CoreModule,
+    HttpClientModule,
+    NavbarModule,
+    NoopAnimationsModule,
+    Ng2SearchPipeModule
+  ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

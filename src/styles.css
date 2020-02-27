@@ -37,6 +37,30 @@ button {
   outline: none;
   cursor: pointer; }
 
+mat-grid-tile{
+  background-color: dimgrey;}
+
+mat-grid-list {
+  border: 3px;}
+
+.search_library{
+  align-content: end;
+}
+
+.library_page{
+  width: 100%;
+  flex-grow: 1;
+  overflow: auto;
+  height: 89vh;}
+
+.library_header{
+  width: auto;
+  padding: 32px;}
+
+.library_content{
+  width: auto;
+  padding: 32px;}
+
 .flexContainer {
   display: flex;
   flex-direction: column;}
@@ -150,10 +174,6 @@ button {
 .propertiesModule{
   margin: 10px;
 }
-mat-grid-tile{
-  background-color: dimgrey;
-}
-
 
 .ck.ck-editor{
   min-width: 50vw;
