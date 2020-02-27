@@ -1,9 +1,62 @@
-<p>Library</p>
-
-<mat-grid-list cols="4" rowHeight="50px">
-
-  <mat-grid-tile [colspan]="1" [rowspan]="1">
-1
-  </mat-grid-tile>
-
-</mat-grid-list>
+<div class="library_page">
+  <div class="library_header">
+    <div class="library_title" fxLayout="row" fxLayoutAlign="space-between center" >
+      <h2 >Favorite Assets</h2>
+      <div class="search_library">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchtext" autocomplete="off"
+               placeholder="&#61442;  Search Asset">
+      </div>
+    </div>
+    <div *ngIf="(objects | filter:searchtext).length <1">
+      Not Found
+    </div>
+    <mat-grid-list cols="5" style="flex: auto" gutterSize="10px">
+      <ng-container *ngFor="let favorites of objects | filter:searchtext">
+      <mat-grid-tile
+        *ngIf="favorites.favorite"
+        [colspan]="1"
+        [rowspan]="1">
+        <mat-card style="width: 100%">
+          <mat-card-header>
+            <mat-card-title>{{favorites.tag}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="C:\Users\Andreas Lust\Git\PnpConfigurator\src\assets\nercadium-logo@0,5x.png" alt="Nercadium_Logo">
+          <mat-card-content>
+            {{favorites.text}}
+          </mat-card-content>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+            <button style="flex: 50%" mat-button>Details</button>
+            <button style="flex: 50%" mat-button>Edit</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </div>
+  <div class="library_content">
+    <h2>All Assets</h2>
+    <div *ngIf="(objects | filter:searchtext).length <1">
+      Not Found
+    </div>
+    <mat-grid-list cols="5" style="flex: auto" gutterSize="10px">
+      <mat-grid-tile
+        *ngFor="let object of objects | filter:searchtext"
+        [colspan]="1"
+        [rowspan]="1">
+        <mat-card style="width:100%;">
+          <mat-card-header>
+            <mat-card-title>{{object.tag}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="C:\Users\Andreas Lust\Git\PnpConfigurator\src\assets\nercadium-logo@0,5x.png" alt="Nercadium_Logo">
+          <mat-card-content>
+            {{object.text}}
+          </mat-card-content>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+            <button style="flex: 50%" mat-button>Details</button>
+            <button style="flex: 50%" mat-button>Edit</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
