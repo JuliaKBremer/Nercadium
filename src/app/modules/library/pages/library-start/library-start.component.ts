@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatGridListModule} from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-library-start',
@@ -24,7 +23,6 @@ export class LibraryStartComponent implements OnInit {
     {text: 'City', cols: 1, rows: 2, tag: 'Scene', favorite: true},
     {text: 'Orc', cols: 1, rows: 2, tag: 'Character', favorite: false}
   ];
-
 
   constructor() { }
 
