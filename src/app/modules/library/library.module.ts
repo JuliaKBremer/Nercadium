@@ -10,6 +10,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
+
 @NgModule({
   declarations: [LibraryStartComponent],
   exports: [
