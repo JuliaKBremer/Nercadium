@@ -1,14 +1,20 @@
 export interface IProperty {
 
   // ID der Property / Eigenschaft
-  id: number;
+  // id: number;
 
   // Vergebener Wert
-  value: object;
+  // value: any;
 
   // Beschreibung zu dem Property / was es sein soll..
-  Description: string;
+  // Description: string;
 
   // Type evtl. hierfür ein Enum?
-  type: number;
+  // type: number;
+
+  [key: string]: any;
+}
+
+export interface IProperties {
+  [key: string]: IProperty;
 }

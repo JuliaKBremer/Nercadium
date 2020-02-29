@@ -1,0 +1,22 @@
+<app-editor-navbar></app-editor-navbar>
+<p>template-tab works!</p>
+<div class="alignContent">
+
+  <div class="contentOrganizerModule">
+    <app-content-organizer-module [objectList]="templateTabService.GetTemplates()"
+                                  (addObject)="templateTabService.AddTemplate()"
+                                  (copyObject)="templateTabService.CopyTemplate($event)"
+                                  (deleteObject)="templateTabService.DeleteTemplate($event)"
+                                  (selectObject)="selectedTemplate = $event">
+    </app-content-organizer-module>
+  </div>
+
+  <div class="mainContentModule">
+    <app-main-content-module></app-main-content-module>
+  </div>
+
+  <div class="propertiesModule">
+    <app-properties-module></app-properties-module>
+  </div>
+
+</div>

@@ -1,2 +1,6 @@
-<p>content-organizer-module works!</p>
-
+<div *ngFor="let object of objectList">
+  <span (click)="selectObject.emit(object)">{{object.Properties.Name.value}}</span>
+  <span (click)="copyObject.emit(object)">Copy</span>
+  <span (click)="deleteObject.emit(object)">Delete</span>
+</div>
+<div (click)="addObject.emit()">+ Add</div>

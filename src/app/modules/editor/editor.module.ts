@@ -13,10 +13,8 @@ import { CharacterTabComponent } from './pages/character-tab/character-tab.compo
 import { ObjectTabComponent } from './pages/object-tab/object-tab.component';
 import { TextEditorComponent } from './shared/text-editor/text-editor.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
-import { TemplateTabComponent } from './pages/sandbaox/template-tab/template-tab.component';
-import { SammlungComponent } from './pages/sandbaox/sammlung/sammlung.component';
-import { MainComponent } from './pages/sandbaox/main/main.component';
-import { PropertiesComponent } from './pages/sandbaox/properties/properties.component';
+import { TemplateTabComponent } from './pages/template-tab/template-tab.component';
+import { TemplateTabOrganizerComponent } from './pages/template-tab/template-tab-organizer/template-tab-organizer.component';
 
 
 @NgModule({
@@ -31,9 +29,7 @@ import { PropertiesComponent } from './pages/sandbaox/properties/properties.comp
     ObjectTabComponent,
     TextEditorComponent,
     TemplateTabComponent,
-    SammlungComponent,
-    MainComponent,
-    PropertiesComponent
+    TemplateTabOrganizerComponent
   ],
   exports: [
     EditorStartComponent
