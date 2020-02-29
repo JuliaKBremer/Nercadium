@@ -14,8 +14,6 @@ import { ObjectTabComponent } from './pages/object-tab/object-tab.component';
 import { TextEditorComponent } from './shared/text-editor/text-editor.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import { TemplateTabComponent } from './pages/template-tab/template-tab.component';
-import { TemplateTabOrganizerComponent } from './pages/template-tab/template-tab-organizer/template-tab-organizer.component';
-
 
 @NgModule({
   declarations: [
@@ -28,8 +26,7 @@ import { TemplateTabOrganizerComponent } from './pages/template-tab/template-tab
     CharacterTabComponent,
     ObjectTabComponent,
     TextEditorComponent,
-    TemplateTabComponent,
-    TemplateTabOrganizerComponent
+    TemplateTabComponent
   ],
   exports: [
     EditorStartComponent
