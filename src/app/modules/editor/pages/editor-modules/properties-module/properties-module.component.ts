@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IObject} from "../../../../../data/schema/Interfaces/Editor/IObject";
 
 @Component({
   selector: 'app-properties-module',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertiesModuleComponent implements OnInit {
 
+  @Input() selectedObject: IObject;
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

@@ -12,22 +12,40 @@ export class TemplateTabService {
     {
       Properties: {
         Name: {
-          id: 0,
           value: 'Test'
         },
         Order: {
-          id: 0,
           value: 0
         }
       },
-      Fields: []
+      Fields: [
+        {
+          Properties: {
+            Name: {
+              value: 'Test Field'
+            },
+            Order: {
+              value: 0
+            },
+            Type: {
+              value: 'textBox'
+            }
+          }
+        }
+      ]
     }
   ];
+
+  private selectedTemplate: IObject;
 
   constructor() { }
 
   public GetTemplates() {
     return this.templates;
+  }
+
+  public GetSelectedTemplate() {
+    return this.selectedTemplate;
   }
 
   public AddTemplate() {
@@ -47,6 +65,13 @@ export class TemplateTabService {
   }
 
   public DeleteTemplate(objectToDelete: IObject) {
+    if(objectToDelete === this.selectedTemplate)
+      this.selectedTemplate = null;
+
     this.templates = this.templates.filter(obj => obj !== objectToDelete);
+  }
+
+  public SelectTemplate(objectToSelect: IObject) {
+    this.selectedTemplate = objectToSelect;
   }
 }

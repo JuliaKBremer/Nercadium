@@ -7,7 +7,7 @@
                                   (addObject)="templateTabService.AddTemplate()"
                                   (copyObject)="templateTabService.CopyTemplate($event)"
                                   (deleteObject)="templateTabService.DeleteTemplate($event)"
-                                  (selectObject)="selectedTemplate = $event">
+                                  (selectObject)="templateTabService.SelectTemplate($event)">
     </app-content-organizer-module>
   </div>
 
@@ -16,7 +16,7 @@
   </div>
 
   <div class="propertiesModule">
-    <app-properties-module></app-properties-module>
+    <app-properties-module [selectedObject]="templateTabService.GetSelectedTemplate()"></app-properties-module>
   </div>
 
 </div>
