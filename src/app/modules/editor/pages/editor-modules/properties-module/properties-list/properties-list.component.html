@@ -1,0 +1,35 @@
+<div *ngFor="let property of properties | keyvalue">
+  <span>
+    {{property.key}}
+  </span>
+
+  <div [ngSwitch]="property.value.type">
+
+    <div *ngSwitchCase="propertyType.string">
+      <label>
+        <input type="text" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.number">
+      <label>
+        <input type="number" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.boolean">
+      <label>
+        <input type="checkbox" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.enum">
+      <label>
+        <select (change)="selectChanged.emit()" [(ngModel)]="property.value.value" >
+          <option *ngFor="let type of objectKeys(property.value.enum)" [ngValue]="type">{{type}}</option>
+        </select>
+      </label>
+    </div>
+
+  </div>
+</div>

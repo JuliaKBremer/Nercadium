@@ -1,34 +1,45 @@
-import { Injectable } from '@angular/core';
-import {ITemplate} from "../../../../data/schema/Interfaces/Editor/ITemplate";
-import {IObject} from "../../../../data/schema/Interfaces/Editor/IObject";
+import {Injectable} from '@angular/core';
+import {ITemplate} from '../../../../data/schema/Interfaces/Editor/ITemplate';
+import {IObject} from '../../../../data/schema/Interfaces/Editor/IObject';
+import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemplateTabService {
 
-  //Dummy
+  // Dummy
   private templates: ITemplate[] = [
     {
       Properties: {
         Name: {
-          value: 'Test'
+          id: 0,
+          value: 'Test',
+          type: PropertyTypes.string
         },
         Order: {
-          value: 0
+          id: 0,
+          value: 0,
+          type: PropertyTypes.number
         }
       },
       Fields: [
         {
           Properties: {
             Name: {
-              value: 'Test Field'
+              id: 0,
+              value: 'Test Field',
+              type: PropertyTypes.string
             },
             Order: {
-              value: 0
+              id: 0,
+              value: 0,
+              type: PropertyTypes.number
             },
             Type: {
-              value: 'textBox'
+              id: 0,
+              value: 'textBox',
+              type: PropertyTypes.string
             }
           }
         }
@@ -49,13 +60,14 @@ export class TemplateTabService {
   }
 
   public AddTemplate() {
-    let newTemplate: ITemplate = {
+    const newTemplate: ITemplate = {
       Properties: {},
       Fields: []
     };
 
-    newTemplate.Properties.Name = {value: 'New Template'};
-    newTemplate.Properties.Order = {value: 0};
+    newTemplate.Properties.Name = {id: 0, value: 'New Template', type: PropertyTypes.string};
+    newTemplate.Properties.Order = {id: 0, value: 0, type: PropertyTypes.number};
+    newTemplate.Properties.Type = {id: 0, value: PropertyTypes.boolean, type: PropertyTypes.enum, enum: PropertyTypes};
 
     this.templates.push(newTemplate);
   }
@@ -65,8 +77,9 @@ export class TemplateTabService {
   }
 
   public DeleteTemplate(objectToDelete: IObject) {
-    if(objectToDelete === this.selectedTemplate)
+    if (objectToDelete === this.selectedTemplate) {
       this.selectedTemplate = null;
+    }
 
     this.templates = this.templates.filter(obj => obj !== objectToDelete);
   }

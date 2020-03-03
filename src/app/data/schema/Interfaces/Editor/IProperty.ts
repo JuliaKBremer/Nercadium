@@ -1,16 +1,18 @@
+import {PropertyTypes} from '../../Enums/property-types.enum';
+
 export interface IProperty {
 
   // ID der Property / Eigenschaft
-  // id: number;
+  id: number;
 
   // Vergebener Wert
-  // value: any;
+  value: any;
 
   // Beschreibung zu dem Property / was es sein soll..
   // Description: string;
 
   // Type evtl. hierfür ein Enum?
-  // type: number;
+  type: PropertyTypes;
 
   [key: string]: any;
 }

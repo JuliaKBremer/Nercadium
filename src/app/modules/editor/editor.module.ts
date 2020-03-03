@@ -14,6 +14,8 @@ import { ObjectTabComponent } from './pages/object-tab/object-tab.component';
 import { TextEditorComponent } from './shared/text-editor/text-editor.component';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import { TemplateTabComponent } from './pages/template-tab/template-tab.component';
+import { PropertiesListComponent } from './pages/editor-modules/properties-module/properties-list/properties-list.component';
+import { FieldsListComponent } from './pages/editor-modules/properties-module/fields-list/fields-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { TemplateTabComponent } from './pages/template-tab/template-tab.componen
     CharacterTabComponent,
     ObjectTabComponent,
     TextEditorComponent,
-    TemplateTabComponent
+    TemplateTabComponent,
+    PropertiesListComponent,
+    FieldsListComponent
   ],
   exports: [
     EditorStartComponent

@@ -1,3 +1,18 @@
-<div *ngIf="selectedObject">
-  {{selectedObject.Properties.Name.value}}
+<div *ngIf="object">
+  <div>
+    <div>
+      {{object.Properties.Name.value}}
+    </div>
+    <div *ngIf="properties">
+      <app-properties-list [properties]="properties"></app-properties-list>
+    </div>
+    <div *ngIf="fields">
+      <app-fields-list></app-fields-list>
+    </div>
+  </div>
 </div>
+
+
+
+
+
