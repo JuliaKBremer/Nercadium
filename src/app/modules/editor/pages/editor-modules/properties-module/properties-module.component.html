@@ -1,14 +1,16 @@
 <div *ngIf="object">
   <div>
-    <div>
-      {{object.Properties.Name.value}}
-    </div>
-    <div *ngIf="properties">
-      <app-properties-list [properties]="properties"></app-properties-list>
-    </div>
-    <div *ngIf="fields">
-      <app-fields-list></app-fields-list>
-    </div>
+    {{object.Properties.Name.value}}
+  </div>
+  <div *ngIf="properties">
+    <app-properties-list [properties]="properties"></app-properties-list>
+  </div>
+  <div *ngIf="fields">
+    <app-fields-list (deleteField)="deleteField.emit($event)"
+                     (copyField)="copyField.emit($event)"
+                     [fields]="fields">
+    </app-fields-list>
+    <div (click)="addField.emit(fields)">+ Add Field</div>
   </div>
 </div>
 

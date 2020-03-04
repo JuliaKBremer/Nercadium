@@ -1,1 +1,13 @@
-<p>fields-list works!</p>
+<div *ngFor="let field of fields">
+  <hr>
+  <span (click)="field.IsCollapsed = !field.IsCollapsed">
+    {{field.Properties.Name.value}}
+  </span>
+
+  <div [hidden]="field.IsCollapsed">
+    <app-properties-list [properties]="field.Properties"></app-properties-list>
+  </div>
+
+  <span (click)="copyField.emit({fieldsToEdit: fields, fieldToDelete: field})">Copy</span>
+  <span (click)="deleteField.emit({fieldsToEdit: fields, fieldToDelete: field})">Delete</span>
+</div>

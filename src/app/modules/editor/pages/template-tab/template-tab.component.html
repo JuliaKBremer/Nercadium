@@ -12,11 +12,15 @@
   </div>
 
   <div class="mainContentModule">
-    <app-main-content-module></app-main-content-module>
+    <app-main-content-module [templates]="templateTabService.GetTemplates()" [selectedTemplate]="templateTabService.GetSelectedTemplate()"></app-main-content-module>
   </div>
 
   <div class="propertiesModule">
-    <app-properties-module [selectedObject]="templateTabService.GetSelectedTemplate()"></app-properties-module>
+    <app-properties-module [selectedObject]="templateTabService.GetSelectedTemplate()"
+                           (deleteField)="templateTabService.DeleteField($event)"
+                           (copyField)="templateTabService.CopyField($event)"
+                           (addField)="templateTabService.AddField($event)">
+    </app-properties-module>
   </div>
 
 </div>

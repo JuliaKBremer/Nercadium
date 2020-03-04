@@ -3,6 +3,10 @@
     {{property.key}}
   </span>
 
+  <span *ngIf="property.value.description">
+    {{property.value.description}}
+  </span>
+
   <div [ngSwitch]="property.value.type">
 
     <div *ngSwitchCase="propertyType.string">

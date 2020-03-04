@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
@@ -17,11 +17,15 @@ export class PropertiesModuleComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  @Output() addField = new EventEmitter<IField[]>();
+  @Output() deleteField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
+  @Output() copyField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
+
+  constructor(private templateTabService: TemplateTabService) { }
 
   public object: IObject;
   public properties: IProperties;
-  public fields: IField;
+  public fields: IField[];
 
   private checkProps(object) {
     if (typeof(object.Properties) !== 'undefined') {
