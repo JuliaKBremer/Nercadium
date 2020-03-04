@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
+import {TemplateTabService} from '../../template-tab/template-tab.service';
 
 @Component({
   selector: 'app-properties-module',
@@ -35,7 +36,10 @@ export class PropertiesModuleComponent implements OnInit {
     }
 
     if (typeof(object.Fields) !== 'undefined') {
-      this.fields = object.Fields;
+      this.templateTabService.GetSelectedTemplateObservable().subscribe(next => {
+        this.fields = next.Fields;
+      });
+      // this.fields = this.templateTabService.GetSelectedTemplate().Fields;
     } else {
       this.fields = null;
     }

@@ -16,14 +16,20 @@ export class TemplateTabService {
 
   private selectedTemplate: BehaviorSubject<ITemplate>;
 
-  constructor() { }
+  constructor() {
+    this.selectedTemplate = new BehaviorSubject<ITemplate>(null);
+  }
 
   public GetTemplates() {
     return this.templates;
   }
 
   public GetSelectedTemplate() {
-    return this.selectedTemplate;
+    return this.selectedTemplate.value;
+  }
+
+  public GetSelectedTemplateObservable() {
+    return this.selectedTemplate.asObservable();
   }
 
   public AddTemplate() {
@@ -44,8 +50,8 @@ export class TemplateTabService {
   }
 
   public DeleteTemplate(objectToDelete: IObject) {
-    if (objectToDelete === this.selectedTemplate) {
-      this.selectedTemplate = null;
+    if (objectToDelete === this.selectedTemplate.value) {
+      this.selectedTemplate.next(null);
     }
 
     this.templates = this.templates.filter(obj => obj !== objectToDelete);
