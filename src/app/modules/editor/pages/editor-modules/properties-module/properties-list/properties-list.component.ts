@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IProperties} from '../../../../../../data/schema/Interfaces/Editor/IProperty';
 import {PropertyTypes} from '../../../../../../data/schema/Enums/property-types.enum';
 
@@ -10,6 +10,8 @@ import {PropertyTypes} from '../../../../../../data/schema/Enums/property-types.
 export class PropertiesListComponent implements OnInit {
 
   @Input() properties: IProperties;
+
+  @Output() selectChanged = new EventEmitter();
 
   public propertyType = PropertyTypes;
 

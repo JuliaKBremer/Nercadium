@@ -12,9 +12,9 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
 
-  @Output() addField = new EventEmitter<IField[]>();
-  @Output() deleteField = new EventEmitter<IField>();
-  @Output() copyField = new EventEmitter<IField>();
+  @Output() addField = new EventEmitter<number>();
+  @Output() deleteField = new EventEmitter<{fieldNumber: number, templateNumber: number}>();
+  @Output() copyField = new EventEmitter<{fieldNumber: number, templateNumber: number}>();
 
   public selectedObject: any;
   public properties: IProperties;

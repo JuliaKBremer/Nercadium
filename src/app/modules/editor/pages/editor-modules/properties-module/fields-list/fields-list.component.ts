@@ -10,8 +10,8 @@ export class FieldsListComponent implements OnInit {
 
   @Input() fields: IField[];
 
-  @Output() deleteField = new EventEmitter<IField>();
-  @Output() copyField = new EventEmitter<IField>();
+  @Output() deleteField = new EventEmitter<number>();
+  @Output() copyField = new EventEmitter<number>();
 
   constructor() { }
 

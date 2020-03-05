@@ -2,7 +2,7 @@ import {IField} from './IField';
 import {IProperties} from './IProperty';
 
 export interface ITemplate {
-  Order: number;
+  ID: number;
   Properties: IProperties;
   Fields: IField[];
 }

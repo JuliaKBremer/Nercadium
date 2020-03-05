@@ -4,8 +4,8 @@
     <span (click)="field.IsCollapsed = !field.IsCollapsed">
       {{field.Properties.Name.value}}
     </span>
-    <span (click)="copyField.emit(field)">Copy</span>
-    <span (click)="deleteField.emit(field)">Delete</span>
+    <span (click)="copyField.emit(field.ID)">Copy</span>
+    <span (click)="deleteField.emit(field.ID)">Delete</span>
 
     <div [hidden]="field.IsCollapsed">
       <app-properties-list [properties]="field.Properties"></app-properties-list>

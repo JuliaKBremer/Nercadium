@@ -11,9 +11,9 @@ export class ContentOrganizerModuleComponent implements OnInit, OnDestroy {
   @Input() objectListObservable: Observable<any[]>;
 
   @Output() addObject = new EventEmitter();
-  @Output() copyObject = new EventEmitter<any>();
-  @Output() deleteObject = new EventEmitter<any>();
-  @Output() selectObject = new EventEmitter<any>();
+  @Output() copyObject = new EventEmitter<number>();
+  @Output() deleteObject = new EventEmitter<number>();
+  @Output() selectObject = new EventEmitter<number>();
 
   public objectList: any[];
 
