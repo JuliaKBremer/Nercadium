@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
 import {Observable, Subscription} from 'rxjs';
+import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
+import {ITemplate} from 'src/app/data/schema/Interfaces/Editor/ITemplate';
 
 @Component({
   selector: 'app-properties-module',
@@ -10,15 +12,15 @@ import {Observable, Subscription} from 'rxjs';
 })
 export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
-  @Input() selectedObjectObservable: Observable<any>;
+  @Input() selectedObjectObservable: Observable<IObject>;
 
   @Output() addField = new EventEmitter<number>();
-  @Output() deleteField = new EventEmitter<{fieldNumber: number, templateNumber: number}>();
-  @Output() copyField = new EventEmitter<{fieldNumber: number, templateNumber: number}>();
+  @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
+  @Output() copyField = new EventEmitter<{fieldID: number, objectID: number}>();
 
-  public selectedObject: any;
   public properties: IProperties;
   public fields: IField[];
+  public selectedObject: IObject;
 
   private selectedObjectSubscription: Subscription;
 
@@ -26,12 +28,9 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.selectedObjectObservable !== undefined) {
-        this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+      this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
         this.selectedObject = next;
-
-        if (this.selectedObject) {
-        this.checkProps(this.selectedObject);
-        }
+        this.checkSelectedObject(this.selectedObject);
       });
     }
   }
@@ -42,15 +41,26 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     }
   }
 
-  private checkProps(object) {
-    if (typeof(object.Properties) !== 'undefined') {
-      this.properties = object.Properties;
+  private checkSelectedObject(object: IObject) {
+    if (object) {
+      if (object.Discriminator === 'I-AM-Template') {
+        this.checkTemplateProps(object.Template);
+      }
+    } else {
+      this.properties = null;
+      this.fields = null;
+    }
+  }
+
+  private checkTemplateProps(template: ITemplate) {
+    if (typeof(template.Properties) !== 'undefined') {
+      this.properties = template.Properties;
     } else {
       this.properties = null;
     }
 
-    if (typeof(object.Fields) !== 'undefined') {
-      this.fields = object.Fields;
+    if (typeof(template.Fields) !== 'undefined') {
+      this.fields = template.Fields;
     } else {
       this.fields = null;
     }

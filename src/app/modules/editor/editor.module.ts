@@ -16,6 +16,7 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import { TemplateTabComponent } from './pages/template-tab/template-tab.component';
 import { PropertiesListComponent } from './pages/editor-modules/properties-module/properties-list/properties-list.component';
 import { FieldsListComponent } from './pages/editor-modules/properties-module/fields-list/fields-list.component';
+import { FieldsDisplayComponent } from './pages/editor-modules/main-content-module/fields-display/fields-display.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FieldsListComponent } from './pages/editor-modules/properties-module/fi
     TextEditorComponent,
     TemplateTabComponent,
     PropertiesListComponent,
-    FieldsListComponent
+    FieldsListComponent,
+    FieldsDisplayComponent
   ],
   exports: [
     EditorStartComponent

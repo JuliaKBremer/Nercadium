@@ -6,8 +6,8 @@
     <app-properties-list [properties]="properties"></app-properties-list>
   </div>
   <div *ngIf="fields">
-    <app-fields-list (deleteField)="deleteField.emit({templateNumber: selectedObject.ID, fieldNumber: $event})"
-                     (copyField)="copyField.emit({templateNumber: selectedObject.ID, fieldNumber: $event})"
+    <app-fields-list (deleteField)="deleteField.emit({objectID: selectedObject.ID, fieldID: $event})"
+                     (copyField)="copyField.emit({objectID: selectedObject.ID, fieldID: $event})"
                      [fields]="fields">
     </app-fields-list>
     <div (click)="addField.emit(selectedObject.ID)">+ Add Field</div>
