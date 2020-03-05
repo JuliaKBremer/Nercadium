@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IField} from '../../../../../../data/schema/Interfaces/Editor/IField';
-import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
 
 @Component({
   selector: 'app-fields-list',
@@ -11,14 +10,8 @@ export class FieldsListComponent implements OnInit {
 
   @Input() fields: IField[];
 
-  @Output() selectChanged = new EventEmitter();
-
-  @Output() deleteField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
-  @Output() copyField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
-
-  public fieldTypes = FieldTypes;
-
-  public objectKeys = Object.keys;
+  @Output() deleteField = new EventEmitter<IField>();
+  @Output() copyField = new EventEmitter<IField>();
 
   constructor() { }
 

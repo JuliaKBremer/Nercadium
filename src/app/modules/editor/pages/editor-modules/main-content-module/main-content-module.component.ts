@@ -1,5 +1,4 @@
-import {Component, Injectable, Input, OnInit} from '@angular/core';
-import {ITemplate} from '../../../../../data/schema/Interfaces/Editor/ITemplate';
+import {Component, Injectable, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-main-content-module',
@@ -8,9 +7,6 @@ import {ITemplate} from '../../../../../data/schema/Interfaces/Editor/ITemplate'
 })
 @Injectable()
 export class MainContentModuleComponent implements OnInit {
-
-  @Input() selectedTemplate: ITemplate;
-  @Input() templates: ITemplate[];
 
   constructor() { }
 

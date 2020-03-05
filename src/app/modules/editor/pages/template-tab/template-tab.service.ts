@@ -1,4 +1,4 @@
-import {Injectable, InjectFlags} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ITemplate} from '../../../../data/schema/Interfaces/Editor/ITemplate';
 import {IObject} from '../../../../data/schema/Interfaces/Editor/IObject';
 import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
@@ -12,29 +12,30 @@ import {BehaviorSubject} from 'rxjs';
 export class TemplateTabService {
 
   // Dummy
-  private templates: ITemplate[] = [];
+  private templates: BehaviorSubject<ITemplate[]>;
 
-  private selectedTemplate: BehaviorSubject<ITemplate>;
+  private selectedObject: BehaviorSubject<ITemplate>;
 
   constructor() {
-    this.selectedTemplate = new BehaviorSubject<ITemplate>(null);
+    this.templates = new BehaviorSubject<ITemplate[]>([]);
+    this.selectedObject = new BehaviorSubject<ITemplate>(null);
   }
 
-  public GetTemplates() {
-    return this.templates;
-  }
-
-  public GetSelectedTemplate() {
-    return this.selectedTemplate.value;
+  public GetTemplatesObservable() {
+    return this.templates.asObservable();
   }
 
   public GetSelectedTemplateObservable() {
-    return this.selectedTemplate.asObservable();
+    return this.selectedObject.asObservable();
+  }
+
+  public SelectTemplate(objectToSelect: ITemplate) {
+    this.selectedObject.next(objectToSelect);
   }
 
   public AddTemplate() {
     const newTemplate: ITemplate = {
-      Order: this.templates.length,
+      Order: this.templates.value.length,
       Properties: {},
       Fields: []
     };
@@ -42,24 +43,22 @@ export class TemplateTabService {
     newTemplate.Properties.Name = {id: 0, value: 'New Template', type: PropertyTypes.string};
     newTemplate.Properties.Type = {id: 0, value: PropertyTypes.boolean, type: PropertyTypes.enum, enum: PropertyTypes};
 
-    this.templates.push(newTemplate);
+    this.templates.value.push(newTemplate);
   }
 
   public CopyTemplate(objectToCopy: IObject) {
-    this.templates.push(JSON.parse(JSON.stringify(objectToCopy)));
+    this.templates.value.push(JSON.parse(JSON.stringify(objectToCopy)));
   }
 
   public DeleteTemplate(objectToDelete: IObject) {
-    if (objectToDelete === this.selectedTemplate.value) {
-      this.selectedTemplate.next(null);
+    if (objectToDelete === this.selectedObject.value) {
+      this.selectedObject.next(null);
     }
 
-    this.templates = this.templates.filter(obj => obj !== objectToDelete);
+    const currentTemplates: ITemplate[] = this.templates.value.filter(obj => obj !== objectToDelete);
+    this.templates.next(currentTemplates);
   }
 
-  public SelectTemplate(objectToSelect: ITemplate) {
-    this.selectedTemplate.next(objectToSelect);
-  }
 
   public AddField(fields: IField[]) {
     const newField: IField = {
@@ -74,13 +73,13 @@ export class TemplateTabService {
     fields.push(newField);
   }
 
-  public DeleteField({fieldsToEdit: fields, fieldToDelete: field}) {
-    const currentTemplate: ITemplate = this.selectedTemplate.value;
-    currentTemplate.Fields = currentTemplate.Fields.filter(obj => obj !== field);
-    this.selectedTemplate.next(currentTemplate);
+  public DeleteField(fieldToDelete: IField) {
+    const currentTemplate: ITemplate = this.selectedObject.value;
+    currentTemplate.Fields = currentTemplate.Fields.filter(obj => obj !== fieldToDelete);
+    this.selectedObject.next(currentTemplate);
   }
 
-  public CopyField({fieldsToEdit: fields, fieldToDelete: field}) {
-    fields.push(JSON.parse(JSON.stringify(field)));
+  public CopyField(fieldToCopy: IField) {
+    this.selectedObject.value.Fields.push(JSON.parse(JSON.stringify(fieldToCopy)));
   }
 }

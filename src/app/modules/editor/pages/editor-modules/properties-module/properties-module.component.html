@@ -1,6 +1,6 @@
-<div *ngIf="object">
+<div *ngIf="selectedObject">
   <div>
-    {{object.Properties.Name.value}}
+    {{selectedObject.Properties.Name.value}}
   </div>
   <div *ngIf="properties">
     <app-properties-list [properties]="properties"></app-properties-list>

@@ -1,32 +1,46 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
+import {Component, EventEmitter, Input, OnInit, OnDestroy, Output} from '@angular/core';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
-import {TemplateTabService} from '../../template-tab/template-tab.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-properties-module',
   templateUrl: './properties-module.component.html',
   styleUrls: ['./properties-module.component.css']
 })
-export class PropertiesModuleComponent implements OnInit {
+export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
-  @Input() set selectedObject(object: IObject) {
-    this.object = object;
-    if (this.object) {
-      this.checkProps(this.object);
+  @Input() selectedObjectObservable: Observable<any>;
+
+  @Output() addField = new EventEmitter<IField[]>();
+  @Output() deleteField = new EventEmitter<IField>();
+  @Output() copyField = new EventEmitter<IField>();
+
+  public selectedObject: any;
+  public properties: IProperties;
+  public fields: IField[];
+
+  private selectedObjectSubscription: Subscription;
+
+  constructor() { }
+
+  ngOnInit() {
+    if (this.selectedObjectObservable !== undefined) {
+        this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+        this.selectedObject = next;
+
+        if (this.selectedObject) {
+        this.checkProps(this.selectedObject);
+        }
+      });
     }
   }
 
-  @Output() addField = new EventEmitter<IField[]>();
-  @Output() deleteField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
-  @Output() copyField: EventEmitter<{fieldsToEdit: IField[], fieldToDelete: IField}> = new EventEmitter();
-
-  constructor(private templateTabService: TemplateTabService) { }
-
-  public object: IObject;
-  public properties: IProperties;
-  public fields: IField[];
+  ngOnDestroy() {
+    if (this.selectedObjectSubscription) {
+      this.selectedObjectSubscription.unsubscribe();
+    }
+  }
 
   private checkProps(object) {
     if (typeof(object.Properties) !== 'undefined') {
@@ -36,15 +50,9 @@ export class PropertiesModuleComponent implements OnInit {
     }
 
     if (typeof(object.Fields) !== 'undefined') {
-      this.templateTabService.GetSelectedTemplateObservable().subscribe(next => {
-        this.fields = next.Fields;
-      });
-      // this.fields = this.templateTabService.GetSelectedTemplate().Fields;
+      this.fields = object.Fields;
     } else {
       this.fields = null;
     }
-  }
-
-  ngOnInit() {
   }
 }

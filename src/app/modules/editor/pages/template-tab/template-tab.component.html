@@ -3,7 +3,7 @@
 <div class="alignContent">
 
   <div class="contentOrganizerModule">
-    <app-content-organizer-module [objectList]="templateTabService.GetTemplates()"
+    <app-content-organizer-module [objectListObservable]="templateTabService.GetTemplatesObservable()"
                                   (addObject)="templateTabService.AddTemplate()"
                                   (copyObject)="templateTabService.CopyTemplate($event)"
                                   (deleteObject)="templateTabService.DeleteTemplate($event)"
@@ -12,11 +12,11 @@
   </div>
 
   <div class="mainContentModule">
-    <app-main-content-module [templates]="templateTabService.GetTemplates()" [selectedTemplate]="templateTabService.GetSelectedTemplate()"></app-main-content-module>
+    <app-main-content-module></app-main-content-module>
   </div>
 
   <div class="propertiesModule">
-    <app-properties-module [selectedObject]="templateTabService.GetSelectedTemplate()"
+    <app-properties-module [selectedObjectObservable]="templateTabService.GetSelectedTemplateObservable()"
                            (deleteField)="templateTabService.DeleteField($event)"
                            (copyField)="templateTabService.CopyField($event)"
                            (addField)="templateTabService.AddField($event)">
