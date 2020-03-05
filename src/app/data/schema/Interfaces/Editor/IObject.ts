@@ -6,5 +6,5 @@ export interface IObject {
   ID: number;
   Properties: IProperties;
   Template?: ITemplate;
-  FieldValues?: any;
+  FieldValues?: {[key: string]: any};
 }

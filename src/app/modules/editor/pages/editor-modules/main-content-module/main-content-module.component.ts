@@ -1,5 +1,6 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
+import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
 
 @Component({
   selector: 'app-main-content-module',
@@ -9,9 +10,9 @@ import {Observable, Subscription} from 'rxjs';
 @Injectable()
 export class MainContentModuleComponent implements OnInit, OnDestroy {
 
-  @Input() selectedObjectObservable: Observable<any>;
+  @Input() selectedObjectObservable: Observable<IObject>;
 
-  public selectedObject: any;
+  public selectedObject: IObject;
 
   private selectedObjectSubscription: Subscription;
 

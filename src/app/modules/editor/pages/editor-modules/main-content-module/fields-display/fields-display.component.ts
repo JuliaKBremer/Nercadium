@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
-import {ITemplate} from '../../../sandbaox/template.service';
+import {IObject} from '../../../../../../data/schema/Interfaces/Editor/IObject';
 
 @Component({
   selector: 'app-fields-display',
@@ -9,7 +9,7 @@ import {ITemplate} from '../../../sandbaox/template.service';
 })
 export class FieldsDisplayComponent implements OnInit {
 
-  @Input() selectedObject: {template: ITemplate};
+  @Input() selectedObject: IObject;
 
   public fieldTypes = FieldTypes;
 

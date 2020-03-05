@@ -36,11 +36,11 @@ export class TemplateTabService {
     return newTemplate;
   }
 
-  public GetTemplatesObservable() {
+  public GetObjectsObservable() {
     return this.objects.asObservable();
   }
 
-  public GetSelectedTemplateObservable() {
+  public GetSelectedObjectObservable() {
     return this.selectedObject.asObservable();
   }
 
@@ -53,7 +53,8 @@ export class TemplateTabService {
     const newObject: IObject = {
       Discriminator: 'I-AM-Template',
       ID: this.nextObjectID++,
-      Properties: {}
+      Properties: {},
+      FieldValues: {}
     };
 
     newObject.Properties.Name = {id: 0, value: 'New Object', type: PropertyTypes.string};
@@ -94,7 +95,9 @@ export class TemplateTabService {
     newField.Properties.Name = {id: 0, value: 'New Field', type: PropertyTypes.string};
     newField.Properties.Type = {id: 1, value: FieldTypes.textBox, type: PropertyTypes.enum, enum: FieldTypes};
 
-    this.objects.value.find(obj => obj.ID === objectID).Template.Fields.push(newField);
+    const currentObject = this.objects.value.find(obj => obj.ID === objectID);
+    currentObject.FieldValues[newField.ID] = 'TexBox';
+    currentObject.Template.Fields.push(newField);
   }
 
   public CopyField({objectID: objectID, fieldID: fieldToCopyID}) {
@@ -110,6 +113,7 @@ export class TemplateTabService {
   public DeleteField({objectID: objectID, fieldID: fieldToDeleteID}) {
     const currentObject: IObject = this.objects.value.find(obj => obj.ID === objectID);
     currentObject.Template.Fields = currentObject.Template.Fields.filter(obj => obj.ID !== fieldToDeleteID);
+    delete currentObject.FieldValues[fieldToDeleteID];
     this.selectedObject.next(currentObject);
   }
 }

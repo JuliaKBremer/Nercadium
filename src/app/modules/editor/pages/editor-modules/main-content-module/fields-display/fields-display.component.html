@@ -1,10 +1,25 @@
-<!--<div *ngIf="fields">-->
-<!--  <div *ngFor="let field of fields"-->
-<!--       [ngSwitch]="field.Properties.Type">-->
+<div *ngIf="selectedObject">
+<!--  <pre>{{selectedObject | json}}</pre>-->
+  <div *ngFor="let field of selectedObject.Template.Fields"
+       [ngSwitch]="field.Properties.Type.value">
 
-<!--    <div *ngSwitchCase="fieldTypes.textBox">-->
+    <div *ngSwitchCase="fieldTypes.textBox">
+      <label>
+        <input type="text" [(ngModel)]="selectedObject.FieldValues[field.ID]">
+      </label>
+    </div>
 
-<!--    </div>-->
+    <div *ngSwitchCase="fieldTypes.number">
+      <span>Number</span>
+    </div>
 
-<!--  </div>-->
-<!--</div>-->
+    <div *ngSwitchCase="fieldTypes.select">
+      <span>Select</span>
+    </div>
+
+    <div *ngSwitchCase="fieldTypes.textArea">
+      <span>TextArea</span>
+    </div>
+
+  </div>
+</div>
