@@ -101,11 +101,14 @@ export class TemplateTabService {
   }
 
   public CopyField({objectID: objectID, fieldID: fieldToCopyID}) {
-    const template: ITemplate = this.objects.value.find(obj => obj.ID === objectID).Template;
+    const currentObject = this.objects.value.find(obj => obj.ID === objectID);
+    const template: ITemplate = currentObject.Template;
     const fieldToCopy: IField = template.Fields.find(obj => obj.ID === fieldToCopyID);
     const newField: IField = JSON.parse(JSON.stringify(fieldToCopy));
 
     newField.ID = this.nextFieldID++;
+
+    currentObject.FieldValues[newField.ID] = currentObject.FieldValues[fieldToCopy.ID];
 
     this.objects.value.find(obj => obj.ID === objectID).Template.Fields.push(newField);
   }
