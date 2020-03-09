@@ -12,10 +12,9 @@ import {PAFHandler} from '../../../data/schema/Classes/Storage/PAFHandler';
 import {IBaseGameEntity} from '../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 import {PAFEntry} from '../../../data/schema/Classes/Storage/PAFEntry';
 import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
-import {NoteObject} from "../../../data/schema/Classes/Editor/Scene/SceneNote";
-import {GameChapter} from "../../../data/schema/Classes/Editor/Chapter/GameChapter";
-import {Script} from "vm";
-import {GameCharacterTemplateTemplate} from "../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate";
+import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
+import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
+import {GameCharacterTemplateTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Injectable({
   providedIn: 'root'
