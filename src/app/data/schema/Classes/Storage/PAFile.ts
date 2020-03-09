@@ -8,6 +8,7 @@ import {IPAFEntry} from '../../Interfaces/storage/IPAFEntry';
 export class PAFile implements IPAFile {
   Entries: IPAFEntry[];
   Description: string;
+  Name: string;
   fileName: string;
   filePath: string;
 }
