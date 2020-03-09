@@ -21,6 +21,8 @@ export class PAFHandler {
     const revtal = false;
     if (file != null) {
       const storageFile = new StorageFile();
+      storageFile.Name = file.Name;
+      storageFile.Description = file.Description;
       storageFile.fileName = file.fileName;
       storageFile.filePath = file.filePath;
       storageFile.fileData = file;
