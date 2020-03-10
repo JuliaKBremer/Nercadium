@@ -1,7 +1,8 @@
 <a class="mainEditorContent__anker"></a>
 <div class="mainContent">
   <div *ngIf="selectedObject">
-    <div *ngIf="selectedObject.Discriminator === 'I-AM-Template'">
+    <div *ngIf="selectedObject.GetEntityType() === entityTypes.CharacterTemplate
+                || selectedObject.GetEntityType() === entityTypes.ObjectTemplate">
       <app-fields-display [selectedObject]="selectedObject"></app-fields-display>
     </div>
   </div>

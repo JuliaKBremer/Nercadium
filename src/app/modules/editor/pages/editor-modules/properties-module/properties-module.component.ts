@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
 import {Observable, Subscription} from 'rxjs';
-import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
-import {ITemplate} from 'src/app/data/schema/Interfaces/Editor/ITemplate';
+import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Component({
   selector: 'app-properties-module',
@@ -12,7 +12,7 @@ import {ITemplate} from 'src/app/data/schema/Interfaces/Editor/ITemplate';
 })
 export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
-  @Input() selectedObjectObservable: Observable<IObject>;
+  @Input() selectedObjectObservable: Observable<any>;
 
   @Output() addField = new EventEmitter<number>();
   @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
@@ -20,7 +20,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   public properties: IProperties;
   public fields: IField[];
-  public selectedObject: IObject;
+  public selectedObject: any;
 
   private selectedObjectSubscription: Subscription;
 
@@ -41,10 +41,10 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     }
   }
 
-  private checkSelectedObject(object: IObject) {
+  private checkSelectedObject(object: any) {
     if (object) {
-      if (object.Discriminator === 'I-AM-Template') {
-        this.checkTemplateProps(object.Template);
+      if (object instanceof GameObjectTemplate || object instanceof GameCharacterTemplate) {
+        this.checkTemplateProps(object);
       }
     } else {
       this.properties = null;
@@ -52,7 +52,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     }
   }
 
-  private checkTemplateProps(template: ITemplate) {
+  private checkTemplateProps(template: GameObjectTemplate|GameCharacterTemplate) {
     if (typeof(template.Properties) !== 'undefined') {
       this.properties = template.Properties;
     } else {

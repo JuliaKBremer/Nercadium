@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
-import {IObject} from '../../../../../../data/schema/Interfaces/Editor/IObject';
+import {GameObjectTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {GameCharacterTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Component({
   selector: 'app-fields-display',
@@ -9,7 +10,7 @@ import {IObject} from '../../../../../../data/schema/Interfaces/Editor/IObject';
 })
 export class FieldsDisplayComponent implements OnInit {
 
-  @Input() selectedObject: IObject;
+  @Input() selectedObject: GameObjectTemplate|GameCharacterTemplate;
 
   public fieldTypes = FieldTypes;
 

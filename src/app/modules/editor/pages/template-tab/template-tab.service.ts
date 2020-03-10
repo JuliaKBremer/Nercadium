@@ -1,90 +1,102 @@
 import {Injectable} from '@angular/core';
-import {ITemplate} from '../../../../data/schema/Interfaces/Editor/ITemplate';
 import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
 import {IField} from '../../../../data/schema/Interfaces/Editor/IField';
 import {FieldTypes} from '../../../../data/schema/Enums/field-types.enum';
 import {BehaviorSubject} from 'rxjs';
-import {IObject} from '../../../../data/schema/Interfaces/Editor/IObject';
+import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemplateTabService {
-
-
   constructor() {
-    this.objects = new BehaviorSubject<IObject[]>([]);
-    this.selectedObject = new BehaviorSubject<IObject>(null);
+    this.characterTemplateObjects = new BehaviorSubject<GameCharacterTemplate[]>([]);
+    this.objectTemplateObjects = new BehaviorSubject<GameObjectTemplate[]>([]);
+    this.selectedObject = new BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>(null);
   }
 
   // Dummy
-  private objects: BehaviorSubject<IObject[]>;
-  private nextObjectID = 0;
+  private characterTemplateObjects: BehaviorSubject<GameCharacterTemplate[]>;
+  private objectTemplateObjects: BehaviorSubject<GameObjectTemplate[]>;
+  private nextTemplateID = 0;
   private nextFieldID = 0;
 
-  private selectedObject: BehaviorSubject<IObject>;
+  private selectedObject: BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>;
 
-  private static AddTemplate(): ITemplate {
-    const newTemplate: ITemplate = {
-      Properties: {},
-      Fields: []
-    };
+  private FindTemplateByID(templateToFindID: number): GameObjectTemplate|GameCharacterTemplate {
+    if (this.characterTemplateObjects.value.find(obj => obj.id === templateToFindID)) {
+      return this.characterTemplateObjects.value.find(obj => obj.id === templateToFindID);
+    } else if (this.objectTemplateObjects.value.find(obj => obj.id === templateToFindID)) {
+      return this.objectTemplateObjects.value.find(obj => obj.id === templateToFindID);
+    }
 
-    newTemplate.Properties.Name = {id: 0, value: 'New Template', type: PropertyTypes.string};
-    newTemplate.Properties.Type = {id: 1, value: PropertyTypes.boolean, type: PropertyTypes.enum, enum: PropertyTypes};
-
-    return newTemplate;
+    return null;
   }
 
-  public GetObjectsObservable() {
-    return this.objects.asObservable();
+  public GetObjectTemplatesObservable() {
+    return this.objectTemplateObjects.asObservable();
+  }
+
+  public GetCharacterTemplatesObservable() {
+    return this.characterTemplateObjects.asObservable();
   }
 
   public GetSelectedObjectObservable() {
     return this.selectedObject.asObservable();
   }
 
-  public SelectObject(objectToSelectID: number) {
-    const objectToSelect = this.objects.value.find(obj => obj.ID === objectToSelectID);
-    this.selectedObject.next(objectToSelect);
+  public SelectObject(templateToSelect: number) {
+    this.selectedObject.next(this.FindTemplateByID(templateToSelect));
   }
 
-  public AddObject() {
-    const newObject: IObject = {
-      Discriminator: 'I-AM-Template',
-      ID: this.nextObjectID++,
-      Properties: {},
-      FieldValues: {}
-    };
-
-    newObject.Properties.Name = {id: 0, value: 'New Object', type: PropertyTypes.string};
-    newObject.Properties.Type = {id: 1, value: PropertyTypes.boolean, type: PropertyTypes.enum, enum: PropertyTypes};
-
-    newObject.Template = TemplateTabService.AddTemplate();
-
-    this.objects.value.push(newObject);
+  public AddCharacterTemplate() {
+    const newCharacterTemplate: GameCharacterTemplate = new GameCharacterTemplate();
+    newCharacterTemplate.id = this.nextTemplateID++;
+    this.characterTemplateObjects.value.push(newCharacterTemplate);
   }
 
-  public CopyObject(objectToCopyID: number) {
-    const templateToCopy: IObject = this.objects.value.find(obj => obj.ID === objectToCopyID);
-    const newObject: IObject = JSON.parse(JSON.stringify(templateToCopy));
-
-    newObject.ID = this.nextObjectID++;
-
-    this.objects.value.push(newObject);
+  public AddObjectTemplate() {
+    const newObjectTemplate: GameObjectTemplate = new GameObjectTemplate();
+    newObjectTemplate.id = this.nextTemplateID++;
+    this.objectTemplateObjects.value.push(newObjectTemplate);
   }
 
-  public DeleteObject(objectToDeleteID: number) {
-    if (this.selectedObject.value && objectToDeleteID === this.selectedObject.value.ID) {
+  public CopyTemplate(templateToCopyID: number) {
+    const templateToCopy: GameObjectTemplate|GameCharacterTemplate = this.FindTemplateByID(templateToCopyID);
+
+    if (templateToCopy instanceof GameCharacterTemplate) {
+      const newTemplate: GameCharacterTemplate = new GameCharacterTemplate(templateToCopy);
+      newTemplate.id = this.nextTemplateID++;
+      this.characterTemplateObjects.value.push(newTemplate);
+    } else {
+      const newTemplate: GameObjectTemplate = new GameObjectTemplate(templateToCopy);
+      newTemplate.id = this.nextTemplateID++;
+      this.objectTemplateObjects.value.push(newTemplate);
+    }
+  }
+
+  public DeleteTemplate(templateToDeleteID: number) {
+    if (this.selectedObject.value && templateToDeleteID === this.selectedObject.value.id) {
       this.selectedObject.next(null);
     }
 
-    const currentObject: IObject[] = this.objects.value.filter(obj => obj.ID !== objectToDeleteID);
-    this.objects.next(currentObject);
+    const templateToDelete: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateToDeleteID);
+
+    if (templateToDelete instanceof GameCharacterTemplate) {
+      const currentTemplates: GameCharacterTemplate[] = this.characterTemplateObjects.value
+        .filter(obj => obj.id !== templateToDeleteID);
+
+      this.characterTemplateObjects.next(currentTemplates);
+    } else {
+      const currentTempaltes: GameObjectTemplate[] = this.objectTemplateObjects.value
+        .filter(obj => obj.id !== templateToDeleteID);
+
+      this.objectTemplateObjects.next(currentTempaltes);
+    }
   }
 
-
-  public AddField(objectID: number) {
+  public AddField(templateID: number) {
     const newField: IField = {
       Discriminator: 'I-AM-Field',
       ID: this.nextFieldID++,
@@ -95,27 +107,26 @@ export class TemplateTabService {
     newField.Properties.Name = {id: 0, value: 'New Field', type: PropertyTypes.string};
     newField.Properties.Type = {id: 1, value: FieldTypes.textBox, type: PropertyTypes.enum, enum: FieldTypes};
 
-    const currentObject = this.objects.value.find(obj => obj.ID === objectID);
-    currentObject.FieldValues[newField.ID] = 'TexBox';
-    currentObject.Template.Fields.push(newField);
+    const currentTemplate: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateID);
+    currentTemplate.FieldValues[newField.ID] = 'TexBox';
+    currentTemplate.Fields.push(newField);
   }
 
-  public CopyField({objectID: objectID, fieldID: fieldToCopyID}) {
-    const currentObject = this.objects.value.find(obj => obj.ID === objectID);
-    const template: ITemplate = currentObject.Template;
-    const fieldToCopy: IField = template.Fields.find(obj => obj.ID === fieldToCopyID);
+  public CopyField({fieldID: fieldToCopyID, objectID: templateID}) {
+    const currentTemplate: GameObjectTemplate|GameCharacterTemplate = this.FindTemplateByID(templateID);
+    const fieldToCopy: IField = currentTemplate.Fields.find(obj => obj.ID === fieldToCopyID);
     const newField: IField = JSON.parse(JSON.stringify(fieldToCopy));
 
     newField.ID = this.nextFieldID++;
 
-    currentObject.FieldValues[newField.ID] = currentObject.FieldValues[fieldToCopy.ID];
+    currentTemplate.FieldValues[newField.ID] = currentTemplate.FieldValues[fieldToCopy.ID];
 
-    this.objects.value.find(obj => obj.ID === objectID).Template.Fields.push(newField);
+    currentTemplate.Fields.push(newField);
   }
 
-  public DeleteField({objectID: objectID, fieldID: fieldToDeleteID}) {
-    const currentObject: IObject = this.objects.value.find(obj => obj.ID === objectID);
-    currentObject.Template.Fields = currentObject.Template.Fields.filter(obj => obj.ID !== fieldToDeleteID);
+  public DeleteField({fieldID: fieldToDeleteID, objectID: templateID}) {
+    const currentObject: GameObjectTemplate|GameCharacterTemplate = this.FindTemplateByID(templateID);
+    currentObject.Fields = currentObject.Fields.filter(obj => obj.ID !== fieldToDeleteID);
     delete currentObject.FieldValues[fieldToDeleteID];
     this.selectedObject.next(currentObject);
   }

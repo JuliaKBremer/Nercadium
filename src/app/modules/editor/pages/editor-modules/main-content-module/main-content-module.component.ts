@@ -1,15 +1,14 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {IObject} from '../../../../../data/schema/Interfaces/Editor/IObject';
-import {Component, Injectable, OnInit} from '@angular/core';
 import {LibraryService} from '../../../../../core/service/localLibrary/library.service';
 import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
-import {PAFHandler} from '../../../../../data/schema/Classes/Storage/PAFHandler';
 import {StorageSystemService} from '../../../../../core/service/storageSystem/storage-system.service';
 import {IBaseGameEntity} from '../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 import {GameChapter} from '../../../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {GameScript} from "../../../../../data/schema/Classes/Editor/Scripts/GameScript";
+import {GameScript} from '../../../../../data/schema/Classes/Editor/Scripts/GameScript';
+import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
 
 @Component({
   selector: 'app-main-content-module',
@@ -19,9 +18,10 @@ import {GameScript} from "../../../../../data/schema/Classes/Editor/Scripts/Game
 @Injectable()
 export class MainContentModuleComponent implements OnInit, OnDestroy {
 
-  @Input() selectedObjectObservable: Observable<IObject>;
+  @Input() selectedTemplateObservable: Observable<GameObjectTemplate|GameCharacterTemplate>;
 
-  public selectedObject: IObject;
+  public selectedObject: GameObjectTemplate|GameCharacterTemplate;
+  public entityTypes = EntityTypeEnum;
 
   private selectedObjectSubscription: Subscription;
 
@@ -64,8 +64,8 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.selectedObjectObservable !== undefined) {
-      this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+    if (this.selectedTemplateObservable !== undefined) {
+      this.selectedObjectSubscription = this.selectedTemplateObservable.subscribe(next => {
         this.selectedObject = next;
       });
     }

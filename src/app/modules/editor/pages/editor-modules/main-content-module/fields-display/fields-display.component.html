@@ -1,6 +1,6 @@
 <div *ngIf="selectedObject">
 <!--  <pre>{{selectedObject | json}}</pre>-->
-  <div *ngFor="let field of selectedObject.Template.Fields"
+  <div *ngFor="let field of selectedObject.Fields"
        [ngSwitch]="field.Properties.Type.value">
 
     <div *ngSwitchCase="fieldTypes.textBox">

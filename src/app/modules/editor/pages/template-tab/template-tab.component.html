@@ -1,18 +1,19 @@
 <app-editor-navbar></app-editor-navbar>
-<p>template-tab works!</p>
 <div class="alignContent">
 
   <div class="contentOrganizerModule">
-    <app-content-organizer-module [objectListObservable]="templateTabService.GetObjectsObservable()"
-                                  (addObject)="templateTabService.AddObject()"
-                                  (copyObject)="templateTabService.CopyObject($event)"
-                                  (deleteObject)="templateTabService.DeleteObject($event)"
+    <app-content-organizer-module [objectTemplateListObservable]="templateTabService.GetObjectTemplatesObservable()"
+                                  [characterTemplateListObservable]="templateTabService.GetCharacterTemplatesObservable()"
+                                  (addObjectTemplate)="templateTabService.AddObjectTemplate()"
+                                  (addCharacterTemplate)="templateTabService.AddCharacterTemplate()"
+                                  (copyObject)="templateTabService.CopyTemplate($event)"
+                                  (deleteObject)="templateTabService.DeleteTemplate($event)"
                                   (selectObject)="templateTabService.SelectObject($event)">
     </app-content-organizer-module>
   </div>
 
   <div class="mainContentModule">
-    <app-main-content-module [selectedObjectObservable]="templateTabService.GetSelectedObjectObservable()"></app-main-content-module>
+    <app-main-content-module [selectedTemplateObservable]="templateTabService.GetSelectedObjectObservable()"></app-main-content-module>
   </div>
 
   <div class="propertiesModule">

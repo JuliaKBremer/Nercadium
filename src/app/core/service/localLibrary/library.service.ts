@@ -14,7 +14,7 @@ import {PAFEntry} from '../../../data/schema/Classes/Storage/PAFEntry';
 import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {GameCharacterTemplateTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,7 @@ export class LibraryService {
     }
 
     if (gameObject.GetEntityType() === EntityTypeEnum.CharacterTemplate) {
-      this.CharacterTemplates.push(gameObject as GameCharacterTemplateTemplate);
+      this.CharacterTemplates.push(gameObject as GameCharacterTemplate);
     }
 
     if (gameObject.GetEntityType() === EntityTypeEnum.ObjectTemplate) {
@@ -179,7 +179,7 @@ export class LibraryService {
         // tslint:disable-next-line:triple-equals
         if (entry.GetEntityType() == EntityTypeEnum.CharacterTemplate) {
           pathSubFolder = '/' + PackageName +  '/CharacterTemplates/';
-          file.fileData = entry as GameCharacterTemplateTemplate;
+          file.fileData = entry as GameCharacterTemplate;
         }
         // tslint:disable-next-line:triple-equals
         if (entry.GetEntityType() == EntityTypeEnum.ObjectTemplate) {

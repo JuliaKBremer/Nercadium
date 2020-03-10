@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, OnDestroy, Output} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
+import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 
 @Component({
   selector: 'app-content-organizer-module',
@@ -8,30 +10,44 @@ import {Observable, Subscription} from 'rxjs';
 })
 export class ContentOrganizerModuleComponent implements OnInit, OnDestroy {
 
-  @Input() objectListObservable: Observable<any[]>;
+  @Input() objectTemplateListObservable: Observable<GameObjectTemplate[]>;
+  @Input() characterTemplateListObservable: Observable<GameCharacterTemplate[]>;
 
-  @Output() addObject = new EventEmitter();
+  @Output() addObjectTemplate = new EventEmitter();
+  @Output() addCharacterTemplate = new EventEmitter();
   @Output() copyObject = new EventEmitter<number>();
   @Output() deleteObject = new EventEmitter<number>();
   @Output() selectObject = new EventEmitter<number>();
 
-  public objectList: any[];
+  public objectTemplateList: GameObjectTemplate[];
+  public characterTemplateList: GameCharacterTemplate[];
 
-  private objectListSubscription: Subscription;
+  private objectTemplateListSubscription: Subscription;
+  private characterTemplateListSubscription: Subscription;
 
   constructor() { }
 
   ngOnInit() {
-    if (this.objectListObservable) {
-      this.objectListSubscription = this.objectListObservable.subscribe(next => {
-        this.objectList = next;
+    if (this.objectTemplateListObservable) {
+      this.objectTemplateListSubscription = this.objectTemplateListObservable.subscribe(next => {
+        this.objectTemplateList = next;
+      });
+    }
+
+    if (this.characterTemplateListObservable) {
+      this.characterTemplateListSubscription = this.characterTemplateListObservable.subscribe(next => {
+        this.characterTemplateList = next;
       });
     }
   }
 
   ngOnDestroy() {
-    if (this.objectListSubscription) {
-      this.objectListSubscription.unsubscribe();
+    if (this.objectTemplateListSubscription) {
+      this.objectTemplateListSubscription.unsubscribe();
+    }
+
+    if (this.characterTemplateListSubscription) {
+      this.characterTemplateListSubscription.unsubscribe();
     }
   }
 }
