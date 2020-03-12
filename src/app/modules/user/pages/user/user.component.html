@@ -1,0 +1,11 @@
+<div class="flexContainer">
+  <section *ngIf="!userIsLoggedIn">
+    <p routerLink="/user/login">LOGIN</p>
+    <p routerLink="/user/register">REGISTER</p>
+  </section>
+
+  <section *ngIf="userIsLoggedIn">
+    <p>Herzlich Willkommen</p>
+    <p (click)="this.logout()">LOGOUT</p>
+  </section>
+</div>
