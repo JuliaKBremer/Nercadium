@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-library-start',
@@ -24,6 +25,17 @@ export class LibraryStartComponent implements OnInit {
     {text: 'Orc', cols: 1, rows: 2, tag: 'Character', favorite: false}
   ];
 
+  // values and functions for Pagination
+  pageEvent: PageEvent;
+  length = this.objects.length;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
   constructor() { }
 
   ngOnInit() {
