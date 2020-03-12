@@ -10,7 +10,7 @@ export interface IGameScript {
   Name: string;
 
   // Beschreibung des Skript
-  Descripton: string;
+  Description: string;
 
   // Kapitel innerhalb des Skript
   Chapters: IGameChapter[];

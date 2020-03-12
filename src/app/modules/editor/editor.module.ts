@@ -11,17 +11,38 @@ import { EditorNavbarComponent } from './pages/editor-modules/editor-navbar/edit
 import { ChapterTabComponent } from './pages/chapter-tab/chapter-tab.component';
 import { CharacterTabComponent } from './pages/character-tab/character-tab.component';
 import { ObjectTabComponent } from './pages/object-tab/object-tab.component';
+import { TextEditorComponent } from './shared/text-editor/text-editor.component';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import { TemplateTabComponent } from './pages/sandbaox/template-tab/template-tab.component';
+import { SammlungComponent } from './pages/sandbaox/sammlung/sammlung.component';
+import { MainComponent } from './pages/sandbaox/main/main.component';
+import { PropertiesComponent } from './pages/sandbaox/properties/properties.component';
 
 
 @NgModule({
-  declarations: [EditorStartComponent, PropertiesModuleComponent, MainContentModuleComponent, ContentOrganizerModuleComponent, EditorNavbarComponent, ChapterTabComponent, CharacterTabComponent, ObjectTabComponent],
+  declarations: [
+    EditorStartComponent,
+    PropertiesModuleComponent,
+    MainContentModuleComponent,
+    ContentOrganizerModuleComponent,
+    EditorNavbarComponent,
+    ChapterTabComponent,
+    CharacterTabComponent,
+    ObjectTabComponent,
+    TextEditorComponent,
+    TemplateTabComponent,
+    SammlungComponent,
+    MainComponent,
+    PropertiesComponent
+  ],
   exports: [
     EditorStartComponent
   ],
   imports: [
     CommonModule,
     EditorRoutingModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ]
 })
 export class EditorModule { }

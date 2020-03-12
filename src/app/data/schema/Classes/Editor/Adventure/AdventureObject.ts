@@ -3,8 +3,10 @@ import {IAdventureObject} from '../../../Interfaces/Editor/IAdventureObject';
 import {IGameCharacter} from '../../../Interfaces/Editor/IGameCharacter';
 import {IGameScene} from '../../../Interfaces/Editor/IGameScene';
 import {IGameScript} from '../../../Interfaces/Editor/IGameScript';
+import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
+import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
 
-export class AdventureObject implements IAdventureObject {
+export class AdventureObject implements IAdventureObject, IBaseGameEntity {
 
   // ID of the Adventure.
   public id: number;
@@ -32,6 +34,10 @@ export class AdventureObject implements IAdventureObject {
 
   // ALL containing GameScripts.
   public Scripts: IGameScript[];
+
+  GetEntityType(): EntityTypeEnum {
+    return EntityTypeEnum.Adventure;
+  }
 
 
 }

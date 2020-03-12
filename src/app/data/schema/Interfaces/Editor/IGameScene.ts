@@ -12,7 +12,7 @@ export interface IGameScene {
   Name: string;
 
   // Beschreibung der Szene
-  Descripton: string;
+  Description: string;
 
   // Notizen innerhalb der Szene
   Notes: INote[];

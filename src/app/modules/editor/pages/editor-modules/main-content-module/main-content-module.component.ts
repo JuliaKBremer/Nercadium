@@ -1,5 +1,10 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {IOServiceService} from '../../../../../data/service/ioservice.service';
+import {LibraryService} from '../../../../../core/service/localLibrary/library.service';
+import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {PAFHandler} from '../../../../../data/schema/Classes/Storage/PAFHandler';
+import {StorageSystemService} from '../../../../../core/service/storageSystem/storage-system.service';
+import {IBaseGameEntity} from '../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
 @Component({
   selector: 'app-main-content-module',
@@ -9,32 +14,34 @@ import {IOServiceService} from '../../../../../data/service/ioservice.service';
 @Injectable()
 export class MainContentModuleComponent implements OnInit {
 
-  file = null;
-  public Path: string;
 
-  error: object = null;
-  constructor(private dataHandler: IOServiceService) { }
+  constructor(private libraryService: LibraryService, private fileManager: StorageSystemService) { }
+
+  private result: string = null;
+  public FilePath = '/users/mdmm/';
+  private itm: IBaseGameEntity[];
 
   public GetTest(): void {
-    this.dataHandler.getConfig(this.Path).subscribe(
-      (data) => this.file = { ...data }, // success path
-      error => this.error = error // error path
-    );
+    return;
   }
 
   public GetResult() {
-    if (this.file != null) {
-      const itm = this.file as testClass;
-      return itm.Name;
-    }
-    return 'file empty / not found!';
+    return this.result;
   }
 
   public CreateFile() {
-    const nitm = new testClass();
-    nitm.Name = 'neu';
-    this.dataHandler.writeTest(nitm, this.Path);
-    this.file = nitm;
+    this.result = 'working';
+    const itms: IBaseGameEntity[] = [];
+    const objTest = new GameObject();
+    const objTemp = new GameObjectTemplate();
+    objTemp.Name = 'TesTemplate';
+    objTemp.Properties = null;
+
+    objTest.Name = 'Test';
+    objTest.ObjectTemplate = objTemp;
+    this.libraryService.AddGameObject(objTest);
+    this.libraryService.SavePackage(this.FilePath, 'TestPackage.json');
+    this.result = 'done';
   }
 
   ngOnInit() {

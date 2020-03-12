@@ -1,6 +1,8 @@
 import {INote} from '../../../Interfaces/Editor/INote';
+import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
+import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
 
-export class NoteObject implements INote {
+export class NoteObject implements INote, IBaseGameEntity {
 
   // ID der Notiz
   id: number;
@@ -9,6 +11,10 @@ export class NoteObject implements INote {
   Name: string;
 
   // Text der Notiz
-  Descripton: string;
+  Description: string;
+
+  GetEntityType(): EntityTypeEnum {
+    return EntityTypeEnum.Note;
+  }
 
 }
