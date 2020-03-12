@@ -35,6 +35,11 @@
   </div>
   <div class="library_content">
     <h2>All Assets</h2>
+    <mat-paginator
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent = $event">
     <div *ngIf="(objects | filter:searchtext).length <1">
       Not Found
     </div>
@@ -58,5 +63,12 @@
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
+    </mat-paginator>
+    <div *ngIf="pageEvent">
+      <h5>Page Change Event Properties</h5>
+      <div>List length: {{pageEvent.length}}</div>
+      <div>Page size: {{pageEvent.pageSize}}</div>
+      <div>Page index: {{pageEvent.pageIndex}}</div>
+    </div>
   </div>
 </div>

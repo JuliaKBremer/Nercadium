@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { LibraryRoutingModule } from './library-routing.module';
 import { LibraryStartComponent } from './pages/library-start/library-start.component';
-import {MatGridListModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatGridListModule, MatPaginator, MatPaginatorModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/typings/esm5/card';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
-
 
 @NgModule({
   declarations: [LibraryStartComponent],
@@ -26,7 +25,9 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     FlexLayoutModule,
     MatFormFieldModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatButtonModule,
+    MatPaginatorModule
   ]
 })
 export class LibraryModule { }
