@@ -10,6 +10,9 @@ export class GameCharacterTemplateTemplate implements IGameCharacterTemplate, IB
   id: number;
   Description: string;
 
+  // Entity's Tags
+  public Tags: string[];
+
   GetEntityType(): EntityTypeEnum {
     return EntityTypeEnum.CharacterTemplate;
   }

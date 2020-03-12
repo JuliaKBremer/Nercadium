@@ -10,6 +10,9 @@ export class CharacterObject implements IGameCharacter, IBaseGameEntity {
   // ID des Objektes.
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Charakter/Heldenname.
   Name: string;
 

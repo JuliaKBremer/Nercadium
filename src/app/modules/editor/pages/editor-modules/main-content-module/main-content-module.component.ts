@@ -6,7 +6,7 @@ import {PAFHandler} from '../../../../../data/schema/Classes/Storage/PAFHandler'
 import {StorageSystemService} from '../../../../../core/service/storageSystem/storage-system.service';
 import {IBaseGameEntity} from '../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 import {GameChapter} from '../../../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {GameScript} from "../../../../../data/schema/Classes/Editor/Scripts/GameScript";
+import {GameScript} from '../../../../../data/schema/Classes/Editor/Scripts/GameScript';
 
 @Component({
   selector: 'app-main-content-module',

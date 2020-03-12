@@ -8,6 +8,9 @@ export class GameScript implements IGameScript, IBaseGameEntity {
   // ID des Script
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Bezeichnung / Name des Skript
   Name: string;
 

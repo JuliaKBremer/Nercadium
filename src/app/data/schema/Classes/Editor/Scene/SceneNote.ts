@@ -7,6 +7,9 @@ export class NoteObject implements INote, IBaseGameEntity {
   // ID der Notiz
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name ... notwendig?!
   Name: string;
 

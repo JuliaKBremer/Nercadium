@@ -10,6 +10,9 @@ export class GameObject implements IGameObject, IBaseGameEntity {
   // ID des Objekt
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name
   Name: string;
 

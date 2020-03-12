@@ -9,6 +9,9 @@ export class SceneObject implements IGameScene, IBaseGameEntity {
   // ID der Szene
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name der Szene
   Name: string;
 
