@@ -16,7 +16,7 @@ export class TemplateTabService {
     this.selectedObject = new BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>(null);
   }
 
-  // Dummy
+  // TODO: Get templates from storage. Get next id´s from storage.
   private characterTemplateObjects: BehaviorSubject<GameCharacterTemplate[]>;
   private objectTemplateObjects: BehaviorSubject<GameObjectTemplate[]>;
   private nextTemplateID = 0;
@@ -98,18 +98,18 @@ export class TemplateTabService {
 
   public AddField(templateID: number) {
     const newField: IField = {
-      Discriminator: 'I-AM-Field',
       ID: this.nextFieldID++,
       IsCollapsed: false,
       Properties: {}
     };
 
-    newField.Properties.Name = {id: 0, value: 'New Field', type: PropertyTypes.string};
-    newField.Properties.Type = {id: 1, value: FieldTypes.textBox, type: PropertyTypes.enum, enum: FieldTypes};
-
     const currentTemplate: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateID);
-    currentTemplate.FieldValues[newField.ID] = 'TexBox';
+
+    newField.Properties.Name = {id: 0, value: 'New Field', type: PropertyTypes.string};
+
     currentTemplate.Fields.push(newField);
+
+    this.ChangeFieldType(currentTemplate.id, newField.ID, FieldTypes.textBox);
   }
 
   public CopyField({fieldID: fieldToCopyID, objectID: templateID}) {
@@ -129,5 +129,88 @@ export class TemplateTabService {
     currentObject.Fields = currentObject.Fields.filter(obj => obj.ID !== fieldToDeleteID);
     delete currentObject.FieldValues[fieldToDeleteID];
     this.selectedObject.next(currentObject);
+  }
+
+  public ChangeFieldType(templateID: number, fieldID: number, fieldType: FieldTypes) {
+    const currentTemplate: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateID);
+    const currentField: IField = currentTemplate.Fields.find(obj => obj.ID === fieldID);
+
+    currentField.Properties.Type = {id: 1, value: fieldType, type: PropertyTypes.enum, enum: FieldTypes};
+
+    for (const key in currentField.Properties) {
+      if (key !== 'Name' && key !== 'Type') {
+        // noinspection JSUnfilteredForInLoop
+        delete currentField.Properties[key];
+      }
+    }
+
+    // TODO: add end delete properties depending on fieldType.
+    switch (fieldType) {
+      case FieldTypes.textBox: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.MaxLength = {id: 3, value: 20, type: PropertyTypes.number};
+        currentField.Properties.Placeholder = {id: 5, value: 'Text Box', type: PropertyTypes.string};
+        currentField.Properties.ReadOnly = {id: 6, value: false, type: PropertyTypes.boolean};
+        currentField.Properties.Size = {id: 7, value: 20, type: PropertyTypes.number};
+
+        currentTemplate.FieldValues[currentField.ID] = '';
+        break;
+      }
+      case FieldTypes.textArea: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Cols = {id: 3, value: 20, type: PropertyTypes.number};
+        currentField.Properties.Rows = {id: 4, value: 20, type: PropertyTypes.number};
+        currentField.Properties.MaxLength = {id: 5, value: 20, type: PropertyTypes.number};
+        currentField.Properties.Placeholder = {id: 7, value: 'Text Area', type: PropertyTypes.string};
+        currentField.Properties.ReadOnly = {id: 8, value: false, type: PropertyTypes.boolean};
+        currentField.Properties.Resize = {id: 9, value: false, type: PropertyTypes.boolean};
+
+        currentTemplate.FieldValues[currentField.ID] = '';
+        break;
+      }
+      case FieldTypes.number: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
+        currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
+        currentField.Properties.Step = {id: 5, value: '1', type: PropertyTypes.number};
+        currentField.Properties.ReadOnly = {id: 6, value: false, type: PropertyTypes.boolean};
+
+        currentTemplate.FieldValues[currentField.ID] = 0;
+        break;
+      }
+      // TODO: Select
+      // case FieldTypes.select: {
+      //   currentTemplate.FieldValues[currentField.ID] = {value: 0, options: ['']};
+      //   break;
+      // }
+      case FieldTypes.checkBox: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+
+        currentTemplate.FieldValues[currentField.ID] = false;
+        break;
+      }
+      case FieldTypes.radio: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+
+        currentTemplate.FieldValues[currentField.ID] = false;
+        break;
+      }
+      case FieldTypes.range: {
+        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
+        currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
+        currentField.Properties.Step = {id: 5, value: '1', type: PropertyTypes.number};
+        currentField.Properties.ReadOnly = {id: 6, value: false, type: PropertyTypes.boolean};
+
+        currentTemplate.FieldValues[currentField.ID] = 0;
+        break;
+      }
+      // TODO: Table
+      // case FieldTypes.table: {
+      //   currentTemplate.FieldValues[currentField.ID] = {};
+      //   break;
+      // }
+    }
+
   }
 }

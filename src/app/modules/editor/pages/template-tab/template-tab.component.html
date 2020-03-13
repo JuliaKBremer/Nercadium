@@ -20,6 +20,7 @@
     <app-properties-module [selectedObjectObservable]="templateTabService.GetSelectedObjectObservable()"
                            (deleteField)="templateTabService.DeleteField($event)"
                            (copyField)="templateTabService.CopyField($event)"
+                           (changeFieldType)="templateTabService.ChangeFieldType($event.templateID, $event.fieldID, $event.fieldType)"
                            (addField)="templateTabService.AddField($event)">
     </app-properties-module>
   </div>

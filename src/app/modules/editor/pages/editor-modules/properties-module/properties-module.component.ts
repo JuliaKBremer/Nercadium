@@ -4,6 +4,7 @@ import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
 import {Observable, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
 
 @Component({
   selector: 'app-properties-module',
@@ -17,6 +18,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   @Output() addField = new EventEmitter<number>();
   @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
   @Output() copyField = new EventEmitter<{fieldID: number, objectID: number}>();
+  @Output() changeFieldType = new EventEmitter<{templateID: number, fieldID: number, fieldType: FieldTypes}>();
 
   public properties: IProperties;
   public fields: IField[];

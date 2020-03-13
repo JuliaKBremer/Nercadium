@@ -1,3 +1,4 @@
+<!--  TODO: Sort by id -->
 <div *ngFor="let property of properties | keyvalue">
   <span>
     {{property.key}}
@@ -29,7 +30,7 @@
 
     <div *ngSwitchCase="propertyType.enum">
       <label>
-        <select (change)="selectChanged.emit()" [(ngModel)]="property.value.value" >
+        <select (change)="selectChanged.emit(property.value.value)" [(ngModel)]="property.value.value" >
           <option *ngFor="let type of objectKeys(property.value.enum)" [ngValue]="type">{{type}}</option>
         </select>
       </label>
