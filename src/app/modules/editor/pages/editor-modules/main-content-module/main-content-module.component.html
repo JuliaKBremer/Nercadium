@@ -1,8 +1,8 @@
 <a class="mainEditorContent__anker">bla</a>
 <div class="mainContent">
   <div *ngIf="selectedObject">
-    <div *ngIf="selectedObject.GetEntityType() === entityTypes.CharacterTemplate
-                || selectedObject.GetEntityType() === entityTypes.ObjectTemplate">
+    <div *ngIf="selectedObject.EntityType === entityTypes.CharacterTemplate
+                || selectedObject.EntityType === entityTypes.ObjectTemplate">
       <app-fields-display [selectedObject]="selectedObject"></app-fields-display>
     </div>
   </div>
@@ -10,7 +10,7 @@
   <label>
     <input [(ngModel)]="FilePath" />
   </label>
-  <button class="mainContent__button" (click)="GetTest()">
+  <button class="mainContent__button" (click)="Load()">
     Laden
   </button>
   <button (click)="CreateFile()">
