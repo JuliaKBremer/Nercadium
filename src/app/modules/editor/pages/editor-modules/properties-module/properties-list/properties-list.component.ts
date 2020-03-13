@@ -22,4 +22,17 @@ export class PropertiesListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  trackByFn(index: any) {
+    return index;
+  }
+
+  AddToArray(array: ['']) {
+    const newObject = '';
+    array.push(newObject);
+  }
+
+  // DeleteFromArray(array: [], index: number) {
+  //
+  // }
 }

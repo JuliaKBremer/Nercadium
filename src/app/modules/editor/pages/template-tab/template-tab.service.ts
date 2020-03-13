@@ -144,10 +144,9 @@ export class TemplateTabService {
       }
     }
 
-    // TODO: add end delete properties depending on fieldType.
     switch (fieldType) {
       case FieldTypes.textBox: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'TextBox', type: PropertyTypes.string};
         currentField.Properties.MaxLength = {id: 3, value: 20, type: PropertyTypes.number};
         currentField.Properties.Placeholder = {id: 5, value: 'Text Box', type: PropertyTypes.string};
         currentField.Properties.ReadOnly = {id: 6, value: false, type: PropertyTypes.boolean};
@@ -157,7 +156,7 @@ export class TemplateTabService {
         break;
       }
       case FieldTypes.textArea: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'TextArea', type: PropertyTypes.string};
         currentField.Properties.Cols = {id: 3, value: 20, type: PropertyTypes.number};
         currentField.Properties.Rows = {id: 4, value: 20, type: PropertyTypes.number};
         currentField.Properties.MaxLength = {id: 5, value: 20, type: PropertyTypes.number};
@@ -169,7 +168,7 @@ export class TemplateTabService {
         break;
       }
       case FieldTypes.number: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'Number', type: PropertyTypes.string};
         currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
         currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
         currentField.Properties.Step = {id: 5, value: '1', type: PropertyTypes.number};
@@ -178,25 +177,27 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = 0;
         break;
       }
-      // TODO: Select
-      // case FieldTypes.select: {
-      //   currentTemplate.FieldValues[currentField.ID] = {value: 0, options: ['']};
-      //   break;
-      // }
+      case FieldTypes.select: {
+        currentField.Properties.Label = {id: 2, value: 'Select', type: PropertyTypes.string};
+        currentField.Properties.Options = {id: 3, value: ['Option'], type: PropertyTypes.options};
+
+        currentTemplate.FieldValues[currentField.ID] = 'Option';
+        break;
+      }
       case FieldTypes.checkBox: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'CheckBox', type: PropertyTypes.string};
 
         currentTemplate.FieldValues[currentField.ID] = false;
         break;
       }
       case FieldTypes.radio: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'Radio', type: PropertyTypes.string};
 
         currentTemplate.FieldValues[currentField.ID] = false;
         break;
       }
       case FieldTypes.range: {
-        currentField.Properties.Label = {id: 2, value: 'Label', type: PropertyTypes.string};
+        currentField.Properties.Label = {id: 2, value: 'Range', type: PropertyTypes.string};
         currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
         currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
         currentField.Properties.Step = {id: 5, value: '1', type: PropertyTypes.number};
@@ -211,6 +212,5 @@ export class TemplateTabService {
       //   break;
       // }
     }
-
   }
 }

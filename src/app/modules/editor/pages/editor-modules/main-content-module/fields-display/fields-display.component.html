@@ -1,6 +1,5 @@
 <div *ngIf="selectedObject">
 <!--  <pre>{{selectedObject | json}}</pre>-->
-<!--  TODO: Add a form -->
   <div *ngFor="let field of selectedObject.Fields"
        [ngSwitch]="field.Properties.Type.value">
 
@@ -27,10 +26,16 @@
       </label>
     </div>
 
-    <!-- TODO: Select -->
-<!--    <div *ngSwitchCase="fieldTypes.select">-->
-<!--      <span>Select</span>-->
-<!--    </div>-->
+    <!--  Select -->
+    <div *ngSwitchCase="fieldTypes.select">
+      <div *ngIf="field.Properties.Options.value.length > 0">
+        <label>{{field.Properties.Label.value}}
+          <select [(ngModel)]="selectedObject.FieldValues[field.ID]">
+            <option *ngFor="let value of field.Properties.Options.value" [ngValue]="value">{{value}}</option>
+          </select>
+        </label>
+      </div>
+    </div>
 
 
     <!-- Text Area -->

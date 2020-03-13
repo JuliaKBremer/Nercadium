@@ -2,5 +2,6 @@ export enum PropertyTypes {
   string = 'string',
   number = 'number',
   boolean = 'boolean',
-  enum = 'enum'
+  enum = 'enum',
+  options = 'options'
 }
