@@ -9,9 +9,10 @@ import { FirebaseAuthService } from '../../services/firebase-auth.service';
 })
 export class LogoutComponent implements OnInit {
 
+
   constructor(private loginService: FirebaseAuthService, private router: Router) {
-    this.loginService.logout();
-    this.router.navigate(['/user']);
+     this.loginService.logout();
+     this.router.navigate(['/user']);
   }
 
   ngOnInit() {

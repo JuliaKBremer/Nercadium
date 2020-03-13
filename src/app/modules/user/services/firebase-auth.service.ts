@@ -25,7 +25,6 @@ export class FirebaseAuthService {
     const result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return user !== null;
@@ -34,5 +33,10 @@ export class FirebaseAuthService {
   async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem('user');
+  }
+
+  async register(email: string, password: string) {
+    const result = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    await this.router.navigate(['/user/login']);
   }
 }

@@ -9,7 +9,6 @@ import { Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required]
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
   loginFailed = false;
 
   constructor(private fb: FormBuilder, private loginService: FirebaseAuthService, private router: Router) {
-    this.checkIfUserLoggedInAndRedirect();
   }
 
   ngOnInit() {
@@ -26,13 +24,13 @@ export class LoginComponent implements OnInit {
 
   async userSubmittedForm() {
     /* Process the input data and submit */
-    await this.loginService.login(this.loginForm.get('email').value, this.loginForm.get('password').value);
-    this.checkIfUserLoggedInAndRedirect();
+    const loginProcess = await this.loginService.login(this.loginForm.get('email').value, this.loginForm.get('password').value);
+    await this.checkIfUserLoggedInAndRedirect();
   }
 
-  checkIfUserLoggedInAndRedirect() {
+  async checkIfUserLoggedInAndRedirect() {
     if (this.loginService.isLoggedIn) {
-      this.router.navigate(['user']);
+     await this.router.navigate(['user']);
     }
   }
 }

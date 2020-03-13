@@ -1,1 +1,15 @@
-<p>register works!</p>
+<div class="flexContainer">
+  <form [formGroup]="registerForm" (ngSubmit)="userSubmittedForm()" style="display:flex;flex-direction: column;">
+    <mat-form-field appearance="fill" style="margin:auto;">
+      <mat-label>E-Mail</mat-label>
+      <input matInput formControlName="email" type="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="margin:auto;">
+      <mat-label>Passwort</mat-label>
+      <input matInput formControlName="password" type="password">
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" style="margin:auto;">Registrieren</button>
+  </form>
+</div>

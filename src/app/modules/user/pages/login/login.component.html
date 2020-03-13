@@ -1,6 +1,6 @@
 <div class="flexContainer">
   <form [formGroup]="loginForm" (ngSubmit)="userSubmittedForm()" style="display:flex;flex-direction: column;">
-    <h5 *ngIf="loginFailed" style="color: red; margin:auto;">Fehler beim einloggen, versuche es erneut.</h5>
+    <h5 *ngIf="loginFailed == true" style="color: red; margin:auto;">Fehler beim einloggen, versuche es erneut.</h5>
 
     <mat-form-field appearance="fill" style="margin:auto;">
       <mat-label>E-Mail</mat-label>
