@@ -7,6 +7,9 @@ export class GameChapter implements IGameChapter, IBaseGameEntity {
   // ID
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Kapitel Beschreibung im Kurztext
   Description: string;
 
@@ -16,8 +19,6 @@ export class GameChapter implements IGameChapter, IBaseGameEntity {
   // Text des Kapitel
   Text: string;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Chapter;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Chapter;
 
 }

@@ -12,6 +12,11 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
   Fields: IField[] = [];
   FieldValues: {[key: string]: any} = {};
   Description: string;
+  EntityType: EntityTypeEnum = EntityTypeEnum.ObjectTemplate;
+
+  // Entity's Tags
+  public Tags: string[];
+
 
   constructor(objectTemplateToCopy?: GameObjectTemplate) {
     if (objectTemplateToCopy) {
@@ -26,7 +31,5 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
     }
   }
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.ObjectTemplate;
-  }
+
 }

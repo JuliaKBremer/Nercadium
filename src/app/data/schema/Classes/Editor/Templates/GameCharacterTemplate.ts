@@ -26,7 +26,9 @@ export class GameCharacterTemplate implements IGameCharacterTemplate, IBaseGameE
     }
   }
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.CharacterTemplate;
-  }
+  // Entity's Tags
+  public Tags: string[];
+
+  EntityType: EntityTypeEnum = EntityTypeEnum.CharacterTemplate;
+
 }

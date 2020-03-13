@@ -1,4 +1,4 @@
-<a class="mainEditorContent__anker"></a>
+<a class="mainEditorContent__anker">bla</a>
 <div class="mainContent">
   <div *ngIf="selectedObject">
     <div *ngIf="selectedObject.GetEntityType() === entityTypes.CharacterTemplate
@@ -6,4 +6,20 @@
       <app-fields-display [selectedObject]="selectedObject"></app-fields-display>
     </div>
   </div>
+
+  <label>
+    <input [(ngModel)]="FilePath" />
+  </label>
+  <button class="mainContent__button" (click)="GetTest()">
+    Laden
+  </button>
+  <button (click)="CreateFile()">
+    Speichern
+  </button>
+  <button>
+    Neu
+  </button>
+  <label>
+    {{GetResult()}}
+  </label>
 </div>
