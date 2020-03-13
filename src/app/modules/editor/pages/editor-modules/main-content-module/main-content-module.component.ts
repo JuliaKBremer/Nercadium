@@ -23,7 +23,7 @@ export class MainContentModuleComponent implements OnInit {
   public FilePath = '/users/mdmm/';
   private itm: IBaseGameEntity[];
 
-  public GetTest(): void {
+  public Load(): void {
     const result = this.libraryService.LoadPackage(this.FilePath, 'TestPackage');
     if (result === StateEnum.Loading) {
       this.result = 'Loading';
