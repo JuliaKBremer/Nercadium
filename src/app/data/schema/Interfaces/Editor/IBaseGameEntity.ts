@@ -17,7 +17,7 @@ export interface IBaseGameEntity {
   Description: string;
 
   // Gibt den Typen des Objekt zurück.
-  GetEntityType(): EntityTypeEnum;
+  EntityType: EntityTypeEnum;
 
 
 }

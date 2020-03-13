@@ -25,9 +25,7 @@ export class GameObject implements IGameObject, IBaseGameEntity {
   // Template das für dieses Objekt verwendet wird.
   ObjectTemplate: IGameObjectTemplate;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Object;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Object;
 
 
 }

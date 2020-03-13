@@ -16,8 +16,6 @@ export class NoteObject implements INote, IBaseGameEntity {
   // Text der Notiz
   Description: string;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Note;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Note;
 
 }

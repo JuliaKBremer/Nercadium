@@ -27,9 +27,7 @@ export class SceneObject implements IGameScene, IBaseGameEntity {
   // Objekte / Gegendstände in der Szene
   Objects: IGameObject[];
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Scene;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Scene;
 
 
 }

@@ -4,7 +4,7 @@ import {IGameCharacterTemplate} from '../../../Interfaces/Editor/IGameCharacterT
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
 
-export class GameCharacterTemplateTemplate implements IGameCharacterTemplate, IBaseGameEntity {
+export class GameCharacterTemplate implements IGameCharacterTemplate, IBaseGameEntity {
   Name: string;
   Properties: IProperty[];
   id: number;
@@ -13,8 +13,6 @@ export class GameCharacterTemplateTemplate implements IGameCharacterTemplate, IB
   // Entity's Tags
   public Tags: string[];
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.CharacterTemplate;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.CharacterTemplate;
 
 }

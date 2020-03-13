@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AdventureObject} from '../../../data/schema/Classes/Editor/Adventure/AdventureObject';
 import {CharacterObject} from '../../../data/schema/Classes/Editor/Character/CharacterObject';
 import {GameObject} from '../../../data/schema/Classes/Editor/Objects/GameObject';
@@ -14,7 +14,8 @@ import {PAFEntry} from '../../../data/schema/Classes/Storage/PAFEntry';
 import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {GameCharacterTemplateTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {StateEnum} from '../../../data/schema/Classes/Storage/StateEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -32,21 +33,15 @@ export class LibraryService {
   private CharacterTemplates: GameObjectTemplate[];
   Description: string;
   Name: string;
+  public State: StateEnum;
 
 
   constructor(private FileAccessService: StorageSystemService) {
-    this.Objects = [];
-    this.Adventures = [];
-    this.Characters = [];
-    this.Notes = [];
-    this.Scenes = [];
-    this.Scripts = [];
-    this.Chapters = [];
-    this.ObjectTemplates = [];
-    this.CharacterTemplates = [];
+    this.Clear();
   }
 
   Clear(): void {
+    this.State = StateEnum.Default;
     this.Objects = [];
     this.Adventures = [];
     this.Characters = [];
@@ -60,39 +55,39 @@ export class LibraryService {
 
   public Add(gameObject: IBaseGameEntity) {
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Object) {
+    if (gameObject.EntityType === EntityTypeEnum.Object) {
       this.Objects.push(gameObject as GameObject);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Adventure) {
+    if (gameObject.EntityType === EntityTypeEnum.Adventure) {
       this.Adventures.push(gameObject as AdventureObject);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Character) {
+    if (gameObject.EntityType === EntityTypeEnum.Character) {
       this.Characters.push(gameObject as CharacterObject);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.CharacterTemplate) {
-      this.CharacterTemplates.push(gameObject as GameCharacterTemplateTemplate);
+    if (gameObject.EntityType === EntityTypeEnum.CharacterTemplate) {
+      this.CharacterTemplates.push(gameObject as GameCharacterTemplate);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.ObjectTemplate) {
+    if (gameObject.EntityType === EntityTypeEnum.ObjectTemplate) {
       this.ObjectTemplates.push(gameObject as GameObjectTemplate);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Script) {
+    if (gameObject.EntityType === EntityTypeEnum.Script) {
       this.Scripts.push(gameObject as GameScript);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Scene) {
+    if (gameObject.EntityType === EntityTypeEnum.Scene) {
       this.Scenes.push(gameObject as SceneObject);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Chapter) {
+    if (gameObject.EntityType === EntityTypeEnum.Chapter) {
       this.Chapters.push(gameObject as GameChapter);
     }
 
-    if (gameObject.GetEntityType() === EntityTypeEnum.Note) {
+    if (gameObject.EntityType === EntityTypeEnum.Note) {
       this.Notes.push(gameObject as NoteObject);
     }
 
@@ -137,7 +132,83 @@ export class LibraryService {
   }
 
   public LoadPackage(FilePath: string, FileName: string) {
+    this.State = StateEnum.Loading;
+    const handler = new PAFHandler(this.FileAccessService);
+    const result = handler.LoadPAFFile(FilePath, FileName);
+    if (result != null) {
+      this.Clear();
+      result.then( (entries) => {
+        for (const entry of entries) {
+          const newFile = new StorageFile();
+          newFile.filePath = entry.filePath;
+          console.log(newFile.filePath);
+          newFile.fileName = entry.fileName;
+          console.log(newFile.fileName);
+          this.FileAccessService.loadData(newFile).then( (objectRes => {
+              if (objectRes != null) {
+                console.log('typing... ');
+                const typed = this.getTypedEntity(objectRes, entry.type);
+                console.log('typed as : ' + typed.EntityType);
+                this.Add(typed);
+                console.log('Added: ' + typed.Name);
+              }
+          }))
+            .catch( () => { this.State = StateEnum.Failure; });
+        }
+        this.State = StateEnum.Completed;
+      } ) .catch( () => { this.State = StateEnum.Failure; })
+        .finally( () => { const state = this.State; return state; } );
 
+      while (this.State === StateEnum.Loading) {
+      }
+
+      if (this.State !== StateEnum.Loading) {
+        return this.State;
+      }
+    }
+    return this.State;
+  }
+
+  private getTypedEntity(obj: object, typedstr: string): IBaseGameEntity {
+    let retVal = null as IBaseGameEntity;
+    console.log('got: ' + typedstr);
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Object) {
+      retVal = obj as GameObject;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Adventure) {
+      retVal = obj as  AdventureObject;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Character) {
+      retVal = obj as  CharacterObject;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.CharacterTemplate) {
+      retVal = obj as  GameCharacterTemplate;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.ObjectTemplate) {
+      retVal = obj as  GameObjectTemplate;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Script) {
+      retVal = obj as  GameScript;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Scene) {
+      retVal = obj as  SceneObject;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Chapter) {
+      retVal = obj as  GameChapter;
+    }
+    // tslint:disable-next-line:triple-equals
+    if (typedstr == EntityTypeEnum.Note) {
+      retVal = obj as  NoteObject;
+    }
+    return retVal;
   }
 
   public SavePackage(FilePath: string, PackageName: string) {
@@ -162,47 +233,47 @@ export class LibraryService {
         let pathSubFolder: string;
 
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Object) {
+        if (entry.EntityType == EntityTypeEnum.Object) {
           pathSubFolder = '/' + PackageName + '/Objects/';
           file.fileData = entry as GameObject;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Adventure) {
+        if (entry.EntityType == EntityTypeEnum.Adventure) {
           pathSubFolder = '/' + PackageName +  '/Adventures/';
           file.fileData = entry as AdventureObject;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Character) {
+        if (entry.EntityType == EntityTypeEnum.Character) {
           pathSubFolder = '/' + PackageName +  '/Characters/';
           file.fileData = entry as CharacterObject;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.CharacterTemplate) {
+        if (entry.EntityType == EntityTypeEnum.CharacterTemplate) {
           pathSubFolder = '/' + PackageName +  '/CharacterTemplates/';
-          file.fileData = entry as GameCharacterTemplateTemplate;
+          file.fileData = entry as GameCharacterTemplate;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.ObjectTemplate) {
+        if (entry.EntityType == EntityTypeEnum.ObjectTemplate) {
           pathSubFolder = '/' + PackageName +  '/ObjectTemplates/';
           file.fileData = entry as GameObjectTemplate;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Script) {
+        if (entry.EntityType == EntityTypeEnum.Script) {
           pathSubFolder = '/' + PackageName +  '/Scripts/';
           file.fileData = entry as GameScript;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Scene) {
+        if (entry.EntityType == EntityTypeEnum.Scene) {
           pathSubFolder = '/' + PackageName +  '/Scenes/';
           file.fileData = entry as SceneObject;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Chapter) {
+        if (entry.EntityType == EntityTypeEnum.Chapter) {
           pathSubFolder = '/' + PackageName +  '/Chapters/';
           file.fileData = entry as GameChapter;
         }
         // tslint:disable-next-line:triple-equals
-        if (entry.GetEntityType() == EntityTypeEnum.Note) {
+        if (entry.EntityType == EntityTypeEnum.Note) {
           pathSubFolder = '/' + PackageName +  '/Notes/';
           file.fileData = entry as NoteObject;
         }
@@ -230,7 +301,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName + '/Notes/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -238,7 +309,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/Objects/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -246,7 +317,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/Adventures/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -254,7 +325,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path  + '/' + PackageName +  '/Characters/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -262,7 +333,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/Scenes/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -270,7 +341,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/Scripts/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -278,7 +349,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/Chapters/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -286,7 +357,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path  + '/' + PackageName +  '/CharacterTemplates/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 
@@ -294,7 +365,7 @@ export class LibraryService {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
       newEnt.filePath = Path + '/' + PackageName +  '/ObjectTemplates/';
-      newEnt.type = entry.GetEntityType();
+      newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
 

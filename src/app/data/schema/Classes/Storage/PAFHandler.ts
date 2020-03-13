@@ -9,12 +9,20 @@ import {StorageFile} from './StorageFile';
 import {IBaseGameEntity} from '../../Interfaces/Editor/IBaseGameEntity';
 import {Type} from '@angular/compiler';
 import {PAFEntry} from './PAFEntry';
+import {IStorageLoad} from '../../Interfaces/storage/IStorageLoad';
+
 
 export class PAFHandler {
 
+  tempFile: object = null;
+  public event: Event = new Event('Loaded');
 
   constructor(private FileAccessService: StorageSystemService) {
 
+  }
+
+  public eventHandler(e) {
+    console.log('The time is: ' + e.detail);
   }
 
   public SavePAFile(file: PAFile): boolean {
@@ -26,27 +34,44 @@ export class PAFHandler {
       storageFile.fileName = file.fileName;
       storageFile.filePath = file.filePath;
       storageFile.fileData = file;
+      console.log('Saving: ' + storageFile.filePath);
+      console.log('Saving: ' + storageFile.fileName);
       this.FileAccessService.saveData(storageFile);
     }
     return revtal;
   }
 
-  public LoadPAFile<T>(filePath: string, filename: string): PAFile {
-    const storageFile = new StorageFile();
-    storageFile.fileName = filename;
-    storageFile.filePath = filePath;
-    // tslint:disable-next-line:prefer-const
-    let fileResult = null;
 
-    const pr = new Promise((resolve, reject) => {
-      this.FileAccessService.loadData(storageFile).then(
-        result => {
-          fileResult  = result.data;
-          resolve();
-        });
+
+  public Load<T>(filePath: string, filename: string) {
+    const storageFile = new StorageFile();
+    storageFile.fileName = 'main.paf';
+    storageFile.filePath = filePath + '/' + filename ;
+
+  }
+
+  public LoadPAFFile(filePath: string, filename: string) {
+    this.Load(filePath, filename);
+    // let aaf: PAFEntry[] = null as PAFEntry[];
+    const storageFile = new StorageFile();
+    storageFile.fileName = 'main.paf';
+    storageFile.filePath = filePath + '/' + filename ;
+
+    const asd = this.FileAccessService.loadData(storageFile)
+      .then( (response) => {
+        const result = (response as PAFile);
+        if (result != null) {
+          const awfq: PAFEntry[] = [];
+          for (const entry of result.Entries) {
+            console.log(entry.type);
+            awfq.push(entry);
+          }
+          return awfq;
+        }
     });
 
-    return fileResult;
+    return asd;
   }
+
 
 }

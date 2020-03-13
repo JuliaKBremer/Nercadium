@@ -19,8 +19,6 @@ export class GameChapter implements IGameChapter, IBaseGameEntity {
   // Text des Kapitel
   Text: string;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Chapter;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Chapter;
 
 }

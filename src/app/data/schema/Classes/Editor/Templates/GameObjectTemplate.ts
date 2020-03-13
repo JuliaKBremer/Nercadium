@@ -13,7 +13,5 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
   id: number;
   Description: string;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.ObjectTemplate;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.ObjectTemplate;
 }
