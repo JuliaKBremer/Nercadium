@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material';
+import {DataSearchService} from '../../../../data/db/data-search.service';
+import {Router} from '@angular/router';
+import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
 @Component({
   selector: 'app-library-start',
@@ -8,22 +11,23 @@ import {PageEvent} from '@angular/material';
 })
 export class LibraryStartComponent implements OnInit {
   searchtext = '';
+  objects: IBaseGameEntity[];
 
-  objects = [
-    {text: 'Dungeon', cols: 1, rows: 2, tag: 'Scene', favorite: true},
-    {text: 'Owlbear', cols: 1, rows: 2, tag: 'Character', favorite: true},
-    {text: 'Dagger', cols: 1, rows: 2, tag: 'Object', favorite: false},
-    {text: 'Axe', cols: 1, rows: 2, tag: 'Object', favorite: true},
-    {text: 'Dangers in the big City', cols: 1, rows: 2, tag: 'Scripts', favorite: true},
-    {text: 'Healing Potion', cols: 1, rows: 2, tag: 'Object', favorite: false},
-    {text: 'obscure encounter', cols: 1, rows: 2, tag: 'Scripts', favorite: false},
-    {text: 'Sword', cols: 1, rows: 2, tag: 'Object', favorite: true},
-    {text: 'Club', cols: 1, rows: 2, tag: 'Object', favorite: true},
-    {text: 'Bow', cols: 1, rows: 2, tag: 'Object', favorite: false},
-    {text: 'Arrows', cols: 1, rows: 2, tag: 'Object', favorite: false},
-    {text: 'City', cols: 1, rows: 2, tag: 'Scene', favorite: true},
-    {text: 'Orc', cols: 1, rows: 2, tag: 'Character', favorite: false}
-  ];
+  // objects = [
+  //   {text: 'Dungeon', cols: 1, rows: 2, tag: 'Scene', favorite: true},
+  //   {text: 'Owlbear', cols: 1, rows: 2, tag: 'Character', favorite: true},
+  //   {text: 'Dagger', cols: 1, rows: 2, tag: 'Object', favorite: false},
+  //   {text: 'Axe', cols: 1, rows: 2, tag: 'Object', favorite: true},
+  //   {text: 'Dangers in the big City', cols: 1, rows: 2, tag: 'Scripts', favorite: true},
+  //   {text: 'Healing Potion', cols: 1, rows: 2, tag: 'Object', favorite: false},
+  //   {text: 'obscure encounter', cols: 1, rows: 2, tag: 'Scripts', favorite: false},
+  //   {text: 'Sword', cols: 1, rows: 2, tag: 'Object', favorite: true},
+  //   {text: 'Club', cols: 1, rows: 2, tag: 'Object', favorite: true},
+  //   {text: 'Bow', cols: 1, rows: 2, tag: 'Object', favorite: false},
+  //   {text: 'Arrows', cols: 1, rows: 2, tag: 'Object', favorite: false},
+  //   {text: 'City', cols: 1, rows: 2, tag: 'Scene', favorite: true},
+  //   {text: 'Orc', cols: 1, rows: 2, tag: 'Character', favorite: false}
+  // ];
 
   // values and functions for Pagination
   pageEvent: PageEvent;
@@ -36,9 +40,16 @@ export class LibraryStartComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  constructor() { }
+  constructor(private dataService: DataSearchService, private router: Router) { }
+
+  getDummyData(): void {
+    this.dataService
+      .getData()
+      .then(value => this.objects = value)
+  }
 
   ngOnInit() {
+    this.getDummyData()
   }
 
 }
