@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from './data/db/in-memory-data.service';
+import {DataSearchService} from './data/db/data-search.service';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpClientModule,
     NavbarModule,
     NoopAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [],
+  providers: [
+    DataSearchService
+  ],
   exports: [
   ],
   bootstrap: [AppComponent]
