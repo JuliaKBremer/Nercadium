@@ -11,11 +11,12 @@ export class UserComponent implements OnInit {
   userIsLoggedIn = false;
 
   constructor(private loginService: FirebaseAuthService, private router: Router) {
-    console.log(this.loginService.isLoggedIn);
-    this.userIsLoggedIn = this.loginService.isLoggedIn ? this.userIsLoggedIn = true : this.userIsLoggedIn = false;
+    /*console.log(this.loginService.isLoggedIn);
+    this.userIsLoggedIn = this.loginService.isLoggedIn ? this.userIsLoggedIn = true : this.userIsLoggedIn = false;*/
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userIsLoggedIn = await this.loginService.isLoggedIn();
   }
 
   async logout() {

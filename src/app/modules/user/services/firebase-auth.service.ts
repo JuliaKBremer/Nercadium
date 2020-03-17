@@ -22,12 +22,25 @@ export class FirebaseAuthService {
   }
 
   async login(email: string, password: string) {
-    const result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    let success = false;
+
+    // tslint:disable-next-line:only-arrow-functions
+    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(function(userI) {
+      if (userI !== null) {
+        success = true;
+      }
+      // tslint:disable-next-line:only-arrow-functions
+    }).catch(function(error) {
+      success = false;
+      console.log(error.message);
+    });
+
+    return success;
   }
 
-  get isLoggedIn(): boolean {
+  async isLoggedIn() {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+    return user !== null ? true : false;
   }
 
   async logout() {

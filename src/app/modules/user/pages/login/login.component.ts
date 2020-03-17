@@ -24,9 +24,18 @@ export class LoginComponent implements OnInit {
 
   async userSubmittedForm() {
     /* Process the input data and submit */
-    const loginProcess = await this.loginService.login(this.loginForm.get('email').value, this.loginForm.get('password').value);
-    await this.checkIfUserLoggedInAndRedirect();
+      this.loginFailed = false;
+      if (await this.loginService.login(this.loginForm.get('email').value, this.loginForm.get('password').value) === true) {
+        this.loginFailed = false;
+        await this.router.navigate(['/user']);
+      } else {
+        this.loginFailed = true;
+      }
+      /*await this.checkIfUserLoggedInAndRedirect();
+      this.loginFailed = true;*/
   }
+
+  /* TODO: Error-Handling (No Record & co) */
 
   async checkIfUserLoggedInAndRedirect() {
     if (this.loginService.isLoggedIn) {

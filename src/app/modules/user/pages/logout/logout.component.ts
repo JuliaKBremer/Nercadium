@@ -11,10 +11,10 @@ export class LogoutComponent implements OnInit {
 
 
   constructor(private loginService: FirebaseAuthService, private router: Router) {
-     this.loginService.logout();
-     this.router.navigate(['/user']);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.loginService.logout();
+    await this.router.navigate(['/user']);
   }
 }
