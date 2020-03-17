@@ -12,26 +12,31 @@
 
     <div *ngSwitchCase="propertyType.string">
       <label>
-        <input type="text" [(ngModel)]="properties[property.key].value">
+        <input type="text"
+               [(ngModel)]="properties[property.key].value">
       </label>
     </div>
 
     <div *ngSwitchCase="propertyType.number">
       <label>
-        <input type="number" [(ngModel)]="properties[property.key].value">
+        <input type="number"
+               [(ngModel)]="properties[property.key].value">
       </label>
     </div>
 
     <div *ngSwitchCase="propertyType.boolean">
       <label>
-        <input type="checkbox" [(ngModel)]="properties[property.key].value">
+        <input type="checkbox"
+               [(ngModel)]="properties[property.key].value">
       </label>
     </div>
 
     <div *ngSwitchCase="propertyType.enum">
       <label>
-        <select (change)="selectChanged.emit(properties[property.key].value)" [(ngModel)]="properties[property.key].value" >
-          <option *ngFor="let type of objectKeys(properties[property.key].enum)" [ngValue]="type">{{type}}</option>
+        <select (change)="CheckSelectChange(properties[property.key])"
+                [(ngModel)]="properties[property.key].value">
+          <option *ngFor="let type of properties[property.key].enum | keyvalue"
+                  [ngValue]="type.value">{{type.key}}</option>
         </select>
       </label>
     </div>
@@ -39,7 +44,8 @@
     <div *ngSwitchCase="propertyType.options">
       <div *ngFor="let value of properties[property.key].value; index as i; trackBy:trackByFn">
         <label>
-          <input type="text" [(ngModel)]="properties[property.key].value[i]">
+          <input type="text"
+                 [(ngModel)]="properties[property.key].value[i]">
         </label>
 <!--        <div (click)="DeleteFromArray(properties[property.key].value, i)">-</div>-->
       </div>

@@ -1,10 +1,11 @@
 export enum FieldTypes {
-  textBox = 'textBox',
-  number = 'number',
-  select = 'select',
-  textArea = 'textArea',
-  checkBox = 'checkBox',
-  radio = 'radio',
-  range = 'range',
-  // table = 'table'
+  TextBox = 'textBox',
+  Number = 'number',
+  Select = 'select',
+  TextArea = 'textArea',
+  CheckBox = 'checkBox',
+  Radio = 'radio',
+  Range = 'range',
+  Table = 'table',
+  Image = 'image'
 }

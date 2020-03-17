@@ -16,6 +16,9 @@ export interface IProperty {
 
   // Falls type den Wert Enum hat muss enum den Enum als Object gegeben werden.
   enum?: any;
+
+  // Wenn type den Wert Enum hat kann man ein Event abfeuern lassen wenn der Wert geändert wird.
+  checkChange?: boolean;
 }
 
 export interface IProperties {

@@ -5,6 +5,7 @@ import {FieldTypes} from '../../../../data/schema/Enums/field-types.enum';
 import {BehaviorSubject} from 'rxjs';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {TableStyles} from '../../../../data/schema/Enums/table-styles.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -109,7 +110,7 @@ export class TemplateTabService {
 
     currentTemplate.Fields.push(newField);
 
-    this.ChangeFieldType(currentTemplate.id, newField.ID, FieldTypes.textBox);
+    this.ChangeFieldType(currentTemplate.id, newField.ID, FieldTypes.TextBox);
   }
 
   public CopyField({fieldID: fieldToCopyID, objectID: templateID}) {
@@ -135,7 +136,7 @@ export class TemplateTabService {
     const currentTemplate: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateID);
     const currentField: IField = currentTemplate.Fields.find(obj => obj.ID === fieldID);
 
-    currentField.Properties.Type = {id: 1, value: fieldType, type: PropertyTypes.enum, enum: FieldTypes};
+    currentField.Properties.Type = {id: 1, value: fieldType, type: PropertyTypes.enum, enum: FieldTypes, checkChange: true};
 
     for (const key in currentField.Properties) {
       if (key !== 'Name' && key !== 'Type') {
@@ -145,7 +146,7 @@ export class TemplateTabService {
     }
 
     switch (fieldType) {
-      case FieldTypes.textBox: {
+      case FieldTypes.TextBox: {
         currentField.Properties.Label = {id: 2, value: 'TextBox', type: PropertyTypes.string};
         currentField.Properties.MaxLength = {id: 3, value: 20, type: PropertyTypes.number};
         currentField.Properties.Placeholder = {id: 5, value: 'Text Box', type: PropertyTypes.string};
@@ -155,7 +156,7 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = '';
         break;
       }
-      case FieldTypes.textArea: {
+      case FieldTypes.TextArea: {
         currentField.Properties.Label = {id: 2, value: 'TextArea', type: PropertyTypes.string};
         currentField.Properties.Cols = {id: 3, value: 20, type: PropertyTypes.number};
         currentField.Properties.Rows = {id: 4, value: 20, type: PropertyTypes.number};
@@ -167,7 +168,7 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = '';
         break;
       }
-      case FieldTypes.number: {
+      case FieldTypes.Number: {
         currentField.Properties.Label = {id: 2, value: 'Number', type: PropertyTypes.string};
         currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
         currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
@@ -177,26 +178,26 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = 0;
         break;
       }
-      case FieldTypes.select: {
+      case FieldTypes.Select: {
         currentField.Properties.Label = {id: 2, value: 'Select', type: PropertyTypes.string};
         currentField.Properties.Options = {id: 3, value: ['Option'], type: PropertyTypes.options};
 
         currentTemplate.FieldValues[currentField.ID] = 'Option';
         break;
       }
-      case FieldTypes.checkBox: {
+      case FieldTypes.CheckBox: {
         currentField.Properties.Label = {id: 2, value: 'CheckBox', type: PropertyTypes.string};
 
         currentTemplate.FieldValues[currentField.ID] = false;
         break;
       }
-      case FieldTypes.radio: {
+      case FieldTypes.Radio: {
         currentField.Properties.Label = {id: 2, value: 'Radio', type: PropertyTypes.string};
 
         currentTemplate.FieldValues[currentField.ID] = false;
         break;
       }
-      case FieldTypes.range: {
+      case FieldTypes.Range: {
         currentField.Properties.Label = {id: 2, value: 'Range', type: PropertyTypes.string};
         currentField.Properties.Min = {id: 3, value: '0', type: PropertyTypes.number};
         currentField.Properties.Max = {id: 4, value: '999', type: PropertyTypes.number};
@@ -207,10 +208,22 @@ export class TemplateTabService {
         break;
       }
       // TODO: Table
-      // case FieldTypes.table: {
-      //   currentTemplate.FieldValues[currentField.ID] = {};
-      //   break;
-      // }
+      case FieldTypes.Table: {
+        currentField.Properties.Label = {id: 2, value: 'Table', type: PropertyTypes.string};
+        currentField.Properties.Rows = {id: 3, value: 10, type: PropertyTypes.number};
+        currentField.Properties.Cols = {id: 4, value: 10, type: PropertyTypes.number};
+        currentField.Properties.Width = {id: 5, description: 'in % oder px', value: '100%', type: PropertyTypes.string};
+        currentField.Properties.TableStyle = {id: 6, value: TableStyles.StyleOne,
+          type: PropertyTypes.enum, enum: TableStyles, checkChange: false};
+
+        currentTemplate.FieldValues[currentField.ID] = [];
+        break;
+      }
+      // TODO: Image
+      case FieldTypes.Image: {
+        currentTemplate.FieldValues[currentField.ID] = {};
+        break;
+      }
     }
   }
 }

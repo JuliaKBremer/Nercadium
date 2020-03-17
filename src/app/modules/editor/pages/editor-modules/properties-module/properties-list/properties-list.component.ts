@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IProperties} from '../../../../../../data/schema/Interfaces/Editor/IProperty';
+import {IProperties, IProperty} from '../../../../../../data/schema/Interfaces/Editor/IProperty';
 import {PropertyTypes} from '../../../../../../data/schema/Enums/property-types.enum';
 import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
 
@@ -15,8 +15,6 @@ export class PropertiesListComponent implements OnInit {
   @Output() selectChanged = new EventEmitter<FieldTypes>();
 
   public propertyType = PropertyTypes;
-
-  public objectKeys = Object.keys;
 
   constructor() { }
 
@@ -35,4 +33,14 @@ export class PropertiesListComponent implements OnInit {
   // DeleteFromArray(array: [], index: number) {
   //
   // }
+
+  CheckSelectChange(property: IProperty) {
+    if (!property.checkChange) {
+      return;
+    }
+
+    if (Object.values(FieldTypes).includes(property.value)) {
+      this.selectChanged.emit(property.value);
+    }
+  }
 }

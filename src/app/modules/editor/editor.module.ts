@@ -17,6 +17,7 @@ import { TemplateTabComponent } from './pages/template-tab/template-tab.componen
 import { PropertiesListComponent } from './pages/editor-modules/properties-module/properties-list/properties-list.component';
 import { FieldsListComponent } from './pages/editor-modules/properties-module/fields-list/fields-list.component';
 import { FieldsDisplayComponent } from './pages/editor-modules/main-content-module/fields-display/fields-display.component';
+import {NgForNumberPipe} from '../../shared/pipes/ng-for-number.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FieldsDisplayComponent } from './pages/editor-modules/main-content-modu
     TemplateTabComponent,
     PropertiesListComponent,
     FieldsListComponent,
-    FieldsDisplayComponent
+    FieldsDisplayComponent,
+    NgForNumberPipe
   ],
   exports: [
     EditorStartComponent

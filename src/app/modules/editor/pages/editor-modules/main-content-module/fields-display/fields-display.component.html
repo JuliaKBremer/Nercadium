@@ -4,7 +4,7 @@
        [ngSwitch]="field.Properties.Type.value">
 
     <!-- Text Box -->
-    <div *ngSwitchCase="fieldTypes.textBox">
+    <div *ngSwitchCase="fieldTypes.TextBox">
       <label>{{field.Properties.Label.value}}
         <input type="text"
                [maxLength]="field.Properties.MaxLength.value"
@@ -16,7 +16,7 @@
     </div>
 
     <!-- Number -->
-    <div *ngSwitchCase="fieldTypes.number">
+    <div *ngSwitchCase="fieldTypes.Number">
       <label>{{field.Properties.Label.value}}
         <input [min]="field.Properties.Min.value"
                [max]="field.Properties.Max.value"
@@ -27,7 +27,7 @@
     </div>
 
     <!--  Select -->
-    <div *ngSwitchCase="fieldTypes.select">
+    <div *ngSwitchCase="fieldTypes.Select">
       <div *ngIf="field.Properties.Options.value.length > 0">
         <label>{{field.Properties.Label.value}}
           <select [(ngModel)]="selectedObject.FieldValues[field.ID]">
@@ -39,7 +39,7 @@
 
 
     <!-- Text Area -->
-    <div *ngSwitchCase="fieldTypes.textArea">
+    <div *ngSwitchCase="fieldTypes.TextArea">
       <label>{{field.Properties.Label.value}}
         <textarea [cols]="field.Properties.Cols.value"
                   [rows]="field.Properties.Rows.value" [style.height]="'unset'"
@@ -52,21 +52,21 @@
     </div>
 
     <!-- Checkbox -->
-    <div *ngSwitchCase="fieldTypes.checkBox">
+    <div *ngSwitchCase="fieldTypes.CheckBox">
       <label>{{field.Properties.Label.value}}
         <input type="checkbox" [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
     <!-- Radio -->
-    <div *ngSwitchCase="fieldTypes.radio">
+    <div *ngSwitchCase="fieldTypes.Radio">
       <label>{{field.Properties.Label.value}}
         <input type="radio" [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
     <!-- Range -->
-    <div *ngSwitchCase="fieldTypes.range">
+    <div *ngSwitchCase="fieldTypes.Range">
       <label>{{field.Properties.Label.value}}
         <input [min]="field.Properties.Min.value"
                [max]="field.Properties.Max.value"
@@ -78,6 +78,24 @@
     </div>
 
     <!-- TODO: Table -->
+    <div *ngSwitchCase="fieldTypes.Table">
+      <label>{{field.Properties.Label.value}}</label>
+      <table [style.width]="field.Properties.Width.value"
+             [ngStyle]="getTableStyle(field.Properties.TableStyle.value)">
+        <tr *ngFor="let row of field.Properties.Rows.value | ngForNumber;">
+          <td *ngFor="let col of field.Properties.Cols.value | ngForNumber;">
+            {{checkTable(field.ID, row, col)}}
+            <!--suppress TypeScriptUnresolvedVariable -->
+            <div contenteditable="true"
+                 (input)="changeTableContent(field.ID, row, col, $event.target.innerHTML)">
+              {{selectedObject.FieldValues[field.ID][row][col]}}
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- TODO: Image -->
 
   </div>
 </div>
