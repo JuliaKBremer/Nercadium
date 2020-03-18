@@ -39,9 +39,9 @@ export class PropertiesListComponent implements OnInit {
     array.push(newObject);
   }
 
-  // DeleteFromArray(array: [], index: number) {
-  //
-  // }
+  DeleteFromArray(array: [''], index: number) {
+    array.splice(index, 1);
+  }
 
   CheckSelectChange(property: IProperty) {
     if (!property.checkChange) {
