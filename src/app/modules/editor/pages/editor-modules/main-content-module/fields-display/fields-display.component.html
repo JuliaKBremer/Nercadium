@@ -77,13 +77,14 @@
       </label>
     </div>
 
-    <!-- TODO: Table -->
     <div *ngSwitchCase="fieldTypes.Table">
       <label>{{field.Properties.Label.value}}</label>
       <table [style.width]="field.Properties.Width.value"
-             [ngStyle]="getTableStyle(field.Properties.TableStyle.value)">
-        <tr *ngFor="let row of field.Properties.Rows.value | ngForNumber;">
-          <td *ngFor="let col of field.Properties.Cols.value | ngForNumber;">
+             [ngStyle]="getTableStyle(field.Properties.TableStyle.value).table">
+        <tr *ngFor="let row of field.Properties.Rows.value | ngForNumber;"
+            [ngStyle]="getTableStyle(field.Properties.TableStyle.value).tr">
+          <td *ngFor="let col of field.Properties.Cols.value | ngForNumber;"
+              [ngStyle]="getTableStyle(field.Properties.TableStyle.value).td">
             {{checkTable(field.ID, row, col)}}
             <!--suppress TypeScriptUnresolvedVariable -->
             <div contenteditable="true"
