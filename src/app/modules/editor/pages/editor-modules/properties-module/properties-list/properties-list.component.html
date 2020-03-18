@@ -1,5 +1,5 @@
 <!--  TODO: Sort by id -->
-<div *ngFor="let property of properties | keyvalue">
+<div *ngFor="let property of properties | keyvalue: indexOrder">
   <span>
     {{property.key}}
   </span>
