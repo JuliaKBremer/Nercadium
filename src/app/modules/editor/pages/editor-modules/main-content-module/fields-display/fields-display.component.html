@@ -1,7 +1,10 @@
 <div *ngIf="selectedObject">
 <!--  <pre>{{selectedObject | json}}</pre>-->
   <div *ngFor="let field of selectedObject.Fields"
-       [ngSwitch]="field.Properties.Type.value">
+       [ngSwitch]="field.Properties.Type.value"
+       [style.position]="'relative'"
+       [style.top]="field.Properties.Top.value + 'px'"
+       [style.left]="field.Properties.Left.value + 'px'">
 
     <!-- Text Box -->
     <div *ngSwitchCase="fieldTypes.TextBox">
