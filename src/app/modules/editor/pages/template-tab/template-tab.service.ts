@@ -207,7 +207,6 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = 0;
         break;
       }
-      // TODO: Table
       case FieldTypes.Table: {
         currentField.Properties.Label = {id: 2, value: 'Table', type: PropertyTypes.string};
         currentField.Properties.Rows = {id: 3, value: 10, type: PropertyTypes.number};
@@ -219,8 +218,11 @@ export class TemplateTabService {
         currentTemplate.FieldValues[currentField.ID] = [];
         break;
       }
-      // TODO: Image
       case FieldTypes.Image: {
+        currentField.Properties.Label = {id: 2, value: 'Table', type: PropertyTypes.string};
+        currentField.Properties.Width = {id: 3, description: 'in % oder px', value: '100%', type: PropertyTypes.string};
+        currentField.Properties.Height = {id: 3, description: 'in % oder px', value: '', type: PropertyTypes.string};
+
         currentTemplate.FieldValues[currentField.ID] = {};
         break;
       }

@@ -37,4 +37,17 @@ export class FieldsDisplayComponent implements OnInit {
   getTableStyle(tableStyle: TableStyles) {
     return GetTableStyleFromEnum(tableStyle);
   }
+
+  onFileChanged(fieldID: number, event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = () => { // called once readAsDataURL is completed
+        console.log(reader.result);
+        this.selectedObject.FieldValues[fieldID] = reader.result;
+      };
+    }
+  }
 }

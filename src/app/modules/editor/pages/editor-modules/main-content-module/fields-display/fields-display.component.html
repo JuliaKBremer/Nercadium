@@ -77,6 +77,7 @@
       </label>
     </div>
 
+    <!-- Table -->
     <div *ngSwitchCase="fieldTypes.Table">
       <label>{{field.Properties.Label.value}}</label>
       <table [style.width]="field.Properties.Width.value"
@@ -96,7 +97,18 @@
       </table>
     </div>
 
-    <!-- TODO: Image -->
-
+    <!-- Image -->
+    <div *ngSwitchCase="fieldTypes.Image">
+      <img *ngIf="selectedObject.FieldValues[field.ID]"
+           [src]="selectedObject.FieldValues[field.ID]"
+           [style.width]="field.Properties.Width.value"
+           [style.height]="field.Properties.Height.value"
+           alt="image...">
+      <input
+        style="display: none"
+        type="file" (change)="onFileChanged(field.ID, $event)"
+        #fileInput>
+      <button (click)="fileInput.click()">Select File</button>
+    </div>
   </div>
 </div>
