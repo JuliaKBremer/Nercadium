@@ -1,5 +1,6 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';import {LibraryService} from '../../../../../core/service/localLibrary/library.service';
+import {Observable, Subscription} from 'rxjs';
+import {LibraryService} from '../../../../../core/service/localLibrary/library.service';
 import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {StorageSystemService} from '../../../../../core/service/storageSystem/storage-system.service';
