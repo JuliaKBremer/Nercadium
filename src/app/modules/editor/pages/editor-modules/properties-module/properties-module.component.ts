@@ -5,6 +5,7 @@ import {Observable, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
+import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
 
 @Component({
   selector: 'app-properties-module',
@@ -44,8 +45,8 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   }
 
   private checkSelectedObject(object: any) {
-    if (object) {
-      if (object instanceof GameObjectTemplate || object instanceof GameCharacterTemplate) {
+    if (object && typeof(object.EntityType) !== 'undefined') {
+      if (object.EntityType === EntityTypeEnum.ObjectTemplate || object.EntityType === EntityTypeEnum.CharacterTemplate) {
         this.checkTemplateProps(object);
       }
     } else {

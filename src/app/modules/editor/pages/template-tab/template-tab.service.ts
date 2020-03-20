@@ -2,26 +2,36 @@ import {Injectable} from '@angular/core';
 import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
 import {IField} from '../../../../data/schema/Interfaces/Editor/IField';
 import {FieldTypes} from '../../../../data/schema/Enums/field-types.enum';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {TableStyles} from '../../../../data/schema/Enums/table-styles.enum';
+import {EditorService} from '../../services/editor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemplateTabService {
-  constructor() {
+  constructor(private editorService: EditorService) {
     this.characterTemplateObjects = new BehaviorSubject<GameCharacterTemplate[]>([]);
     this.objectTemplateObjects = new BehaviorSubject<GameObjectTemplate[]>([]);
     this.selectedObject = new BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>(null);
+
+    this.characterTemplateSubscription = editorService.CharacterTemplates.subscribe(next => {
+      this.characterTemplateObjects.next(next);
+      this.selectedObject.next(null);
+    });
+    this.objectTemplateSubscription = editorService.ObjectTemplates.subscribe(next => {
+      this.objectTemplateObjects.next(next);
+      this.selectedObject.next(null);
+    });
   }
 
-  // TODO: Get templates from storage. Get next id´s from storage.
+  private characterTemplateSubscription: Subscription;
+  private objectTemplateSubscription: Subscription;
+
   private characterTemplateObjects: BehaviorSubject<GameCharacterTemplate[]>;
   private objectTemplateObjects: BehaviorSubject<GameObjectTemplate[]>;
-  private nextTemplateID = 0;
-  private nextFieldID = 0;
 
   private selectedObject: BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>;
 
@@ -53,13 +63,13 @@ export class TemplateTabService {
 
   public AddCharacterTemplate() {
     const newCharacterTemplate: GameCharacterTemplate = new GameCharacterTemplate();
-    newCharacterTemplate.id = this.nextTemplateID++;
+    newCharacterTemplate.id = this.editorService.GetNewID();
     this.characterTemplateObjects.value.push(newCharacterTemplate);
   }
 
   public AddObjectTemplate() {
     const newObjectTemplate: GameObjectTemplate = new GameObjectTemplate();
-    newObjectTemplate.id = this.nextTemplateID++;
+    newObjectTemplate.id = this.editorService.GetNewID();
     this.objectTemplateObjects.value.push(newObjectTemplate);
   }
 
@@ -68,11 +78,11 @@ export class TemplateTabService {
 
     if (templateToCopy instanceof GameCharacterTemplate) {
       const newTemplate: GameCharacterTemplate = new GameCharacterTemplate(templateToCopy);
-      newTemplate.id = this.nextTemplateID++;
+      newTemplate.id = this.editorService.GetNewID();
       this.characterTemplateObjects.value.push(newTemplate);
     } else {
       const newTemplate: GameObjectTemplate = new GameObjectTemplate(templateToCopy);
-      newTemplate.id = this.nextTemplateID++;
+      newTemplate.id = this.editorService.GetNewID();
       this.objectTemplateObjects.value.push(newTemplate);
     }
   }
@@ -99,7 +109,7 @@ export class TemplateTabService {
 
   public AddField(templateID: number) {
     const newField: IField = {
-      ID: this.nextFieldID++,
+      ID: this.editorService.GetNewID(),
       IsCollapsed: false,
       Properties: {}
     };
@@ -118,7 +128,7 @@ export class TemplateTabService {
     const fieldToCopy: IField = currentTemplate.Fields.find(obj => obj.ID === fieldToCopyID);
     const newField: IField = JSON.parse(JSON.stringify(fieldToCopy));
 
-    newField.ID = this.nextFieldID++;
+    newField.ID = this.editorService.GetNewID();
 
     currentTemplate.FieldValues[newField.ID] = currentTemplate.FieldValues[fieldToCopy.ID];
 

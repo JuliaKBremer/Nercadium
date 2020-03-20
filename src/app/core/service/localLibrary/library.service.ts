@@ -22,15 +22,15 @@ import {StateEnum} from '../../../data/schema/Classes/Storage/StateEnum';
 })
 export class LibraryService {
 
-  private Adventures: AdventureObject[];
-  private Characters: CharacterObject[];
-  private Objects: GameObject[];
-  private Scenes: SceneObject[];
-  private Scripts: GameScript[];
-  private Chapters: GameChapter[];
-  private Notes: NoteObject[];
-  private ObjectTemplates: GameObjectTemplate[];
-  private CharacterTemplates: GameObjectTemplate[];
+  Adventures: AdventureObject[];
+  Characters: CharacterObject[];
+  Objects: GameObject[];
+  Scenes: SceneObject[];
+  Scripts: GameScript[];
+  Chapters: GameChapter[];
+  Notes: NoteObject[];
+  ObjectTemplates: GameObjectTemplate[];
+  CharacterTemplates: GameObjectTemplate[];
   Description: string;
   Name: string;
   public State: StateEnum;
@@ -376,7 +376,7 @@ export class LibraryService {
   }
 
   private getNoSpecialString(value: string) {
-    const val = value.replace(/[^a-zA-Z ]/g, '');
+    const val = value.replace(/[^a-zA-Z0-9 ]/g, '');
     return val.split(' ').join('_');
   }
 

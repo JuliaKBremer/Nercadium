@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EditorService} from '../../services/editor.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-editor-start',
@@ -7,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorStartComponent implements OnInit {
 
-  constructor() {
-  }
+  packageName = '';
+
+  constructor(private editorService: EditorService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  NewPackage() {
+    if (this.packageName !== '') {
+    this.editorService.NewPackage(this.packageName);
+    this.router.navigate(['/editor/chapter']);
+    }
+  }
+
+  LoadPackage() {
+    if (this.packageName !== '') {
+      this.editorService.LoadPackage(this.packageName);
+      this.router.navigate(['/editor/chapter']);
+    }
   }
 
 }
