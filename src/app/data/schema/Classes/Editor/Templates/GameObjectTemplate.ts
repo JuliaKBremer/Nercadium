@@ -19,7 +19,6 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
   // Entity's Tags
   public Tags: string[];
 
-
   constructor(objectTemplateToCopy?: GameObjectTemplate) {
     if (objectTemplateToCopy) {
       this.id = objectTemplateToCopy.id;
@@ -31,6 +30,4 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
       this.Properties.Name = {id: 0, value: 'New Object Template', type: PropertyTypes.string};
     }
   }
-
-
 }

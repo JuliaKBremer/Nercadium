@@ -7,6 +7,7 @@ import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templat
 import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {TableStyles} from '../../../../data/schema/Enums/table-styles.enum';
 import {EditorService} from '../../services/editor.service';
+import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class TemplateTabService {
   private selectedObject: BehaviorSubject<GameObjectTemplate|GameCharacterTemplate>;
 
   private FindTemplateByID(templateToFindID: number): GameObjectTemplate|GameCharacterTemplate {
-    if (this.characterTemplateObjects.value.find(obj => obj.id === templateToFindID)) {
+    if (this.characterTemplateObjects.value.some(obj => obj.id === templateToFindID)) {
       return this.characterTemplateObjects.value.find(obj => obj.id === templateToFindID);
-    } else if (this.objectTemplateObjects.value.find(obj => obj.id === templateToFindID)) {
+    } else if (this.objectTemplateObjects.value.some(obj => obj.id === templateToFindID)) {
       return this.objectTemplateObjects.value.find(obj => obj.id === templateToFindID);
     }
 
@@ -98,12 +99,12 @@ export class TemplateTabService {
       const currentTemplates: GameCharacterTemplate[] = this.characterTemplateObjects.value
         .filter(obj => obj.id !== templateToDeleteID);
 
-      this.characterTemplateObjects.next(currentTemplates);
+      this.editorService.UpdateLibrary(currentTemplates, EntityTypeEnum.CharacterTemplate);
     } else {
       const currentTempaltes: GameObjectTemplate[] = this.objectTemplateObjects.value
         .filter(obj => obj.id !== templateToDeleteID);
 
-      this.objectTemplateObjects.next(currentTempaltes);
+      this.editorService.UpdateLibrary(currentTempaltes, EntityTypeEnum.ObjectTemplate);
     }
   }
 

@@ -1,3 +1,4 @@
+<!-- Template -->
 <div *ngIf="objectTemplateList">
   <div *ngFor="let template of objectTemplateList">
     <span (click)="selectObject.emit(template.id)">{{template.Properties.Name.value}}</span>
@@ -14,4 +15,14 @@
     <span (click)="deleteObject.emit(template.id)">Delete</span>
   </div>
   <div (click)="addCharacterTemplate.emit()">+ Character Template</div>
+</div>
+
+<!-- Object -->
+<div *ngIf="objectList">
+  <div *ngFor="let object of objectList">
+    <span (click)="selectObject.emit(object.id)">{{object.Properties.Name.value}}</span>
+    <span (click)="copyObject.emit(object.id)">Copy</span>
+    <span (click)="deleteObject.emit(object.id)">Delete</span>
+  </div>
+  <div (click)="addObject.emit()">+ Object</div>
 </div>
