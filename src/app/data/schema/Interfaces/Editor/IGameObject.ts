@@ -15,7 +15,7 @@ export interface IGameObject {
   Properties: IProperties;
 
   // Das zugewiesene Template
-  ObjectTemplate: IGameObjectTemplate;
+  ObjectTemplateID: number;
 
   // Field values
   FieldValues: {[key: string]: any};

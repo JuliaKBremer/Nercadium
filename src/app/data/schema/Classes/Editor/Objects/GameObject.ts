@@ -1,6 +1,5 @@
 import {IGameObject} from '../../../Interfaces/Editor/IGameObject';
 import {IProperties} from '../../../Interfaces/Editor/IProperty';
-import {IGameObjectTemplate} from '../../../Interfaces/Editor/IGameObjectTemplate';
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
 import {PropertyTypes} from '../../../Enums/property-types.enum';
@@ -11,7 +10,7 @@ export class GameObject implements IGameObject, IBaseGameEntity {
     return this.Properties.Name.value + ' ' + this.id;
   }
   Properties: IProperties = {};
-  ObjectTemplate: IGameObjectTemplate;
+  ObjectTemplateID: number;
   FieldValues: {[key: string]: any} = {};
   Description: string;
   EntityType: EntityTypeEnum = EntityTypeEnum.Object;
@@ -23,7 +22,7 @@ export class GameObject implements IGameObject, IBaseGameEntity {
     if (objectToCopy) {
       this.id = objectToCopy.id;
       this.Properties = JSON.parse(JSON.stringify(objectToCopy.Properties));
-      this.ObjectTemplate = objectToCopy.ObjectTemplate;
+      this.ObjectTemplateID = objectToCopy.ObjectTemplateID;
       this.FieldValues = JSON.parse(JSON.stringify(objectToCopy.FieldValues));
       this.Description = objectToCopy.Description;
     } else {

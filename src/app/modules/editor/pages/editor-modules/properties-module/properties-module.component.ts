@@ -6,6 +6,7 @@ import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Temp
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
 import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
 
 @Component({
   selector: 'app-properties-module',
@@ -16,10 +17,14 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
 
+  // Template
   @Output() addField = new EventEmitter<number>();
   @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
   @Output() copyField = new EventEmitter<{fieldID: number, objectID: number}>();
   @Output() changeFieldType = new EventEmitter<{templateID: number, fieldID: number, fieldType: FieldTypes}>();
+
+  // Object
+  @Output() changeTemplate = new EventEmitter<number>();
 
   public properties: IProperties;
   public fields: IField[];
@@ -48,6 +53,8 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     if (object && typeof(object.EntityType) !== 'undefined') {
       if (object.EntityType === EntityTypeEnum.ObjectTemplate || object.EntityType === EntityTypeEnum.CharacterTemplate) {
         this.checkTemplateProps(object);
+      } else if (object.EntityType === EntityTypeEnum.Object) {
+        this.checkObjectProps(object);
       }
     } else {
       this.properties = null;
@@ -67,5 +74,15 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     } else {
       this.fields = null;
     }
+  }
+
+  private checkObjectProps(object: GameObject) {
+    if (typeof(object.Properties) !== 'undefined') {
+      this.properties = object.Properties;
+    } else {
+      this.properties = null;
+    }
+
+    this.fields = null;
   }
 }
