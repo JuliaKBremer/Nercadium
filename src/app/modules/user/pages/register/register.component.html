@@ -1,15 +1,15 @@
 <div class="flexContainer">
-  <form [formGroup]="registerForm" (ngSubmit)="userSubmittedForm()" style="display:flex;flex-direction: column;">
-    <mat-form-field appearance="fill" style="margin:auto;">
-      <mat-label>E-Mail</mat-label>
-      <input matInput formControlName="email" type="email">
+  <form [formGroup]="registerForm" (ngSubmit)="userSubmittedForm()" class="userAreaSpace">
+    <mat-form-field floatLabel="auto" appearance="legacy">
+      <mat-label [class.errorField]="!this.isFieldValid(this.registerForm.controls['email'])">E-Mail</mat-label>
+      <input matInput formControlName="email" type="email" required>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" style="margin:auto;">
-      <mat-label>Passwort</mat-label>
-      <input matInput formControlName="password" type="password">
+    <mat-form-field floatLabel="auto" appearance="legacy">
+      <mat-label [class.errorField]="!this.isFieldValid(this.registerForm.controls['password'])">Passwort (min. 6 Zeichen)</mat-label>
+      <input matInput formControlName="password" type="password"  required>
     </mat-form-field>
 
-    <button mat-raised-button type="submit" style="margin:auto;">Registrieren</button>
+    <button mat-raised-button [disabled]="!this.isFieldValid(this.registerForm.controls['email']) || !this.isFieldValid(this.registerForm.controls['password'])" type="submit">Registrieren</button>
   </form>
 </div>

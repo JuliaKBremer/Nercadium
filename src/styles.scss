@@ -154,6 +154,44 @@ mat-grid-tile{
   background-color: dimgrey;
 }
 
+/* USER AREA */
+.alignContent {
+  flex-direction: column;
+}
+
+.errorField {
+  color: red;
+}
+
+.userAreaSpace {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  width:30vw;
+  margin: 35px auto;
+}
+
+.userAreaSpace button,
+.userAreaFormButton,
+.userAreaSpace input,
+.userAreaSpace mat-form-field {
+  width: 100%;
+  margin: 10px auto 5px;
+  height: 45px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 1px;
+  background-color: rgb(201, 171, 83);
+  margin: -12px 0 0 0;
+}
+
+.userAreaSpace button:hover,
+.userAreaFormButton:hover {
+  text-shadow: 0 0 8px #fff;
+}
+
+/* Text-Editor Styles */
 
 .ck.ck-editor{
   min-width: 50vw;

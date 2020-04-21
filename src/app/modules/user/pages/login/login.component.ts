@@ -10,36 +10,45 @@ import { Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+    email: ['', [Validators.required, Validators.email, Validators.min(6)]],
+    password: ['', [Validators.required, Validators.min(6)]]
   });
 
-  loginFailed = false;
-
-  constructor(private fb: FormBuilder, private loginService: FirebaseAuthService, private router: Router) {
+  errorMessage: string = null;
+  constructor(private fb: FormBuilder, private fireService: FirebaseAuthService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
   async userSubmittedForm() {
-    /* Process the input data and submit */
-      this.loginFailed = false;
-      if (await this.loginService.login(this.loginForm.get('email').value, this.loginForm.get('password').value) === true) {
-        this.loginFailed = false;
+    this.errorMessage = null;
+
+    const loginProcess = await this.fireService
+      .login(this.loginForm.get('email').value, this.loginForm.get('password').value)
+      .then(async value => {
         await this.router.navigate(['/user']);
-      } else {
-        this.loginFailed = true;
-      }
-      /*await this.checkIfUserLoggedInAndRedirect();
-      this.loginFailed = true;*/
+      })
+      .catch(err => {
+        this.handleErrorOnCatch(err);
+      });
   }
 
-  /* TODO: Error-Handling (No Record & co) */
+  handleErrorOnCatch(err: string) {
+    console.log(err);
+    /*switch(err) {
+      case: '':
+        break;
+    }*/
+  }
 
   async checkIfUserLoggedInAndRedirect() {
-    if (this.loginService.isLoggedIn) {
+    if (this.fireService.isLoggedIn) {
      await this.router.navigate(['user']);
     }
+  }
+
+  isFieldValid(field) {
+    return !(field.invalid && field.dirty && field.touched);
   }
 }

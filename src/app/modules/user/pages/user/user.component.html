@@ -1,11 +1,14 @@
-<div class="flexContainer">
-  <section *ngIf="!userIsLoggedIn">
-    <p routerLink="/user/login">LOGIN</p>
-    <p routerLink="/user/register">REGISTER</p>
+<div class="flexContainer alignContent">
+  <section *ngIf="!userIsLoggedIn" class="userAreaSpace">
+    <h1>Logge dich mit deinem Account ein oder erstelle einen neuen</h1>
+
+    <button routerLink="/user/login">LOGIN</button>
+    <button routerLink="/user/register">REGISTER</button>
   </section>
 
-  <section *ngIf="userIsLoggedIn">
-    <p>Herzlich Willkommen</p>
-    <p (click)="this.logout()">LOGOUT</p>
+  <section *ngIf="userIsLoggedIn" class="userAreaSpace">
+    <h1>Herzlich Willkommen, -USER-</h1>
+
+    <button (click)="this.logout()">LOGOUT</button>
   </section>
 </div>

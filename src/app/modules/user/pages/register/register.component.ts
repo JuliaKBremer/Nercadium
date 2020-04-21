@@ -1,27 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthService} from '../../services/firebase-auth.service';
 import { Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from '@angular/material';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
 
   registerForm = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+    email: ['', [Validators.required, Validators.email, Validators.min(6)]],
+    password: ['', [Validators.required, Validators.min(6)]]
   });
 
+  errorMessage: string = null;
   constructor(private fb: FormBuilder, private router: Router, private fireService: FirebaseAuthService) { }
 
   ngOnInit() {
   }
 
   async userSubmittedForm() {
-    const registerProcess = await this.fireService.register(this.registerForm.get('email').value, this.registerForm.get('password').value);
-    await this.router.navigate(['/user/login']);
+    this.errorMessage = null;
+
+    const registerProcess = await this.fireService
+      .register(this.registerForm.get('email').value, this.registerForm.get('password').value)
+      .then(async value => {
+        await this.router.navigate(['/user/login']);
+      })
+      .catch(err => {
+        this.handleErrorOnCatch(err);
+      });
+  }
+
+  handleErrorOnCatch(err: string) {
+    console.log(err);
+    /*switch(err) {
+      case: '':
+        break;
+    }*/
+  }
+
+  isFieldValid(field) {
+    return !(field.invalid && field.dirty && field.touched);
   }
 }
