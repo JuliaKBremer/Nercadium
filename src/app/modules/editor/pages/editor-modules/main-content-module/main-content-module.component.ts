@@ -52,6 +52,7 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
     anderes.Name = 'Test Kapitel der mega krassen Sorte !';
     anderes.Description = 'joa  ne, weißt schon...';
     const objTest = new GameObject();
+    const objTest2 = new GameObject();
     const objTemp = new GameObjectTemplate();
     objTemp.Name = 'TesTemplate';
     objTemp.Properties = null ;
@@ -63,8 +64,10 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
     objTest.Name = 'Test';
     objTest.ObjectTemplate = objTemp;
     this.libraryService.Add(objTest);
+    this.libraryService.Add((objTest2))
     this.libraryService.Add(anderes);
     this.libraryService.Add(script);
+    // this.libraryService.Remove(objTest2);
     this.libraryService.SavePackage(this.FilePath, 'TestPackage');
     this.result = 'done';
   }

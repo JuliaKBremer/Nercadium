@@ -90,8 +90,105 @@ export class LibraryService {
     if (gameObject.EntityType === EntityTypeEnum.Note) {
       this.Notes.push(gameObject as NoteObject);
     }
+  }
 
+  public Remove(gameObject: IBaseGameEntity): boolean {
+  let removed = false;
 
+  if (gameObject != null) {
+
+      if (gameObject.EntityType === EntityTypeEnum.Object) {
+        const index  = this.Objects.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Objects.splice(index, 1);
+          removed = true;
+        }
+        // this.Objects.push(gameObject as GameObject);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Adventure) {
+        const index  = this.Adventures.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Adventures.splice(index, 1);
+          removed = true;
+        }
+        // this.Adventures.push(gameObject as AdventureObject);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Character) {
+        const index  = this.Characters.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Characters.splice(index, 1);
+          removed = true;
+        }
+        // this.Characters.push(gameObject as CharacterObject);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.CharacterTemplate) {
+        const index  = this.CharacterTemplates.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.CharacterTemplates.splice(index, 1);
+          removed = true;
+        }
+        // this.CharacterTemplates.push(gameObject as GameCharacterTemplate);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.ObjectTemplate) {
+        const index  = this.ObjectTemplates.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.ObjectTemplates.splice(index, 1);
+          removed = true;
+        }
+        // this.ObjectTemplates.push(gameObject as GameObjectTemplate);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Script) {
+        const index  = this.Scripts.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Scripts.splice(index, 1);
+          removed = true;
+        }
+        // this.Scripts.push(gameObject as GameScript);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Scene) {
+        const index  = this.Scenes.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Scenes.splice(index, 1);
+          removed = true;
+        }
+        // this.Scenes.push(gameObject as SceneObject);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Chapter) {
+        const index  = this.Chapters.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Chapters.splice(index, 1);
+          removed = true;
+        }
+        // this.Chapters.push(gameObject as GameChapter);
+      }
+
+      if (gameObject.EntityType === EntityTypeEnum.Note) {
+        const index  = this.Notes.findIndex( (object) => object === gameObject);
+        console.log('Index found:' + index);
+        if (index > -1) {
+          this.Notes.splice(index, 1);
+          removed = true;
+        }
+        // this.Notes.push(gameObject as NoteObject);
+      }
+    }
+
+  return removed;
   }
 
   // GameObject Methods ---   START   ---
