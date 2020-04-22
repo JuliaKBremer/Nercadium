@@ -16,7 +16,7 @@ import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/Game
 export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
-  @Input() templatesObservable: Observable<GameObjectTemplate[] | GameCharacterTemplate[]>;
+  @Input() templatesObservable: Observable<{}>;
 
   // Template
   @Output() addField = new EventEmitter<number>();
@@ -31,7 +31,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   public fields: IField[];
   public selectedObject: any;
 
-  public templates: GameCharacterTemplate[] | GameObjectTemplate[];
+  public templatesEnum: {};
 
   private selectedObjectSubscription: Subscription;
   private templatesSubscription: Subscription;
@@ -41,7 +41,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.templatesObservable !== undefined) {
       this.templatesSubscription = this.templatesObservable.subscribe(next => {
-        this.templates = next;
+        this.templatesEnum = next;
       });
     }
 
@@ -92,24 +92,12 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   private checkObjectProps(object: GameObject) {
     if (typeof(object.Properties) !== 'undefined') {
-      object.Properties.Template.enum = this.TemplatesToEnum();
+      object.Properties.Template.enum = this.templatesEnum;
       this.properties = object.Properties;
     } else {
       this.properties = null;
     }
 
     this.fields = null;
-  }
-
-  private TemplatesToEnum() {
-    const templateEnum = {};
-    this.templates.forEach((template, index) => {
-      if (typeof(templateEnum[template.Properties.Name.value]) === 'undefined') {
-        templateEnum[template.Properties.Name.value] = template.id;
-      } else {
-        templateEnum[template.Properties.Name.value + '_' + index] = template.id;
-      }
-    });
-    return templateEnum;
   }
 }

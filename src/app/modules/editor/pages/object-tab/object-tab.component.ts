@@ -11,6 +11,6 @@ export class ObjectTabComponent implements OnInit {
   constructor(public objectTabService: ObjectTabService) { }
 
   ngOnInit() {
+    this.objectTabService.UpdateTemplatesEnum();
   }
-
 }
