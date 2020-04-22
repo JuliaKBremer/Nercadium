@@ -7,13 +7,14 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatButtonModule, MatFormFieldDefaultOpti
 import { UserComponent } from './pages/user/user.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
 };
 
 @NgModule({
-  declarations: [LoginComponent, UserComponent, RegisterComponent, LogoutComponent],
+  declarations: [LoginComponent, UserComponent, RegisterComponent, LogoutComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     PlayRoutingModule,

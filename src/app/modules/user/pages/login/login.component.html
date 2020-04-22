@@ -11,5 +11,7 @@
     </mat-form-field>
 
     <button mat-raised-button [disabled]="!this.isFieldValid(this.loginForm.controls['email']) || !this.isFieldValid(this.loginForm.controls['password'])" type="submit">Einloggen</button>
+
+    <a routerLink="/user/reset-password">Passwort vergessen?</a>
   </form>
 </div>

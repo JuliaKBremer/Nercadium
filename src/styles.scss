@@ -191,6 +191,28 @@ mat-grid-tile{
   text-shadow: 0 0 8px #fff;
 }
 
+.disabledBecauseWasSuccess {
+  display: none;
+  background-color: gray;
+  color: black;
+}
+
+.userAreaSpace .bannerOnSuccess {
+  background-color: green;
+  padding: 5px 10px;
+  color: #fff;
+  word-wrap: break-word;
+  border-radius: 4px;
+  margin: 0 auto 20px auto;
+  width: 100%;
+}
+
+.userAreaSpace a:any-link {
+  margin: 10px auto;
+  text-decoration: none;
+  color: rgb(201, 171, 83);
+}
+
 /* Text-Editor Styles */
 
 .ck.ck-editor{
