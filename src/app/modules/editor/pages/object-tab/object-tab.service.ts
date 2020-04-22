@@ -3,13 +3,14 @@ import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObject} from '../../../../data/schema/Classes/Editor/Objects/GameObject';
 import {EditorService} from '../../services/editor.service';
 import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {TemplateTabService} from '../template-tab/template-tab.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObjectTabService {
 
-  constructor(private editorService: EditorService) {
+  constructor(private editorService: EditorService, public templateTabService: TemplateTabService) {
     this.objectObjects = new BehaviorSubject<GameObject[]>([]);
     this.selectedObject = new BehaviorSubject<GameObject>(null);
 
