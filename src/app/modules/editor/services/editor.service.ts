@@ -44,11 +44,11 @@ export class EditorService {
     this.NewPackage('New Package');
   }
 
-  GetNewID(): number {
+  public GetNewID(): number {
     return (Date.now() * 1000) + Math.floor(Math.random() * 1000);
   }
 
-  GetDataFromLibrary() {
+  private GetDataFromLibrary() {
     this.Adventures.next(this.libraryService.Adventures);
     this.Characters.next(this.libraryService.Characters);
     this.Objects.next(this.libraryService.Objects);
@@ -60,7 +60,7 @@ export class EditorService {
     this.CharacterTemplates.next(this.libraryService.CharacterTemplates);
   }
 
-  NewPackage(name: string) {
+  public NewPackage(name: string) {
     this.libraryService.Clear();
 
     this.GetDataFromLibrary();
@@ -68,21 +68,17 @@ export class EditorService {
     this.name = name;
   }
 
-  AddToPackage(obj: any) {
-    this.libraryService.Add(obj);
-  }
-
-  LoadPackage(name: string) {
+  public LoadPackage(name: string) {
     this.libraryService.LoadPackage(this.path, name);
 
     this.GetDataFromLibrary();
   }
 
-  SavePackage() {
+  public SavePackage() {
     this.libraryService.SavePackage(this.path, this.name);
   }
 
-  UpdateLibrary(newArray: any[], entityType: EntityTypeEnum) {
+  public UpdateLibrary(newArray: any[], entityType: EntityTypeEnum) {
     switch (entityType) {
       case EntityTypeEnum.Object:
         this.libraryService.Objects = newArray;

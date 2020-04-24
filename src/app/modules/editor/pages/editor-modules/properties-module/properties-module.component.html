@@ -6,12 +6,9 @@
     <app-properties-list [properties]="properties"></app-properties-list>
   </div>
   <div *ngIf="fields">
-    <app-fields-list (deleteField)="deleteField.emit({objectID: selectedObject.id, fieldID: $event})"
-                     (copyField)="copyField.emit({objectID: selectedObject.id, fieldID: $event})"
-                     (changeFieldType)="changeFieldType.emit({templateID: selectedObject.id, fieldID: $event.fieldID, fieldType: $event.fieldType})"
-                     [fields]="fields">
+    <app-fields-list [fields]="fields">
     </app-fields-list>
-    <div (click)="addField.emit(selectedObject.id)">+ Add Field</div>
+    <div (click)="fieldService.AddField(selectedObject.id)">+ Add Field</div>
   </div>
 </div>
 

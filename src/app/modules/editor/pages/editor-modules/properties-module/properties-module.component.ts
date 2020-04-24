@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
 import {Observable, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
 import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {FieldService} from '../../template-tab/field.service';
 
 @Component({
   selector: 'app-properties-module',
@@ -18,15 +18,6 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   @Input() selectedObjectObservable: Observable<any>;
   @Input() templatesObservable: Observable<{}>;
 
-  // Template
-  @Output() addField = new EventEmitter<number>();
-  @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
-  @Output() copyField = new EventEmitter<{fieldID: number, objectID: number}>();
-  @Output() changeFieldType = new EventEmitter<{templateID: number, fieldID: number, fieldType: FieldTypes}>();
-
-  // Object
-  @Output() changeTemplate = new EventEmitter<number>();
-
   public properties: IProperties;
   public fields: IField[];
   public selectedObject: any;
@@ -36,7 +27,7 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
   private selectedObjectSubscription: Subscription;
   private templatesSubscription: Subscription;
 
-  constructor() { }
+  constructor(public fieldService: FieldService) { }
 
   ngOnInit() {
     if (this.templatesObservable !== undefined) {

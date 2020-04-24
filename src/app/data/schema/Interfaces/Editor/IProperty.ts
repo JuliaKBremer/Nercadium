@@ -5,6 +5,12 @@ export interface IProperty {
   // ID der Property / Eigenschaft
   id: number;
 
+  // parent template of the property
+  parentTemplateID?: number;
+
+  // parent field of the property
+  parentFieldID?: number;
+
   // Vergebener Wert
   value: any;
 
@@ -18,7 +24,7 @@ export interface IProperty {
   enum?: any;
 
   // Wenn type den Wert Enum hat kann man ein Event abfeuern lassen wenn der Wert geändert wird.
-  checkChange?: boolean;
+  changeFireEvent?: string;
 }
 
 export interface IProperties {

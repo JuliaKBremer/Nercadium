@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IProperties, IProperty} from '../../../../../../data/schema/Interfaces/Editor/IProperty';
 import {PropertyTypes} from '../../../../../../data/schema/Enums/property-types.enum';
-import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
 import {KeyValue} from '@angular/common';
+import {EventService} from '../../../../../../core/service/event/event.service';
 
 @Component({
   selector: 'app-properties-list',
@@ -13,11 +13,9 @@ export class PropertiesListComponent implements OnInit {
 
   @Input() properties: IProperties;
 
-  @Output() selectChanged = new EventEmitter<FieldTypes>();
-
   public propertyType = PropertyTypes;
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
   }
@@ -44,12 +42,8 @@ export class PropertiesListComponent implements OnInit {
   }
 
   CheckSelectChange(property: IProperty) {
-    if (!property.checkChange) {
-      return;
-    }
-
-    if (Object.values(FieldTypes).includes(property.value)) {
-      this.selectChanged.emit(property.value);
+    if (property.changeFireEvent) {
+      this.eventService.broadcast(property.changeFireEvent, property);
     }
   }
 }
