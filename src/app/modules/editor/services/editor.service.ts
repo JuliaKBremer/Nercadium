@@ -10,7 +10,6 @@ import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject} from 'rxjs';
 import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -76,39 +75,5 @@ export class EditorService {
 
   public SavePackage() {
     this.libraryService.SavePackage(this.path, this.name);
-  }
-
-  public UpdateLibrary(newArray: any[], entityType: EntityTypeEnum) {
-    switch (entityType) {
-      case EntityTypeEnum.Object:
-        this.libraryService.Objects = newArray;
-        break;
-      case EntityTypeEnum.Adventure:
-        this.libraryService.Adventures = newArray;
-        break;
-      case EntityTypeEnum.Chapter:
-        this.libraryService.Chapters = newArray;
-        break;
-      case EntityTypeEnum.Character:
-        this.libraryService.Characters = newArray;
-        break;
-      case EntityTypeEnum.Note:
-        this.libraryService.Notes = newArray;
-        break;
-      case EntityTypeEnum.Scene:
-        this.libraryService.Scenes = newArray;
-        break;
-      case EntityTypeEnum.Script:
-        this.libraryService.Scripts = newArray;
-        break;
-      case EntityTypeEnum.CharacterTemplate:
-        this.libraryService.CharacterTemplates = newArray;
-        break;
-      case EntityTypeEnum.ObjectTemplate:
-        this.libraryService.ObjectTemplates = newArray;
-        break;
-    }
-
-    this.GetDataFromLibrary();
   }
 }

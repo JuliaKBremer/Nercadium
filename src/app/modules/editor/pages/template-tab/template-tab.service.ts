@@ -108,16 +108,14 @@ export class TemplateTabService {
 
     const templateToDelete: GameCharacterTemplate|GameObjectTemplate = this.FindTemplateByID(templateToDeleteID);
 
-    if (templateToDelete instanceof GameCharacterTemplate) {
-      const currentTemplates: GameCharacterTemplate[] = this.characterTemplateObjects.value
-        .filter(obj => obj.id !== templateToDeleteID);
-
-      this.editorService.UpdateLibrary(currentTemplates, EntityTypeEnum.CharacterTemplate);
-    } else {
-      const currentTempaltes: GameObjectTemplate[] = this.objectTemplateObjects.value
-        .filter(obj => obj.id !== templateToDeleteID);
-
-      this.editorService.UpdateLibrary(currentTempaltes, EntityTypeEnum.ObjectTemplate);
+    if (templateToDelete.EntityType === EntityTypeEnum.CharacterTemplate) {
+      const characterTemplates: GameCharacterTemplate[] = this.characterTemplateObjects.value;
+      const indexOfTemplate: number = characterTemplates.indexOf(templateToDelete);
+      characterTemplates.splice(indexOfTemplate, 1);
+    } else if (templateToDelete.EntityType === EntityTypeEnum.ObjectTemplate) {
+      const objectTemplates: GameObjectTemplate[] = this.objectTemplateObjects.value;
+      const indexOfTemplate: number = objectTemplates.indexOf(templateToDelete);
+      objectTemplates.splice(indexOfTemplate, 1);
     }
   }
 }

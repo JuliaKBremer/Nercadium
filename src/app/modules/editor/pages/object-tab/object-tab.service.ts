@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObject} from '../../../../data/schema/Classes/Editor/Objects/GameObject';
 import {EditorService} from '../../services/editor.service';
-import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 
 @Injectable({
@@ -79,10 +78,10 @@ export class ObjectTabService {
       this.selectedObject.next(null);
     }
 
-    const currentObjects: GameObject[] = this.gameObjects.value
-      .filter(obj => obj.id !== objectToDeleteID);
-
-    this.editorService.UpdateLibrary(currentObjects, EntityTypeEnum.Object);
+    const objectToDelete: GameObject = this.FindObjectByID(objectToDeleteID);
+    const objects: GameObject[] = this.gameObjects.value;
+    const indexOfObject: number = objects.indexOf(objectToDelete);
+    objects.splice(indexOfObject, 1);
   }
 
   private TemplatesToEnum(templates: GameObjectTemplate[]) {
