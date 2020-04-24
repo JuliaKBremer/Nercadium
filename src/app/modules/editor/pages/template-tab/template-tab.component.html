@@ -3,13 +3,7 @@
 
   <div class="contentOrganizerModule">
     <app-content-organizer-module [objectTemplateListObservable]="templateTabService.GetObjectTemplatesObservable()"
-                                  [characterTemplateListObservable]="templateTabService.GetCharacterTemplatesObservable()"
-                                  (addObjectTemplate)="templateTabService.AddObjectTemplate()"
-                                  (addCharacterTemplate)="templateTabService.AddCharacterTemplate()"
-                                  (copyObject)="templateTabService.CopyTemplate($event)"
-                                  (deleteObject)="templateTabService.DeleteTemplate($event)"
-                                  (selectObject)="templateTabService.SelectObject($event)">
-    </app-content-organizer-module>
+                                  [characterTemplateListObservable]="templateTabService.GetCharacterTemplatesObservable()"></app-content-organizer-module>
   </div>
 
   <div class="mainContentModule">

@@ -34,7 +34,7 @@ export class ObjectTabService {
 
   private objectTemplates: GameObjectTemplate[];
 
-  private FindObjectByID(objectToFindID: number): GameObject {
+  public FindObjectByID(objectToFindID: number): GameObject {
     if (this.gameObjects.value.some(obj => obj.id === objectToFindID)) {
       return this.gameObjects.value.find(obj => obj.id === objectToFindID);
     }

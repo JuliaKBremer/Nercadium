@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, OnDestroy, Output} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {TemplateTabService} from '../../template-tab/template-tab.service';
+import {ObjectTabService} from '../../object-tab/object-tab.service';
 
 @Component({
   selector: 'app-content-organizer-module',
@@ -15,9 +17,6 @@ export class ContentOrganizerModuleComponent implements OnInit, OnDestroy {
   @Input() objectTemplateListObservable: Observable<GameObjectTemplate[]>;
   @Input() characterTemplateListObservable: Observable<GameCharacterTemplate[]>;
 
-  @Output() addObjectTemplate = new EventEmitter();
-  @Output() addCharacterTemplate = new EventEmitter();
-
   public objectTemplateList: GameObjectTemplate[];
   public characterTemplateList: GameCharacterTemplate[];
 
@@ -27,19 +26,12 @@ export class ContentOrganizerModuleComponent implements OnInit, OnDestroy {
   // Objects
   @Input() objectListObservable: Observable<GameObject[]>;
 
-  @Output() addObject = new EventEmitter();
-
   public objectList: GameObject[];
 
   private objectListSubscription: Subscription;
 
 
-  @Output() copyObject = new EventEmitter<number>();
-  @Output() deleteObject = new EventEmitter<number>();
-  @Output() selectObject = new EventEmitter<number>();
-
-
-  constructor() { }
+  constructor(public templateTabService: TemplateTabService, public objectTabService: ObjectTabService) { }
 
   ngOnInit() {
     // Template

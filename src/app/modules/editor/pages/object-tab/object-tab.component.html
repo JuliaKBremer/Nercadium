@@ -2,11 +2,7 @@
 <div class="alignContent">
 
   <div class="contentOrganizerModule">
-    <app-content-organizer-module [objectListObservable]="objectTabService.GetObjectsObservable()"
-                                  (addObject)="objectTabService.AddObject()"
-                                  (copyObject)="objectTabService.CopyObject($event)"
-                                  (deleteObject)="objectTabService.DeleteObject($event)"
-                                  (selectObject)="objectTabService.SelectObject($event)"></app-content-organizer-module>
+    <app-content-organizer-module [objectListObservable]="objectTabService.GetObjectsObservable()"></app-content-organizer-module>
   </div>
 
   <div class="mainContentModule">
