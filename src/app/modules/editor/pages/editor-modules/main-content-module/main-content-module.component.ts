@@ -1,7 +1,5 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
-import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {EditorService} from '../../../services/editor.service';
 
@@ -13,23 +11,26 @@ import {EditorService} from '../../../services/editor.service';
 @Injectable()
 export class MainContentModuleComponent implements OnInit, OnDestroy {
 
-  @Input() selectedTemplateObservable: Observable<GameObjectTemplate|GameCharacterTemplate>;
+  @Input() selectedObjectObservable: Observable<any>;
 
-  public selectedObject: GameObjectTemplate|GameCharacterTemplate;
+  public selectedObject: BehaviorSubject<any>;
   public entityTypes = EntityTypeEnum;
 
   private selectedObjectSubscription: Subscription;
 
-  constructor(private editorService: EditorService) { }
+  constructor(private editorService: EditorService) {
+    this.selectedObject = new BehaviorSubject<any>(null);
+  }
 
+  // TODO: Find other place to save
   Save() {
     this.editorService.SavePackage();
   }
 
   ngOnInit() {
-    if (this.selectedTemplateObservable !== undefined) {
-      this.selectedObjectSubscription = this.selectedTemplateObservable.subscribe(next => {
-        this.selectedObject = next;
+    if (this.selectedObjectObservable !== undefined) {
+      this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+        this.selectedObject.next(next);
       });
     }
   }

@@ -1,23 +1,61 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
 import {GameObjectTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {GetTableStyleFromEnum, TableStyles} from '../../../../../../data/schema/Enums/table-styles.enum';
+import {IField} from '../../../../../../data/schema/Interfaces/Editor/IField';
+import {GameObject} from '../../../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {EntityTypeEnum} from '../../../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {TemplateTabService} from '../../../template-tab/template-tab.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-fields-display',
   templateUrl: './fields-display.component.html',
   styleUrls: ['./fields-display.component.css']
 })
-export class FieldsDisplayComponent implements OnInit {
+export class FieldsDisplayComponent implements OnInit, OnDestroy {
 
-  @Input() selectedObject: GameObjectTemplate|GameCharacterTemplate;
+  @Input() selectedObjectObservable: Observable<any>;
+
+  private selectedObject: any;
+  private selectedObjectSubscription: Subscription;
 
   public fieldTypes = FieldTypes;
 
-  constructor() { }
+  public fields: IField[] = [];
+
+  constructor(private templateTabService: TemplateTabService) { }
 
   ngOnInit() {
+    if (this.selectedObjectObservable !== undefined) {
+      this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+        this.selectedObject = next;
+        if (this.selectedObject !== null) {
+          switch (this.selectedObject.EntityType) {
+            case EntityTypeEnum.Object:
+              const sO = this.selectedObject as GameObject;
+              const template: GameObjectTemplate = this.templateTabService.FindTemplateByID(sO.Properties.Template.value);
+              if (template) {
+                this.fields = template.Fields;
+              }
+              break;
+            case EntityTypeEnum.Character:
+              break;
+            case EntityTypeEnum.CharacterTemplate:
+              this.fields = (this.selectedObject as GameCharacterTemplate).Fields;
+              break;
+            case EntityTypeEnum.ObjectTemplate:
+              this.fields = (this.selectedObject as GameObjectTemplate).Fields;
+              break;
+          }
+        }
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.selectedObjectSubscription.unsubscribe();
   }
 
   changeTableContent(fieldID: number, row: number, col: number, innerHTML: string) {

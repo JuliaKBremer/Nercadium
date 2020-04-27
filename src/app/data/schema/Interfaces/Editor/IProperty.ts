@@ -11,6 +11,9 @@ export interface IProperty {
   // parent field of the property
   parentFieldID?: number;
 
+  // parent gameObject of the property
+  parentObjectID?: number;
+
   // Vergebener Wert
   value: any;
 

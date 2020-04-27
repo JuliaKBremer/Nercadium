@@ -3,13 +3,17 @@ import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObject} from '../../../../data/schema/Classes/Editor/Objects/GameObject';
 import {EditorService} from '../../services/editor.service';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {EventService} from '../../../../core/service/event/event.service';
+import {IProperties} from '../../../../data/schema/Interfaces/Editor/IProperty';
+import {TemplateTabService} from '../template-tab/template-tab.service';
+import {IField} from '../../../../data/schema/Interfaces/Editor/IField';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObjectTabService {
 
-  constructor(private editorService: EditorService) {
+  constructor(private editorService: EditorService, private eventService: EventService, private templateTabService: TemplateTabService) {
     this.gameObjects = new BehaviorSubject<GameObject[]>([]);
     this.templatesEnum = new BehaviorSubject<{string, number}>(null);
     this.selectedObject = new BehaviorSubject<GameObject>(null);
@@ -22,6 +26,11 @@ export class ObjectTabService {
       this.gameObjects.next(next);
       this.selectedObject.next(null);
     });
+
+    // Init events
+    eventService.on('Change-Template', () => {
+      this.SelectObject(this.selectedObject.value.id);
+    });
   }
 
   private objectSubscription: Subscription;
@@ -32,6 +41,12 @@ export class ObjectTabService {
   private selectedObject: BehaviorSubject<GameObject>;
 
   private objectTemplates: GameObjectTemplate[];
+
+  private static SetParentObjectID(properties: IProperties, parentObjectID: number) {
+    for (const key of Object.keys(properties)) {
+      properties[key].parentObjectID = parentObjectID;
+    }
+  }
 
   public FindObjectByID(objectToFindID: number): GameObject {
     if (this.gameObjects.value.some(obj => obj.id === objectToFindID)) {
@@ -53,6 +68,7 @@ export class ObjectTabService {
 
   public SelectObject(objectToSelectID: number) {
     this.selectedObject.next(this.FindObjectByID(objectToSelectID));
+    this.UpdateFieldValue();
   }
 
   public UpdateTemplatesEnum() {
@@ -62,6 +78,7 @@ export class ObjectTabService {
   public AddObject() {
     const newObject = new GameObject();
     newObject.id = this.editorService.GetNewID();
+    ObjectTabService.SetParentObjectID(newObject.Properties, newObject.id);
     this.gameObjects.value.push(newObject);
   }
 
@@ -70,6 +87,7 @@ export class ObjectTabService {
 
     const newObject: GameObject = new GameObject(objectToCopy);
     newObject.id = this.editorService.GetNewID();
+    ObjectTabService.SetParentObjectID(newObject.Properties, newObject.id);
     this.gameObjects.value.push(newObject);
   }
 
@@ -82,6 +100,42 @@ export class ObjectTabService {
     const objects: GameObject[] = this.gameObjects.value;
     const indexOfObject: number = objects.indexOf(objectToDelete);
     objects.splice(indexOfObject, 1);
+  }
+
+  public UpdateFieldValue() {
+    const object: GameObject = this.selectedObject.value;
+    let template: GameObjectTemplate = null;
+
+    if (object) {
+      template = this.templateTabService.FindTemplateByID(object.Properties.Template.value);
+    }
+
+    if (object && template) {
+      this.CheckFieldValue(object, template);
+    }
+  }
+
+  private CheckFieldValue(gameObject: GameObject, template: GameObjectTemplate) {
+    for (const fieldValuesKeyTemplate of Object.keys(template.FieldValues)) {
+      const field: IField = template.Fields.filter(obj => obj.ID.toString() === fieldValuesKeyTemplate)[0];
+
+      if (!(fieldValuesKeyTemplate in gameObject.FieldValues)) {
+        gameObject.FieldValues[fieldValuesKeyTemplate] = template.FieldValues[fieldValuesKeyTemplate];
+        gameObject.FieldTypes[fieldValuesKeyTemplate] = field.Properties.Type.value;
+      } else {
+        if (gameObject.FieldTypes[fieldValuesKeyTemplate] !== field.Properties.Type.value) {
+          gameObject.FieldValues[fieldValuesKeyTemplate] = template.FieldValues[fieldValuesKeyTemplate];
+          gameObject.FieldTypes[fieldValuesKeyTemplate] = field.Properties.Type.value;
+        }
+      }
+    }
+
+    for (const fieldValuesKeyObject of Object.keys(gameObject.FieldValues)) {
+      if (!(fieldValuesKeyObject in template.FieldValues)) {
+        delete gameObject.FieldValues[fieldValuesKeyObject];
+        delete gameObject.FieldTypes[fieldValuesKeyObject];
+      }
+    }
   }
 
   private TemplatesToEnum(templates: GameObjectTemplate[]) {

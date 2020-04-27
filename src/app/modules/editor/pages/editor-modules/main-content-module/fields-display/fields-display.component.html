@@ -1,6 +1,5 @@
-<div *ngIf="selectedObject">
-<!--  <pre>{{selectedObject | json}}</pre>-->
-  <div *ngFor="let field of selectedObject.Fields"
+<div *ngIf="fields">
+  <div *ngFor="let field of fields"
        [ngSwitch]="field.Properties.Type.value"
        [style.position]="'relative'"
        [style.top]="field.Properties.Top.value + 'px'"

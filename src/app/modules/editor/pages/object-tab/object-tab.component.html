@@ -6,7 +6,7 @@
   </div>
 
   <div class="mainContentModule">
-    <app-main-content-module></app-main-content-module>
+    <app-main-content-module [selectedObjectObservable]="objectTabService.GetSelectedObjectObservable()"></app-main-content-module>
   </div>
 
   <div class="propertiesModule">
