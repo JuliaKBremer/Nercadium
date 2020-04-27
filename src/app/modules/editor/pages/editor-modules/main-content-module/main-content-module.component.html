@@ -7,14 +7,28 @@
     </div>
   </div>
 
-  <label>
-    <input [(ngModel)]="FilePath" />
-  </label>
+  <label>Filepath:</label>
+  <input [(ngModel)]="FilePath" />
+
   <button class="mainContent__button" (click)="Load()">
     Laden
   </button>
+
   <button (click)="CreateFile()">
     Speichern
+  </button>
+  <label>Replace/Add Value</label>
+  <input [(ngModel)]="input" >
+  <label>Replace/Add Index Value</label>
+  <input [(ngModel)]="index" >
+  <button (click)="Modify()">
+    Replace
+  </button>
+  <button (click)="Add()">
+    Add
+  </button>
+  <button (click)="Delete()">
+    DeleteItem
   </button>
   <button>
     Neu
@@ -22,4 +36,11 @@
   <label>
     {{GetResult()}}
   </label>
+
+  <div *ngFor="let itm of this.DatabaseItems()">
+    <label>
+      {{itm.Name}}
+    </label>
+  </div>
+
 </div>
