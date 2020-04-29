@@ -1,7 +1,6 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
-import {EditorService} from '../../../services/editor.service';
 
 @Component({
   selector: 'app-main-content-module',
@@ -18,13 +17,8 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
 
   private selectedObjectSubscription: Subscription;
 
-  constructor(private editorService: EditorService) {
+  constructor() {
     this.selectedObject = new BehaviorSubject<any>(null);
-  }
-
-  // TODO: Find other place to save
-  Save() {
-    this.editorService.SavePackage();
   }
 
   ngOnInit() {

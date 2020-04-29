@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EditorService} from '../../../services/editor.service';
 
 @Component({
   selector: 'app-editor-navbar',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public editorService: EditorService) { }
 
   ngOnInit() {
   }
