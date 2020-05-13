@@ -93,6 +93,18 @@ ipcMain.handle('load-data', async (event, data) => {
   return loadedData;
 });
 
+ipcMain.on('save-config', (event, data) => {
+  let filePath = app.getPath('userData') + '/config/';
+  storage.writeData(filePath, data[0].fileName, data[0].fileData);
+});
+
+ipcMain.handle('load-config', async (event, data) => {
+  let loadedData;
+  let filePath = app.getPath('userData') + '/config';
+  loadedData = await storage.readData(filePath, data[0].fileName + '.json', data[0].defaultData);
+  return loadedData;
+});
+
 ipcMain.on('rename-data', (event, data) => {
   storage.renameData(data[0].filePath, data[0].oldFileName, data[0].newFileName);
 });

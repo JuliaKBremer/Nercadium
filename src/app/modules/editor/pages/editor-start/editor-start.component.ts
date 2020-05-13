@@ -24,10 +24,8 @@ export class EditorStartComponent implements OnInit {
   }
 
   LoadPackage() {
-    if (this.packageName !== '') {
-      this.editorService.LoadPackage(this.packageName);
-      this.router.navigate(['/editor/chapter']);
-    }
+    this.editorService.LoadPackage();
+    this.router.navigate(['/editor/chapter']);
   }
 
 }

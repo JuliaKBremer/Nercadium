@@ -10,6 +10,7 @@ import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject} from 'rxjs';
 import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {AdventuresManagerService} from '../../../core/service/projectsManager/adventures-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class EditorService {
   name: string;
   path = 'C:\\Users\\timom\\Desktop\\Neuer Ordner (2)'; // TODO: get path from settings
 
-  constructor(private libraryService: LibraryService) {
+  constructor(private libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
     this.Adventures = new BehaviorSubject<AdventureObject[]>([]);
     this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.Objects = new BehaviorSubject<GameObject[]>([]);
@@ -67,8 +68,12 @@ export class EditorService {
     this.name = name;
   }
 
-  public LoadPackage(name: string) {
-    this.libraryService.LoadPackage(this.path, name);
+  public LoadPackage() {
+    const project = this.adventuresManagerService.GetAdventureByDialog();
+
+    console.log(project);
+
+    this.libraryService.LoadPackage(project.path, project.name);
 
     this.GetDataFromLibrary();
   }
