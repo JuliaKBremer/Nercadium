@@ -7,8 +7,8 @@ const storage = new Storage();
 const defaultElectronConfig = {
   width: 1280,
   height: 720,
-  minWidth: 800,
-  minHeight: 600,
+  minWidth: 1280,
+  minHeight: 720,
   icon: `file://${__dirname}/../dist/Nercadium/assets/logo.jpg`,
   webPreferences: {
     nodeIntegration: true
@@ -32,7 +32,7 @@ function createWindow () {
   // Load buildet index.html
   win.loadURL(`file://${__dirname}/../dist/Nercadium/index.html`);
 
-  win.openDevTools();
+  // win.openDevTools();
 
   // Window listeners
   // Event when the window is closed.
