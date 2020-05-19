@@ -1,17 +1,7 @@
-<app-editor-navbar></app-editor-navbar>
-<p>editor-start works!</p>
-<div class="alignContent">
-
-  <div class="contentOrganizerModule">
-    <app-content-organizer-module></app-content-organizer-module>
-  </div>
-
-  <div class="mainContentModule">
-    <app-main-content-module></app-main-content-module>
-  </div>
-
-  <div class="propertiesModule">
-    <app-properties-module></app-properties-module>
-  </div>
-
+<div>
+  <label>
+    <input type="text" [(ngModel)]="packageName">
+  </label>
+  <button (click)="NewPackage()">New Package</button>
+  <button (click)="LoadPackage()">Load Package</button>
 </div>

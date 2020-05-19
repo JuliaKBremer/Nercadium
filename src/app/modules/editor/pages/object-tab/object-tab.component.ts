@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ObjectTabService} from './object-tab.service';
 
 @Component({
   selector: 'app-object-tab',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObjectTabComponent implements OnInit {
 
-  constructor() { }
+  constructor(public objectTabService: ObjectTabService) { }
 
   ngOnInit() {
+    this.objectTabService.UpdateTemplatesEnum();
+    this.objectTabService.UpdateFieldValue();
   }
-
 }

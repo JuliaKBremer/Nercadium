@@ -1,8 +1,7 @@
-import {IProperty} from './IProperty';
+import {IProperties} from './IProperty';
 import {IGameObjectTemplate} from './IGameObjectTemplate';
 
 export interface IGameObject {
-
   // ID des Objekt / Item .. whatever
   id: number;
 
@@ -13,8 +12,11 @@ export interface IGameObject {
   Description: string;
 
   // Zugewiesenen Werte / Stats .. whatever
-  Properties: Array<IProperty>[];
+  Properties: IProperties;
 
   // Das zugewiesene Template
-  ObjectTemplate: IGameObjectTemplate;
+  ObjectTemplateID: number;
+
+  // Field values
+  FieldValues: {[key: string]: any};
 }

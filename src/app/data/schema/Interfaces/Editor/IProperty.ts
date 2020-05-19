@@ -5,6 +5,15 @@ export interface IProperty {
   // ID der Property / Eigenschaft
   id: number;
 
+  // parent template of the property
+  parentTemplateID?: number;
+
+  // parent field of the property
+  parentFieldID?: number;
+
+  // parent gameObject of the property
+  parentObjectID?: number;
+
   // Vergebener Wert
   value: any;
 
@@ -16,6 +25,9 @@ export interface IProperty {
 
   // Falls type den Wert Enum hat muss enum den Enum als Object gegeben werden.
   enum?: any;
+
+  // Wenn type den Wert Enum hat kann man ein Event abfeuern lassen wenn der Wert geändert wird.
+  changeFireEvent?: string;
 }
 
 export interface IProperties {

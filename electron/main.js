@@ -7,8 +7,8 @@ const storage = new Storage();
 const defaultElectronConfig = {
   width: 1280,
   height: 720,
-  minWidth: 800,
-  minHeight: 600,
+  minWidth: 1280,
+  minHeight: 720,
   icon: `file://${__dirname}/../dist/Nercadium/assets/logo.jpg`,
   webPreferences: {
     nodeIntegration: true
@@ -32,7 +32,7 @@ function createWindow () {
   // Load buildet index.html
   win.loadURL(`file://${__dirname}/../dist/Nercadium/index.html`);
 
-  win.openDevTools();
+  // win.openDevTools();
 
   // Window listeners
   // Event when the window is closed.
@@ -90,6 +90,18 @@ ipcMain.on('save-data', (event, data) => {
 ipcMain.handle('load-data', async (event, data) => {
   let loadedData;
   loadedData = await storage.readData(data[0].filePath, data[0].fileName);
+  return loadedData;
+});
+
+ipcMain.on('save-config', (event, data) => {
+  let filePath = app.getPath('userData') + '/config/';
+  storage.writeData(filePath, data[0].fileName, data[0].fileData);
+});
+
+ipcMain.handle('load-config', async (event, data) => {
+  let loadedData;
+  let filePath = app.getPath('userData') + '/config';
+  loadedData = await storage.readData(filePath, data[0].fileName + '.json', data[0].defaultData);
   return loadedData;
 });
 
