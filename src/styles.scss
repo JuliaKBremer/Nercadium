@@ -39,7 +39,7 @@ button {
 
 .flexContainer {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;}
 
 /* NAVBAR */
 .navbar {
@@ -47,7 +47,8 @@ button {
   display: flex;
   flex-direction: row;
   padding: 5px 0 5px 0;
-  -webkit-app-region: drag; }
+  -webkit-app-region: drag;
+}
 
 .navbar__headline {
   margin: 4px 0 0 0; }
@@ -86,73 +87,89 @@ button {
 .navbar__logo,
 .navbar__navList,
 .navbar_toolbar {
-  -webkit-app-region: no-drag; }
+  -webkit-app-region: no-drag;
+}
 
 .navbar_toolbar__icons {
-  display: flex;
-  flex-direction: row; }
+  display:flex;
+  flex-direction: row;
+}
 
 .navbar_toolbar {
   margin-left: auto;
   order: 2;
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+}
 
 .navbar_toolbar__toolIcon {
   padding: 0 10px 0 5px;
   margin-top: 7px;
-  font-size: 17px; }
+  font-size: 17px;
+}
 
 .navbar_toolbar__toolIcon:hover {
-  color: #c9ab53; }
+  color: rgb(201, 171, 83);
+}
 
 .navbar_toolbar__toolIcon--redHover:hover {
-  color: red; }
+  color: red;
+}
 
 .navbar_toolbarDropdownInformations i {
   font-size: 33px;
   margin: 23px 7px 0 0;
-  color: #c9ab53; }
+  color: rgb(201, 171, 83);
+}
 
 .navbar_toolbarDropdownInformations p {
-  margin: 30px 35px 0 0; }
+  margin: 30px 35px 0 0;
+}
 
 /* Login In Navbar */
 .navbar_toolbarDropdownInformations {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+}
 
 /*Editor Modules*/
-.alignContent {
+.alignContent{
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+}
 
-.mainContentModule {
+.mainContentModule{
   margin: auto;
-  width: 1000px; }
+  width: 1000px;
+}
 
-.contentOrganizerModule {
-  margin: 10px; }
+.contentOrganizerModule{
+  margin: 10px;
+}
 
-.propertiesModule {
-  margin: 10px; }
-
-mat-grid-tile {
-  background-color: dimgrey; }
+.propertiesModule{
+  margin: 10px;
+}
+mat-grid-tile{
+  background-color: dimgrey;
+}
 
 /* USER AREA */
 .alignContent {
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 .errorField {
-  color: red; }
+  color: red;
+}
 
 .userAreaSpace {
   display: flex;
   flex-direction: column;
   min-width: 400px;
-  width: 30vw;
-  margin: 35px auto; }
+  width:30vw;
+  margin: 35px auto;
+}
 
 .userAreaSpace button,
 .userAreaFormButton,
@@ -160,21 +177,25 @@ mat-grid-tile {
 .userAreaSpace mat-form-field {
   width: 100%;
   margin: 10px auto 5px;
-  height: 45px; }
+  height: 45px;
+}
 
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   height: 1px;
-  background-color: #c9ab53;
-  margin: -12px 0 0 0; }
+  background-color: rgb(201, 171, 83);
+  margin: -12px 0 0 0;
+}
 
 .userAreaSpace button:hover,
 .userAreaFormButton:hover {
-  text-shadow: 0 0 8px #fff; }
+  text-shadow: 0 0 8px #fff;
+}
 
 .disabledBecauseWasSuccess {
   display: none;
   background-color: gray;
-  color: black; }
+  color: black;
+}
 
 .userAreaSpace .bannerOnSuccess,
 .userAreaSpace .bannerOnFail {
@@ -183,32 +204,35 @@ mat-grid-tile {
   word-wrap: break-word;
   border-radius: 4px;
   margin: 0 auto 20px auto;
-  width: 100%; }
+  width: 100%;
+}
 
 .userAreaSpace .bannerOnSuccess {
-  background-color: green; }
+  background-color: green;
+}
 
 .userAreaSpace .bannerOnFail {
-  background-color: red; }
+  background-color: red;
+}
 
 .userAreaSpace a:any-link {
   margin: 10px auto;
   text-decoration: none;
-  color: #c9ab53; }
+  color: rgb(201, 171, 83);
+}
 
 /* User Pages */
 .navbar_toolbarDropdownInformations:any-link {
   color: white;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 /* (CK Editor) Text-Editor Styles */
-.ck.ck-editor {
+.ck.ck-editor{
   min-width: 50vw;
-  max-width: 70vw; }
-
+  max-width: 70vw;
+}
 .ck-editor__editable {
-  min-height: 256px; }
-
-/*# sourceMappingURL=styles.css.map */
-
+  min-height: 256px;
+}
 /*# sourceMappingURL=styles.css.map */
