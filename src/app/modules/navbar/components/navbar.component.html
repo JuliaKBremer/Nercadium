@@ -15,13 +15,19 @@
   <div class="navbar_toolbar">
     <div class="navbar_toolbarDropdown">
 
-      <a routerLink="/user" class="navbar_toolbarDropdownInformations">
+      <div class="navbar_toolbarDropdownInformations">
         <!-- USER ICON -->
         <i class="fas fa-user-circle"></i>
 
         <!-- USERNAME -->
         <p>{{username}}</p>
-      </a>
+      </div>
+
+      <div class="" style="display:none;">
+        <a href="">Login</a>
+        <a href="">Register</a>
+        <a href="">About</a>
+      </div>
     </div>
 
     <app-min-max-close></app-min-max-close>
