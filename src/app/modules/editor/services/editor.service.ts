@@ -10,14 +10,14 @@ import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject} from 'rxjs';
 import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {AdventuresManagerService} from '../../../core/service/projectsManager/adventures-manager.service';
+import {AdventuresManagerService} from '../../../core/service/adventures/adventures-manager.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorService {
 
-  Adventures: BehaviorSubject<AdventureObject[]>;
+  Adventure: BehaviorSubject<AdventureObject>;
   Characters: BehaviorSubject<CharacterObject[]>;
   Objects: BehaviorSubject<GameObject[]>;
   Scenes: BehaviorSubject<SceneObject[]>;
@@ -30,8 +30,8 @@ export class EditorService {
   name: string;
   path = 'C:\\Users\\timom\\Desktop\\Neuer Ordner (2)'; // TODO: get path from settings
 
-  constructor(private libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
-    this.Adventures = new BehaviorSubject<AdventureObject[]>([]);
+  constructor(private libraryService: LibraryService) {
+    this.Adventure = new BehaviorSubject<AdventureObject>(null);
     this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.Objects = new BehaviorSubject<GameObject[]>([]);
     this.Scenes = new BehaviorSubject<SceneObject[]>([]);
@@ -40,8 +40,6 @@ export class EditorService {
     this.Notes = new BehaviorSubject<NoteObject[]>([]);
     this.ObjectTemplates = new BehaviorSubject<GameObjectTemplate[]>([]);
     this.CharacterTemplates = new BehaviorSubject<GameCharacterTemplate[]>([]);
-
-    this.NewPackage('New Package');
   }
 
   public GetNewID(): number {
@@ -49,7 +47,7 @@ export class EditorService {
   }
 
   private GetDataFromLibrary() {
-    this.Adventures.next(this.libraryService.Adventures);
+    this.Adventure.next(this.libraryService.Adventures[0]);
     this.Characters.next(this.libraryService.Characters);
     this.Objects.next(this.libraryService.Objects);
     this.Scenes.next(this.libraryService.Scenes);
@@ -60,25 +58,13 @@ export class EditorService {
     this.CharacterTemplates.next(this.libraryService.CharacterTemplates);
   }
 
-  public NewPackage(name: string) {
-    this.libraryService.Clear();
-
-    this.GetDataFromLibrary();
-
-    this.name = name;
-  }
-
-  public LoadPackage() {
-    const project = this.adventuresManagerService.GetAdventureByDialog();
-
-    console.log(project);
-
-    this.libraryService.LoadPackage(project.path, project.name);
+  public LoadPackage(path: string, name: string) {
+    this.libraryService.LoadPackage(path, name);
 
     this.GetDataFromLibrary();
   }
 
   public SavePackage() {
-    this.libraryService.SavePackage(this.path, this.name);
+    this.libraryService.SavePackage(this.Adventure.value.path, this.Adventure.value.Name);
   }
 }

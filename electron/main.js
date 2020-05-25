@@ -100,8 +100,8 @@ ipcMain.on('save-config', (event, data) => {
 
 ipcMain.handle('load-config', async (event, data) => {
   let loadedData;
-  let filePath = app.getPath('userData') + '/config';
-  loadedData = await storage.readData(filePath, data[0].fileName + '.json', data[0].defaultData);
+  let filePath = app.getPath('userData') + '/config/';
+  loadedData = await storage.readData(filePath, data[0].fileName, data[0].defaultData);
   return loadedData;
 });
 

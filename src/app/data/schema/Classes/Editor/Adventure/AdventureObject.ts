@@ -11,6 +11,9 @@ export class AdventureObject implements IAdventureObject, IBaseGameEntity {
   // ID of the Adventure.
   public id: number;
 
+  // Path of the Adventure.
+  public path: string;
+
   // Entity's Tags
   public Tags: string[];
 

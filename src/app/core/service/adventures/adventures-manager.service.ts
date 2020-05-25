@@ -4,14 +4,13 @@ import {StorageSystemService} from '../storageSystem/storage-system.service';
 import {ConfigManagerService} from '../configManager/config-manager.service';
 import {IConfigLoad} from '../../../data/schema/Interfaces/Config/IConfigLoad';
 import {IConfigSave} from '../../../data/schema/Interfaces/Config/IConfigSave';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 // @ts-ignore
 declare var electron: Electron;
 
 interface IAdventuresConfig {
   adventures: {[id: string]: { path: string, name: string }};
-  lastFiveAdventures: [];
 }
 
 @Injectable({
@@ -29,8 +28,8 @@ export class AdventuresManagerService {
     this.LoadAdventuresConfig();
   }
 
-  private LoadAdventuresConfig() {
-    const adventuresConfigDefault: IAdventuresConfig = {adventures: {}, lastFiveAdventures: []};
+  public LoadAdventuresConfig() {
+    const adventuresConfigDefault: IAdventuresConfig = {adventures: {}};
     const loadConfigData: IConfigLoad = {fileName: this.configFileName, defaultData: adventuresConfigDefault};
 
     this.configManagerService.loadConfig(loadConfigData).then(result => this.adventuresConfig.next(result));
@@ -55,16 +54,16 @@ export class AdventuresManagerService {
 
   public GetAdventureByDialog(): { path: string, name: string } {
     const fullPath = electron.remote.dialog.showOpenDialogSync(
-      {properties: ['openDirectory'], title: 'Load Project', filters: [{name: 'Paf', extensions: ['paf']}]})[0];
-
+      {properties: ['openFile'], title: 'Load Project', filters: [{name: 'Paf', extensions: ['paf']}]})[0];
+    console.log(fullPath);
     const splittedPath = fullPath.split('\\');
 
     let path = '';
-    for (let i = 0; i < splittedPath.length - 1; i++) {
+    for (let i = 0; i < splittedPath.length - 2; i++) {
       path = path + splittedPath[i] + '\\';
     }
 
-    const name = splittedPath[splittedPath.length - 1];
+    const name = splittedPath[splittedPath.length - 2];
 
     let adventureId: string = this.CheckIfAdventureListed(path, name);
     if (adventureId === null) {
@@ -92,5 +91,9 @@ export class AdventuresManagerService {
     }
 
     return null;
+  }
+
+  public GetAdventuresObservable(): Observable<IAdventuresConfig> {
+    return this.adventuresConfig.asObservable();
   }
 }

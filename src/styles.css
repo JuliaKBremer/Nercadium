@@ -1,3 +1,42 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+app-editor-start {
+  display: flex;
+  height: 100%;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 70%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 53%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 0%, 33%);
+}
+
 body {
   margin: 0;
   background-color: #383838;
