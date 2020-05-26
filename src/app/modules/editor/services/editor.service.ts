@@ -10,7 +10,6 @@ import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject} from 'rxjs';
 import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {AdventuresManagerService} from '../../../core/service/adventures/adventures-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +25,6 @@ export class EditorService {
   Notes: BehaviorSubject<NoteObject[]>;
   ObjectTemplates: BehaviorSubject<GameObjectTemplate[]>;
   CharacterTemplates: BehaviorSubject<GameCharacterTemplate[]>;
-
-  name: string;
-  path = 'C:\\Users\\timom\\Desktop\\Neuer Ordner (2)'; // TODO: get path from settings
 
   constructor(private libraryService: LibraryService) {
     this.Adventure = new BehaviorSubject<AdventureObject>(null);
