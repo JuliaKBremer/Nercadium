@@ -111,3 +111,25 @@ button:disabled {
 
 
 }
+
+app-text-editor {
+  height: 100%;
+}
+
+.ck-editor{
+  height: 100% !important;
+
+  display: flex;
+  flex-flow: column;
+}
+
+.ck-editor__main {
+  height: 100%;
+
+  display: flex;
+  flex-flow: column;
+}
+
+.ck-editor__editable {
+  height: 100%;
+}

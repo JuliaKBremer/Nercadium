@@ -1,17 +1,28 @@
+<!-- Template -->
 <div *ngIf="objectTemplateList">
   <div *ngFor="let template of objectTemplateList">
-    <span (click)="selectObject.emit(template.id)">{{template.Properties.Name.value}}</span>
-    <span (click)="copyObject.emit(template.id)">Copy</span>
-    <span (click)="deleteObject.emit(template.id)">Delete</span>
+    <span (click)="templateTabService.SelectObject(template.id)">{{template.Properties.Name.value}}</span>
+    <span (click)="templateTabService.CopyTemplate(template.id)">Copy</span>
+    <span (click)="templateTabService.DeleteTemplate(template.id)">Delete</span>
   </div>
-  <div (click)="addObjectTemplate.emit()">+ Object Template</div>
+  <div (click)="templateTabService.AddObjectTemplate()">+ Object Template</div>
 </div>
 
 <div *ngIf="characterTemplateList">
   <div *ngFor="let template of characterTemplateList">
-    <span (click)="selectObject.emit(template.id)">{{template.Properties.Name.value}}</span>
-    <span (click)="copyObject.emit(template.id)">Copy</span>
-    <span (click)="deleteObject.emit(template.id)">Delete</span>
+    <span (click)="templateTabService.SelectObject(template.id)">{{template.Properties.Name.value}}</span>
+    <span (click)="templateTabService.CopyTemplate(template.id)">Copy</span>
+    <span (click)="templateTabService.DeleteTemplate(template.id)">Delete</span>
   </div>
-  <div (click)="addCharacterTemplate.emit()">+ Character Template</div>
+  <div (click)="templateTabService.AddCharacterTemplate()">+ Character Template</div>
+</div>
+
+<!-- Object -->
+<div *ngIf="objectList">
+  <div *ngFor="let object of objectList">
+    <span (click)="objectTabService.SelectObject(object.id)">{{object.Properties.Name.value}}</span>
+    <span (click)="objectTabService.CopyObject(object.id)">Copy</span>
+    <span (click)="objectTabService.DeleteObject(object.id)">Delete</span>
+  </div>
+  <div (click)="objectTabService.AddObject()">+ Object</div>
 </div>

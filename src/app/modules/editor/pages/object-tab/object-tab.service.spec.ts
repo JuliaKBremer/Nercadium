@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TemplateService } from './template.service';
+import { ObjectTabService } from './object-tab.service';
 
-describe('TemplateService', () => {
+describe('ObjectService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TemplateService = TestBed.get(TemplateService);
+    const service: ObjectTabService = TestBed.get(ObjectTabService);
     expect(service).toBeTruthy();
   });
 });

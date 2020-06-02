@@ -1,0 +1,87 @@
+.centerContainer {
+  height: 400px;
+  width: 600px;
+  margin: auto auto;
+
+  display: flex;
+  flex-flow: row;
+
+  background-color: hsl(0, 0%, 24%);
+}
+
+.projectsContainer {
+  height: 100%;
+  width: 50%;
+
+  overflow: auto;
+}
+
+.project {
+  width: 100%;
+
+  text-align: center;
+  padding: 10px 0;
+}
+
+.project:hover {
+  background-color: hsl(0, 0%, 26%);
+}
+
+.newOpenContainer {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  flex-flow: column;
+
+  border-left: 1px solid hsl(0, 0%, 26%);
+}
+
+.createContainer {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.newButton {
+  margin: auto auto 25px;
+}
+
+.loadButton {
+  margin: 0 auto auto;
+}
+
+.createCancelContainer {
+  display: flex;
+}
+
+.createButton {
+  margin: 0 auto 0 0;
+}
+
+.cancelButton {
+
+}
+
+.pathContainer {
+  display: flex;
+  flex-flow: row;
+}
+
+.pathInput {
+  flex-grow: 1;
+}
+
+.pathButton {
+  padding: 0 5px 0 5px;
+  margin-left: 5px;
+}
+
+.textareaDisableResize {
+  resize: none;
+}

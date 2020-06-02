@@ -7,7 +7,9 @@ import {PropertyTypes} from '../../../Enums/property-types.enum';
 
 export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity {
   id: number;
-  Name: string;
+  get Name() {
+    return this.Properties.Name.value + ' ' + this.id;
+  }
   Properties: IProperties = {};
   Fields: IField[] = [];
   FieldValues: {[key: string]: any} = {};
@@ -17,11 +19,9 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
   // Entity's Tags
   public Tags: string[];
 
-
   constructor(objectTemplateToCopy?: GameObjectTemplate) {
     if (objectTemplateToCopy) {
       this.id = objectTemplateToCopy.id;
-      this.Name = objectTemplateToCopy.Name;
       this.Properties = JSON.parse(JSON.stringify(objectTemplateToCopy.Properties));
       this.Fields = JSON.parse(JSON.stringify(objectTemplateToCopy.Fields));
       this.FieldValues = JSON.parse(JSON.stringify(objectTemplateToCopy.FieldValues));
@@ -30,6 +30,4 @@ export class GameObjectTemplate implements IGameObjectTemplate, IBaseGameEntity 
       this.Properties.Name = {id: 0, value: 'New Object Template', type: PropertyTypes.string};
     }
   }
-
-
 }

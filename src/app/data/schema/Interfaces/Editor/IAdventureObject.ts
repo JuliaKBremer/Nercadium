@@ -5,6 +5,7 @@ import {IGameScript} from './IGameScript';
 
 export interface IAdventureObject {
   id: number;
+  path: string;
   Items: IGameObject[];
   Characters: IGameCharacter[];
   Scenes: IGameScene[];

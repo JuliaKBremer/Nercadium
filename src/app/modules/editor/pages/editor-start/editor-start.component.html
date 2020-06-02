@@ -1,17 +1,57 @@
-<app-editor-navbar></app-editor-navbar>
-<p>editor-start works!</p>
-<div class="alignContent">
+<div class="centerContainer">
+  <ng-container *ngIf="newOpen; then chose; else create"></ng-container>
 
-  <div class="contentOrganizerModule">
-    <app-content-organizer-module></app-content-organizer-module>
-  </div>
+  <ng-template #chose>
+    <div class="projectsContainer">
+      <ng-container *ngIf="adventures">
+        <div class="project"
+             *ngFor="let adventure of adventures"
+             (click)="OpenAdventureFromAdventureList(adventure.path, adventure.name)">
+          {{adventure.name}}
+        </div>
+      </ng-container>
+    </div>
 
-  <div class="mainContentModule">
-    <app-main-content-module></app-main-content-module>
-  </div>
+    <div class="newOpenContainer">
+      <button class="newButton w-45"
+              (click)="NewAdventure()">
+        New
+      </button>
+      <button class="loadButton w-45"
+              (click)="OpenAdventureByDialog()">
+        Open
+      </button>
+    </div>
+  </ng-template>
 
-  <div class="propertiesModule">
-    <app-properties-module></app-properties-module>
-  </div>
+  <ng-template #create>
+    <div class="createContainer">
+      <label>Name</label>
+      <input [(ngModel)]="newAdventureService.newAdventure.name">
+      <br>
+      <label>Path</label>
+      <div class="pathContainer">
+        <input class="pathInput"
+               [(ngModel)]="newAdventureService.newAdventure.path">
+        <button class="pathButton"
+                (click)="newAdventureService.GetPathByDialog()">...</button>
+      </div>
+      <br>
+      <label>Description</label>
+      <textarea class="textareaDisableResize"
+                [(ngModel)]="newAdventureService.newAdventure.description"></textarea>
+      <br>
+      <div class="createCancelContainer">
+        <button class="createButton w-45"
+        (click)="CreateAdventure()">
+          Create
+        </button>
+        <button class="cancelButton w-45"
+                (click)="newOpen = !newOpen">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </ng-template>
 
 </div>

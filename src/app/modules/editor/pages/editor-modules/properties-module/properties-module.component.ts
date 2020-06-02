@@ -1,10 +1,12 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IProperties} from '../../../../../data/schema/Interfaces/Editor/IProperty';
 import {IField} from '../../../../../data/schema/Interfaces/Editor/IField';
 import {Observable, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
+import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {GameObject} from '../../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {FieldService} from '../../template-tab/field.service';
 
 @Component({
   selector: 'app-properties-module',
@@ -14,21 +16,26 @@ import {FieldTypes} from '../../../../../data/schema/Enums/field-types.enum';
 export class PropertiesModuleComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
-
-  @Output() addField = new EventEmitter<number>();
-  @Output() deleteField = new EventEmitter<{fieldID: number, objectID: number}>();
-  @Output() copyField = new EventEmitter<{fieldID: number, objectID: number}>();
-  @Output() changeFieldType = new EventEmitter<{templateID: number, fieldID: number, fieldType: FieldTypes}>();
+  @Input() templatesObservable: Observable<{}>;
 
   public properties: IProperties;
   public fields: IField[];
   public selectedObject: any;
 
-  private selectedObjectSubscription: Subscription;
+  public templatesEnum: {};
 
-  constructor() { }
+  private selectedObjectSubscription: Subscription;
+  private templatesSubscription: Subscription;
+
+  constructor(public fieldService: FieldService) { }
 
   ngOnInit() {
+    if (this.templatesObservable !== undefined) {
+      this.templatesSubscription = this.templatesObservable.subscribe(next => {
+        this.templatesEnum = next;
+      });
+    }
+
     if (this.selectedObjectObservable !== undefined) {
       this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
         this.selectedObject = next;
@@ -41,12 +48,18 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     if (this.selectedObjectSubscription) {
       this.selectedObjectSubscription.unsubscribe();
     }
+
+    if (this.templatesSubscription) {
+      this.templatesSubscription.unsubscribe();
+    }
   }
 
   private checkSelectedObject(object: any) {
-    if (object) {
-      if (object instanceof GameObjectTemplate || object instanceof GameCharacterTemplate) {
+    if (object && typeof(object.EntityType) !== 'undefined') {
+      if (object.EntityType === EntityTypeEnum.ObjectTemplate || object.EntityType === EntityTypeEnum.CharacterTemplate) {
         this.checkTemplateProps(object);
+      } else if (object.EntityType === EntityTypeEnum.Object) {
+        this.checkObjectProps(object);
       }
     } else {
       this.properties = null;
@@ -66,5 +79,16 @@ export class PropertiesModuleComponent implements OnInit, OnDestroy {
     } else {
       this.fields = null;
     }
+  }
+
+  private checkObjectProps(object: GameObject) {
+    if (typeof(object.Properties) !== 'undefined') {
+      object.Properties.Template.enum = this.templatesEnum;
+      this.properties = object.Properties;
+    } else {
+      this.properties = null;
+    }
+
+    this.fields = null;
   }
 }

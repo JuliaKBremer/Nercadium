@@ -1,3 +1,53 @@
+html {
+  border: solid 1px black;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+app-editor-start {
+  display: flex;
+  height: 100%;
+}
+
+app-chapter-tab {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 22%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 53%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 0%, 33%);
+}
+
 body {
   margin: 0;
   background-color: #383838;
@@ -70,8 +120,8 @@ button {
 .navbar__listItem:hover,
 .navbar__listItem:active,
 .navbar__listItem--Active {
-  background-color: #c9ab53 !important;
-  text-shadow: 0 0 8px white; }
+  /*background-color: #c9ab53 !important;*/
+  text-shadow: 0 0 8px hsl(45, 52%, 56%); }
 
 .navbar__logo {
   margin: -3px 0 -7px 10px;
@@ -154,12 +204,4 @@ mat-grid-tile{
   background-color: dimgrey;
 }
 
-
-.ck.ck-editor{
-  min-width: 50vw;
-  max-width: 70vw;
-}
-.ck-editor__editable {
-  min-height: 256px;
-}
 /*# sourceMappingURL=styles.css.map */
