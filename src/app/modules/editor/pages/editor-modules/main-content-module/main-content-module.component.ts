@@ -54,7 +54,7 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
 
   public Delete() {
     const objTest = new GameObject();
-    objTest.Name = this.input;
+    objTest.Properties.Name.value = this.input;
     this.libraryService.Remove(objTest);
     const index = this.libraryService.FindIndexByName(this.input, EntityTypeEnum.Object);
 
@@ -75,13 +75,13 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
 
   public Add() {
     const objTest = new GameObject();
-    objTest.Name = this.input;
+    objTest.Properties.Name.value = this.input;
     this.libraryService.Add(objTest);
   }
 
   public Modify() {
     const objTest = new GameObject();
-    objTest.Name = this.input;
+    objTest.Properties.Name.value = this.input;
 
     if (this.index > -1) {
       this.libraryService.Replace(this.index, objTest);
