@@ -15,20 +15,13 @@
   <div class="navbar_toolbar">
     <div class="navbar_toolbarDropdown">
 
-      <div class="navbar_toolbarDropdownInformations">
+      <a routerLink="/user" class="navbar_toolbarDropdownInformations">
         <!-- USER ICON -->
         <i class="fas fa-user-circle"></i>
 
         <!-- USERNAME -->
-        <p *ngIf="!loggedIn" routerLink="/user">Login</p>
-        <p *ngIf="loggedIn">{{username}}</p>
-      </div>
-
-      <div class="" style="display:none;">
-        <a href="">Login</a>
-        <a href="">Register</a>
-        <a href="">About</a>
-      </div>
+        <p>{{username}}</p>
+      </a>
     </div>
 
     <app-min-max-close></app-min-max-close>

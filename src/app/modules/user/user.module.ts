@@ -1,31 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './pages/login/login.component';
-import {PlayRoutingModule} from './user-routing.module';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatButtonModule, MatFormFieldDefaultOptions, MatInputModule} from '@angular/material';
-import { UserComponent } from './pages/user/user.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LogoutComponent } from './pages/logout/logout.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
-const appearance: MatFormFieldDefaultOptions = {
-  appearance: 'outline'
-};
+import { UserRoutingModule } from './user-routing.module';
+import { UserStartComponent } from './pages/user-start/user-start.component';
+import { UserLoginComponent } from './pages/user-login/user-login.component';
+import { UserLogoutComponent } from './pages/user-logout/user-logout.component';
+import { UserRegisterComponent } from './pages/user-register/user-register.component';
+import { UserResetPwComponent } from './pages/user-reset-pw/user-reset-pw.component';
 
 @NgModule({
-  declarations: [LoginComponent, UserComponent, RegisterComponent, LogoutComponent, ResetPasswordComponent],
+  declarations: [UserStartComponent, UserLoginComponent, UserLogoutComponent, UserRegisterComponent, UserResetPwComponent],
   imports: [
     CommonModule,
-    PlayRoutingModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule
-  ], providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: appearance
-    }
+    UserRoutingModule
   ]
 })
 export class UserModule { }

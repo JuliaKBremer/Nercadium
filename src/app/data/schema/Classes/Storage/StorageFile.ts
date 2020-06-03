@@ -5,6 +5,8 @@ import {IStorageRename} from '../../Interfaces/storage/IStorageRename';
 import {IStorageSave} from '../../Interfaces/storage/IStorageSave';
 
 export class StorageFile implements IStorageAppend, IStorageDelete, IStorageLoad, IStorageRename, IStorageSave {
+  Name: string;
+  Description: string;
   filePath: string;
   fileName: string;
   fileData: object;

@@ -1,0 +1,50 @@
+<!--  TODO: Sort by id -->
+<div *ngFor="let property of properties | keyvalue">
+  <span>
+    {{property.key}}
+  </span>
+
+  <span *ngIf="properties[property.key].description">
+    {{property.value.description}}
+  </span>
+
+  <div [ngSwitch]="properties[property.key].type">
+
+    <div *ngSwitchCase="propertyType.string">
+      <label>
+        <input type="text" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.number">
+      <label>
+        <input type="number" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.boolean">
+      <label>
+        <input type="checkbox" [(ngModel)]="properties[property.key].value">
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.enum">
+      <label>
+        <select (change)="selectChanged.emit(properties[property.key].value)" [(ngModel)]="properties[property.key].value" >
+          <option *ngFor="let type of objectKeys(properties[property.key].enum)" [ngValue]="type">{{type}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div *ngSwitchCase="propertyType.options">
+      <div *ngFor="let value of properties[property.key].value; index as i; trackBy:trackByFn">
+        <label>
+          <input type="text" [(ngModel)]="properties[property.key].value[i]">
+        </label>
+<!--        <div (click)="DeleteFromArray(properties[property.key].value, i)">-</div>-->
+      </div>
+      <div (click)="AddToArray(properties[property.key].value)">+</div>
+    </div>
+
+  </div>
+</div>

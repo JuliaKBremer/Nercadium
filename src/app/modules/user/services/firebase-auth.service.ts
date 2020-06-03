@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router} from '@angular/router';
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 
@@ -25,7 +24,7 @@ export class FirebaseAuthService {
     let success = false;
 
     // tslint:disable-next-line:only-arrow-functions
-    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(function(userI) {
+    this.afAuth.signInWithEmailAndPassword(email, password).then(function(userI) {
       if (userI !== null) {
         success = true;
       }
@@ -44,12 +43,14 @@ export class FirebaseAuthService {
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     localStorage.removeItem('user');
   }
 
   async register(email: string, password: string) {
-    const result = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
     await this.router.navigate(['/user/login']);
   }
 }
+
+

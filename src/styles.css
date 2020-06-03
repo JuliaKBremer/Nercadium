@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  background-color: #383838;
+  color: white; }
+
+button,
+input,
+textarea,
+body {
+  font-family: 'Roboto', sans-serif; }
+
+/* FORMS */
+input,
+textarea {
+  border-radius: 4px;
+  outline: none;
+  border: none; }
+
+input {
+  height: 31px;
+  font-size: 13pt;
+  padding: 0 0 0 7px; }
+
+textarea {
+  height: 46px;
+  min-height: 21px;
+  font-size: 12pt;
+  padding: 7px 0 0 7px; }
+
+button {
+  background-color: #c9ab53;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12pt;
+  padding: 9px;
+  outline: none;
+  cursor: pointer; }
+
+.flexContainer {
+  display: flex;
+  flex-direction: column;}
+
+/* NAVBAR */
+.navbar {
+  background-color: #2e2e2e;
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0 5px 0;
+  -webkit-app-region: drag;
+}
+
+.navbar__headline {
+  margin: 4px 0 0 0; }
+
+.navbar__listItem {
+  list-style: none;
+  color: white;
+  text-decoration: none;
+  cursor: default;
+  margin: -6px 9px 0 0;
+  width: 85px;
+  height: 70px;
+  background-color: #2e2e2e;
+  display: flex; }
+
+.navbar__listItem a {
+  margin: auto; }
+
+.navbar__listItem:hover,
+.navbar__listItem:active,
+.navbar__listItem--Active {
+  background-color: #c9ab53 !important;
+  text-shadow: 0 0 8px white; }
+
+.navbar__logo {
+  margin: -3px 0 -7px 10px;
+  width: 196px;
+  height: 80px; }
+
+.navbar__navList {
+  margin: 12px 0 0 -10px;
+  display: flex;
+  flex-direction: row; }
+
+.navbar__listItem,
+.navbar__logo,
+.navbar__navList,
+.navbar_toolbar {
+  -webkit-app-region: no-drag;
+}
+
+.navbar_toolbar__icons {
+  display:flex;
+  flex-direction: row;
+}
+
+.navbar_toolbar {
+  margin-left: auto;
+  order: 2;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar_toolbar__toolIcon {
+  padding: 0 10px 0 5px;
+  margin-top: 7px;
+  font-size: 17px;
+}
+
+.navbar_toolbar__toolIcon:hover {
+  color: rgb(201, 171, 83);
+}
+
+.navbar_toolbar__toolIcon--redHover:hover {
+  color: red;
+}
+
+.navbar_toolbarDropdownInformations i {
+  font-size: 33px;
+  margin: 23px 7px 0 0;
+  color: rgb(201, 171, 83);
+}
+
+.navbar_toolbarDropdownInformations p {
+  margin: 30px 35px 0 0;
+}
+
+/* Login In Navbar */
+.navbar_toolbarDropdownInformations {
+  display: flex;
+  flex-direction: row;
+}
+
+/*Editor Modules*/
+.alignContent{
+  display: flex;
+  flex-direction: row;
+}
+
+.mainContentModule{
+  margin: auto;
+  width: 1000px;
+}
+
+.contentOrganizerModule{
+  margin: 10px;
+}
+
+.propertiesModule{
+  margin: 10px;
+}
+mat-grid-tile{
+  background-color: dimgrey;
+}
+
+/* User Pages */
+.navbar_toolbarDropdownInformations:any-link {
+  color: white;
+  text-decoration: none;
+}
+
+.ck.ck-editor{
+  min-width: 50vw;
+  max-width: 70vw;
+}
+.ck-editor__editable {
+  min-height: 256px;
+}
+/*# sourceMappingURL=styles.css.map */

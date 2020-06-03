@@ -1,4 +1,5 @@
-import {IProperty} from './IProperty';
+import {IProperties} from './IProperty';
+import {IField} from './IField';
 
 export interface IGameObjectTemplate {
   // ID des Objekt-Template
@@ -8,5 +9,11 @@ export interface IGameObjectTemplate {
   Name: string;
 
   // Zugewiesene Eigenschaften für das Template
-  Properties: IProperty[];
+  Properties: IProperties;
+
+  // Template
+  Fields: IField[];
+
+  // Field values
+  FieldValues: {[key: string]: any};
 }

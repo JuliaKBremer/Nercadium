@@ -4,6 +4,9 @@ import {EntityTypeEnum} from '../../Classes/Storage/EntityTypeEnum';
 
 export interface IBaseGameEntity {
 
+  // Gibt die Tags für ein Entity an
+  Tags: string[];
+
   // ID des Objects
   id: number;
 
@@ -13,6 +16,8 @@ export interface IBaseGameEntity {
   // Beschreibung
   Description: string;
 
-  GetEntityType(): EntityTypeEnum;
+  // Gibt den Typen des Objekt zurück.
+  EntityType: EntityTypeEnum;
+
 
 }
