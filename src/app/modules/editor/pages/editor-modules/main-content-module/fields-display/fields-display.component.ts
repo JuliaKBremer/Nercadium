@@ -18,7 +18,7 @@ export class FieldsDisplayComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
 
-  private selectedObject: any;
+  public selectedObject: any;
   private selectedObjectSubscription: Subscription;
 
   public fieldTypes = FieldTypes;
