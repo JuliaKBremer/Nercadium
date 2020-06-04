@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     const loginProcess = await this.fireService
       .login(this.loginForm.get('email').value, this.loginForm.get('password').value)
       .then(async value => {
-        this.checkIfUserLoggedInAndRedirect();
+        /*this.checkIfUserLoggedInAndRedirect();*/
       })
       .catch((error: firebase.FirebaseError) => {
         this.handleErrorOnCatch(error.message);
@@ -47,12 +47,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Diese E-Mail ist bei uns nicht hinterlegt, lege dir doch ein Konto an.';
     }
   }
-  async checkIfUserLoggedInAndRedirect() {
-    if (await this.fireService.isLoggedIn) {
-     return true;
-    }
-    this.errorMessage = 'Leider trat ein Fehler auf und wir konnten dich nicht einloggen.';
-  }
+
 
   isFieldValid(field) {
     return !(field.invalid && field.dirty && field.touched);
