@@ -1,0 +1,83 @@
+<div *ngIf="selectedObject">
+<!--  <pre>{{selectedObject | json}}</pre>-->
+  <div *ngFor="let field of selectedObject.Fields"
+       [ngSwitch]="field.Properties.Type.value">
+
+    <!-- Text Box -->
+    <div *ngSwitchCase="fieldTypes.textBox">
+      <label>{{field.Properties.Label.value}}
+        <input type="text"
+               [maxLength]="field.Properties.MaxLength.value"
+               [placeholder]="field.Properties.Placeholder.value"
+               [readOnly]="field.Properties.ReadOnly.value"
+               [size]="field.Properties.Size.value"
+               [(ngModel)]="selectedObject.FieldValues[field.ID]">
+      </label>
+    </div>
+
+    <!-- Number -->
+    <div *ngSwitchCase="fieldTypes.number">
+      <label>{{field.Properties.Label.value}}
+        <input [min]="field.Properties.Min.value"
+               [max]="field.Properties.Max.value"
+               [step]="field.Properties.Step.value"
+               [readOnly]="field.Properties.ReadOnly.value"
+               type="number" [(ngModel)]="selectedObject.FieldValues[field.ID]">
+      </label>
+    </div>
+
+    <!--  Select -->
+    <div *ngSwitchCase="fieldTypes.select">
+      <div *ngIf="field.Properties.Options.value.length > 0">
+        <label>{{field.Properties.Label.value}}
+          <select [(ngModel)]="selectedObject.FieldValues[field.ID]">
+            <option *ngFor="let value of field.Properties.Options.value" [ngValue]="value">{{value}}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+
+    <!-- Text Area -->
+    <div *ngSwitchCase="fieldTypes.textArea">
+      <label>{{field.Properties.Label.value}}
+        <textarea [cols]="field.Properties.Cols.value"
+                  [rows]="field.Properties.Rows.value" [style.height]="'unset'"
+                  [maxLength]="field.Properties.MaxLength.value"
+                  [placeholder]="field.Properties.Placeholder.value"
+                  [readOnly]="field.Properties.ReadOnly.value"
+                  [style.resize]="field.Properties.Resize.value ? '': 'none'"
+                  [(ngModel)]="selectedObject.FieldValues[field.ID]"></textarea>
+      </label>
+    </div>
+
+    <!-- Checkbox -->
+    <div *ngSwitchCase="fieldTypes.checkBox">
+      <label>{{field.Properties.Label.value}}
+        <input type="checkbox" [(ngModel)]="selectedObject.FieldValues[field.ID]">
+      </label>
+    </div>
+
+    <!-- Radio -->
+    <div *ngSwitchCase="fieldTypes.radio">
+      <label>{{field.Properties.Label.value}}
+        <input type="radio" [(ngModel)]="selectedObject.FieldValues[field.ID]">
+      </label>
+    </div>
+
+    <!-- Range -->
+    <div *ngSwitchCase="fieldTypes.range">
+      <label>{{field.Properties.Label.value}}
+        <input [min]="field.Properties.Min.value"
+               [max]="field.Properties.Max.value"
+               [step]="field.Properties.Step.value"
+               [readOnly]="field.Properties.ReadOnly.value"
+               type="range" [(ngModel)]="selectedObject.FieldValues[field.ID]">
+        {{selectedObject.FieldValues[field.ID]}}
+      </label>
+    </div>
+
+    <!-- TODO: Table -->
+
+  </div>
+</div>

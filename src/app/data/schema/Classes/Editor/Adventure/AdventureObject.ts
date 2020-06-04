@@ -11,6 +11,9 @@ export class AdventureObject implements IAdventureObject, IBaseGameEntity {
   // ID of the Adventure.
   public id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name of the Adventure.
   public Name: string;
 
@@ -35,9 +38,8 @@ export class AdventureObject implements IAdventureObject, IBaseGameEntity {
   // ALL containing GameScripts.
   public Scripts: IGameScript[];
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Adventure;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Adventure;
+
 
 
 }

@@ -10,6 +10,9 @@ export class GameObject implements IGameObject, IBaseGameEntity {
   // ID des Objekt
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name
   Name: string;
 
@@ -22,9 +25,7 @@ export class GameObject implements IGameObject, IBaseGameEntity {
   // Template das für dieses Objekt verwendet wird.
   ObjectTemplate: IGameObjectTemplate;
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Object;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Object;
 
 
 }

@@ -1,0 +1,15 @@
+<div *ngIf="fields">
+  <div *ngFor="let field of fields">
+    <hr>
+    <span (click)="field.IsCollapsed = !field.IsCollapsed">
+      {{field.Properties.Name.value}}
+    </span>
+    <span (click)="copyField.emit(field.ID)">Copy</span>
+    <span (click)="deleteField.emit(field.ID)">Delete</span>
+
+    <div [hidden]="field.IsCollapsed">
+      <app-properties-list (selectChanged)="changeFieldType.emit({fieldID: field.ID, fieldType: $event})"
+                           [properties]="field.Properties"></app-properties-list>
+    </div>
+  </div>
+</div>

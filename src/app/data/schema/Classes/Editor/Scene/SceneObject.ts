@@ -9,6 +9,9 @@ export class SceneObject implements IGameScene, IBaseGameEntity {
   // ID der Szene
   id: number;
 
+  // Entity's Tags
+  public Tags: string[];
+
   // Name der Szene
   Name: string;
 
@@ -24,9 +27,7 @@ export class SceneObject implements IGameScene, IBaseGameEntity {
   // Objekte / Gegendstände in der Szene
   Objects: IGameObject[];
 
-  GetEntityType(): EntityTypeEnum {
-    return EntityTypeEnum.Scene;
-  }
+  EntityType: EntityTypeEnum = EntityTypeEnum.Scene;
 
 
 }

@@ -1,4 +1,5 @@
-import {IProperty} from './IProperty';
+import {IProperties} from './IProperty';
+import {IField} from './IField';
 
 export interface IGameCharacterTemplate {
   // ID des Templates
@@ -8,5 +9,11 @@ export interface IGameCharacterTemplate {
   Name: string;
 
   // Voralge der Eigenschaften
-  Properties: IProperty[];
+  Properties: IProperties;
+
+  // Template
+  Fields: IField[];
+
+  // Field values
+  FieldValues: {[key: string]: any};
 }

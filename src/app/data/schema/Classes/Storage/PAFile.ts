@@ -1,4 +1,4 @@
-// Mirco Hölzenbein, FEB. 17, 20
+// Mirco Hölzenbein, FEB. 17, 20w
 // PAFile - PackageAllocationFile
 // Definiert als Index die Verweise auf die zu ladenen JSON Objekte.
 
@@ -8,6 +8,7 @@ import {IPAFEntry} from '../../Interfaces/storage/IPAFEntry';
 export class PAFile implements IPAFile {
   Entries: IPAFEntry[];
   Description: string;
+  Name: string;
   fileName: string;
   filePath: string;
 }

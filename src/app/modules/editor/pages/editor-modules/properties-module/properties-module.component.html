@@ -1,1 +1,21 @@
-<p>properties-module works!</p>
+<div *ngIf="selectedObject">
+  <div>
+    {{selectedObject.Properties.Name.value}}
+  </div>
+  <div *ngIf="properties">
+    <app-properties-list [properties]="properties"></app-properties-list>
+  </div>
+  <div *ngIf="fields">
+    <app-fields-list (deleteField)="deleteField.emit({objectID: selectedObject.id, fieldID: $event})"
+                     (copyField)="copyField.emit({objectID: selectedObject.id, fieldID: $event})"
+                     (changeFieldType)="changeFieldType.emit({templateID: selectedObject.id, fieldID: $event.fieldID, fieldType: $event.fieldType})"
+                     [fields]="fields">
+    </app-fields-list>
+    <div (click)="addField.emit(selectedObject.id)">+ Add Field</div>
+  </div>
+</div>
+
+
+
+
+
