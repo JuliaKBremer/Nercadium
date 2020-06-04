@@ -60,13 +60,13 @@ export class EditorStartComponent implements OnInit, OnDestroy {
   public CreateAdventure() {
     this.newAdventureService.CreateAdventure();
 
-    this.router.navigate(['/editor/chapter']);
+    this.router.navigate(['/editor/editor']);
   }
 
   public OpenAdventureFromAdventureList(path: string, name: string) {
     this.editorService.LoadPackage(path, name);
 
-    this.router.navigate(['/editor/chapter']);
+    this.router.navigate(['/editor/editor']);
   }
 
   public OpenAdventureByDialog() {
@@ -74,6 +74,6 @@ export class EditorStartComponent implements OnInit, OnDestroy {
 
     this.editorService.LoadPackage(adventurePathName.path, adventurePathName.name);
 
-    this.router.navigate(['/editor/chapter']);
+    this.router.navigate(['/editor/editor']);
   }
 }

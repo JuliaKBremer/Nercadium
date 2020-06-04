@@ -19,6 +19,7 @@ import { FieldsListComponent } from './pages/editor-modules/properties-module/fi
 import { FieldsDisplayComponent } from './pages/editor-modules/main-content-module/fields-display/fields-display.component';
 import {NgForNumberPipe} from '../../shared/pipes/ng-for-number.pipe';
 import { EditorHotkeysComponent } from './shared/editor-hotkeys/editor-hotkeys.component';
+import {EditorComponent} from './pages/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditorHotkeysComponent } from './shared/editor-hotkeys/editor-hotkeys.c
     FieldsListComponent,
     FieldsDisplayComponent,
     NgForNumberPipe,
-    EditorHotkeysComponent
+    EditorHotkeysComponent,
+    EditorComponent
   ],
   exports: [
     EditorStartComponent

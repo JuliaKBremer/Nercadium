@@ -1,0 +1,79 @@
+<!-- Toolbar -->
+<div class="toolbar borderBottom">
+  <!-- Toolbar Buttons -->
+  <div>
+    <i class="fas fa-file"></i>
+  </div>
+  <div>
+    <i class="fas fa-folder"></i>
+  </div>
+  <div>
+    <i class="fas fa-save"></i>
+  </div>
+  <div>
+    <i class="fas fa-download"></i>
+  </div>
+  <div>
+    <i class="fas fa-upload"></i>
+  </div>
+  <div class="floatRight">
+    <i class="fas fa-cog"></i>
+  </div>
+</div>
+
+<!-- Editor -->
+<div class="editor">
+  <!-- Projectbar -->
+  <div class="sidebar">
+    <!-- Buttons Left -->
+    <div class="buttonsBar borderRight">
+      <ng-container *ngFor="let entityType of buttonsLeft">
+        <div class="button left"
+             [ngClass]="editorService.currentSidebarLeft === entityType ? 'selected' : ''"
+             (click)="setCurrentSidebar(entityType)">
+          <span>{{entityTypeEnum[entityType]}}</span>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- List -->
+    <ng-container *ngIf="editorService.currentSidebarLeft !== null">
+      <div class="list borderRight">
+        <div class="head borderBottom">
+          <span>{{editorService.currentSidebarLeft}}</span>
+          <div class="floatRight">
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <div class="content">
+          {{editorService.data[editorService.currentSidebarLeft].bSubject.value | json}}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Maincontent -->
+  <div class="mainContent">
+
+  </div>
+
+  <!-- Propertiesbar-->
+  <div class="sidebar">
+    <!-- List -->
+    <ng-container *ngIf="editorService.togglePropertiesSidebar !== false">
+      <div class="list borderLeft">
+        <div class="head borderBottom">Properties</div>
+        <div class="content"></div>
+      </div>
+    </ng-container>
+
+    <!-- Buttons Right -->
+    <div class="buttonsBar borderLeft">
+      <div class="button"
+           [ngClass]="editorService.togglePropertiesSidebar === true ? 'selected' : ''"
+           (click)="editorService.togglePropertiesSidebar = !editorService.togglePropertiesSidebar">
+        <span>Properties</span>
+      </div>
+    </div>
+  </div>
+</div>

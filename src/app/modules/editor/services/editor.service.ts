@@ -10,11 +10,38 @@ import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
 import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject} from 'rxjs';
 import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditorService {
+
+  public data: {[key in EntityTypeEnum]?: {bSubject?: BehaviorSubject<any>, service?: any}} = {
+    [EntityTypeEnum.Adventure] : {},
+    [EntityTypeEnum.Character] : {},
+    [EntityTypeEnum.Object] : {},
+    [EntityTypeEnum.Scene] : {},
+    [EntityTypeEnum.Script] : {},
+    [EntityTypeEnum.Chapter] : {},
+    [EntityTypeEnum.Note] : {},
+    [EntityTypeEnum.ObjectTemplate] : {},
+    [EntityTypeEnum.CharacterTemplate] : {}
+  };
+
+  private $currentSidebarLeft: EntityTypeEnum = null;
+  public get currentSidebarLeft(): EntityTypeEnum {
+    return this.$currentSidebarLeft;
+  }
+  public set currentSidebarLeft(entityType: EntityTypeEnum) {
+    if (this.$currentSidebarLeft === entityType) {
+      this.$currentSidebarLeft = null;
+    } else {
+      this.$currentSidebarLeft = entityType;
+    }
+  }
+
+  public togglePropertiesSidebar: boolean;
 
   Adventure: BehaviorSubject<AdventureObject>;
   Characters: BehaviorSubject<CharacterObject[]>;
@@ -27,15 +54,15 @@ export class EditorService {
   CharacterTemplates: BehaviorSubject<GameCharacterTemplate[]>;
 
   constructor(private libraryService: LibraryService) {
-    this.Adventure = new BehaviorSubject<AdventureObject>(null);
-    this.Characters = new BehaviorSubject<CharacterObject[]>([]);
-    this.Objects = new BehaviorSubject<GameObject[]>([]);
-    this.Scenes = new BehaviorSubject<SceneObject[]>([]);
-    this.Scripts = new BehaviorSubject<GameScript[]>([]);
-    this.Chapters = new BehaviorSubject<GameChapter[]>([]);
-    this.Notes = new BehaviorSubject<NoteObject[]>([]);
-    this.ObjectTemplates = new BehaviorSubject<GameObjectTemplate[]>([]);
-    this.CharacterTemplates = new BehaviorSubject<GameCharacterTemplate[]>([]);
+    this.data.Adventure.bSubject = this.Adventure = new BehaviorSubject<AdventureObject>(null);
+    this.data.Chapter.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
+    this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
+    this.data.Scene.bSubject = this.Scenes = new BehaviorSubject<SceneObject[]>([]);
+    this.data.Script.bSubject = this.Scripts = new BehaviorSubject<GameScript[]>([]);
+    this.data.Chapter.bSubject = this.Chapters = new BehaviorSubject<GameChapter[]>([]);
+    this.data.Note.bSubject = this.Notes = new BehaviorSubject<NoteObject[]>([]);
+    this.data.ObjectTemplate.bSubject = this.ObjectTemplates = new BehaviorSubject<GameObjectTemplate[]>([]);
+    this.data.CharacterTemplate.bSubject = this.CharacterTemplates = new BehaviorSubject<GameCharacterTemplate[]>([]);
   }
 
   public GetNewID(): number {
