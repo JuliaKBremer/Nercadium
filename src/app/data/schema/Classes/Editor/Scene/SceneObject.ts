@@ -4,6 +4,7 @@ import {IGameCharacter} from '../../../Interfaces/Editor/IGameCharacter';
 import {IGameObject} from '../../../Interfaces/Editor/IGameObject';
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
+import {IProperties} from '../../../Interfaces/Editor/IProperty';
 
 export class SceneObject implements IGameScene, IBaseGameEntity {
   // ID der Szene
@@ -28,6 +29,7 @@ export class SceneObject implements IGameScene, IBaseGameEntity {
   Objects: IGameObject[];
 
   EntityType: EntityTypeEnum = EntityTypeEnum.Scene;
+  Properties: IProperties;
 
 
 }

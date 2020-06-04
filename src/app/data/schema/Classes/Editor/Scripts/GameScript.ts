@@ -2,6 +2,7 @@ import {IGameScript} from '../../../Interfaces/Editor/IGameScript';
 import {IGameChapter} from '../../../Interfaces/Editor/IGameChapter';
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
+import {IProperties} from '../../../Interfaces/Editor/IProperty';
 
 export class GameScript implements IGameScript, IBaseGameEntity {
 
@@ -21,5 +22,6 @@ export class GameScript implements IGameScript, IBaseGameEntity {
   Chapters: IGameChapter[];
 
   EntityType: EntityTypeEnum = EntityTypeEnum.Script;
+  Properties: IProperties;
 
 }

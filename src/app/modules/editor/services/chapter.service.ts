@@ -10,7 +10,7 @@ export class ChapterService implements IBaseService {
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
-    newChapter.Name = 'Chapter ' + newChapter.id;
+    newChapter.Name = 'Chapter';
 
     chapters.push(newChapter);
   }

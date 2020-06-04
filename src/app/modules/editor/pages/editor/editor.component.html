@@ -50,7 +50,7 @@
         <div class="content">
 <!--          {{editorService.data[editorService.currentSelectedEntityType].bSubject.value | json}}-->
           <div class="listEntry" *ngFor="let entry of editorService.data[editorService.currentSelectedEntityType].bSubject.value">
-            <div class="entryName">{{entry.Name}}</div>
+            <div class="entryName">{{entry.Properties.Name.value}}</div>
             <div class="button"
                  (click)="editorService.data[editorService.currentSelectedEntityType].service.Copy(entry)">
               <i class="fas fa-copy"></i>

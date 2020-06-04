@@ -1,5 +1,5 @@
-import { Type } from '@angular/compiler';
 import {EntityTypeEnum} from '../../Classes/Storage/EntityTypeEnum';
+import {IProperties} from './IProperty';
 
 
 export interface IBaseGameEntity {
@@ -18,6 +18,8 @@ export interface IBaseGameEntity {
 
   // Gibt den Typen des Objekt zurück.
   EntityType: EntityTypeEnum;
+
+  Properties: IProperties;
 
 
 }

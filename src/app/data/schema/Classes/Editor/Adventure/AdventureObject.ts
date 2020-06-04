@@ -5,6 +5,7 @@ import {IGameScene} from '../../../Interfaces/Editor/IGameScene';
 import {IGameScript} from '../../../Interfaces/Editor/IGameScript';
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
+import {IProperties} from '../../../Interfaces/Editor/IProperty';
 
 export class AdventureObject implements IAdventureObject, IBaseGameEntity {
 
@@ -42,6 +43,7 @@ export class AdventureObject implements IAdventureObject, IBaseGameEntity {
   public Scripts: IGameScript[];
 
   EntityType: EntityTypeEnum = EntityTypeEnum.Adventure;
+  Properties: IProperties;
 
 
 
