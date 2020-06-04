@@ -16,7 +16,17 @@ import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnu
   providedIn: 'root'
 })
 export class EditorService {
+  Adventure: BehaviorSubject<AdventureObject>;
+  Characters: BehaviorSubject<CharacterObject[]>;
+  Objects: BehaviorSubject<GameObject[]>;
+  Scenes: BehaviorSubject<SceneObject[]>;
+  Scripts: BehaviorSubject<GameScript[]>;
+  Chapters: BehaviorSubject<GameChapter[]>;
+  Notes: BehaviorSubject<NoteObject[]>;
+  ObjectTemplates: BehaviorSubject<GameObjectTemplate[]>;
+  CharacterTemplates: BehaviorSubject<GameCharacterTemplate[]>;
 
+  // TODO: create editor ui service
   public data: {[key in EntityTypeEnum]?: {bSubject?: BehaviorSubject<any>, service?: any}} = {
     [EntityTypeEnum.Adventure] : {},
     [EntityTypeEnum.Character] : {},
@@ -42,16 +52,6 @@ export class EditorService {
   }
 
   public togglePropertiesSidebar: boolean;
-
-  Adventure: BehaviorSubject<AdventureObject>;
-  Characters: BehaviorSubject<CharacterObject[]>;
-  Objects: BehaviorSubject<GameObject[]>;
-  Scenes: BehaviorSubject<SceneObject[]>;
-  Scripts: BehaviorSubject<GameScript[]>;
-  Chapters: BehaviorSubject<GameChapter[]>;
-  Notes: BehaviorSubject<NoteObject[]>;
-  ObjectTemplates: BehaviorSubject<GameObjectTemplate[]>;
-  CharacterTemplates: BehaviorSubject<GameCharacterTemplate[]>;
 
   constructor(private libraryService: LibraryService) {
     this.data.Adventure.bSubject = this.Adventure = new BehaviorSubject<AdventureObject>(null);

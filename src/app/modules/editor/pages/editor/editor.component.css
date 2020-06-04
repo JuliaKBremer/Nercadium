@@ -59,11 +59,16 @@
 .list > .head {
   height: 35px;
   display: flex;
+}
+
+.head > .heading {
+  flex-grow: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.head div {
+.head > .button {
   height: inherit;
   width: 35px;
 
@@ -72,7 +77,7 @@
   align-items: center;
 }
 
-.head div:hover {
+.head > .button:hover {
   background-color: hsl(0, 0%, 14%);
 }
 
@@ -89,7 +94,7 @@
 }
 
 
-.button {
+.buttonsBar > .button {
   display: flex;
   justify-content: center;
   align-items: center;

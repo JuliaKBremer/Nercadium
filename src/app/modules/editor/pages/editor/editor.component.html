@@ -40,8 +40,8 @@
     <ng-container *ngIf="editorService.currentSidebarLeft !== null">
       <div class="list borderRight">
         <div class="head borderBottom">
-          <span>{{editorService.currentSidebarLeft}}</span>
-          <div class="floatRight">
+          <div class="heading">{{editorService.currentSidebarLeft}}</div>
+          <div class="button">
             <i class="fas fa-plus"></i>
           </div>
         </div>
@@ -62,7 +62,9 @@
     <!-- List -->
     <ng-container *ngIf="editorService.togglePropertiesSidebar !== false">
       <div class="list borderLeft">
-        <div class="head borderBottom">Properties</div>
+        <div class="head borderBottom">
+          <div class="heading">Properties</div>
+        </div>
         <div class="content"></div>
       </div>
     </ng-container>

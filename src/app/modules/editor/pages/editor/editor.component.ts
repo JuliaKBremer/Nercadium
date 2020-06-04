@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
 import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
 
@@ -10,7 +10,8 @@ import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityType
 export class EditorComponent implements OnInit {
 
   public entityTypeEnum = EntityTypeEnum;
-  public buttonsLeft = [EntityTypeEnum.Chapter, EntityTypeEnum.Scene, EntityTypeEnum.Object, EntityTypeEnum.Character, EntityTypeEnum.Note];
+  public buttonsLeft = [EntityTypeEnum.Chapter, EntityTypeEnum.Scene, EntityTypeEnum.Object, EntityTypeEnum.Character, EntityTypeEnum.Note,
+    EntityTypeEnum.ObjectTemplate];
 
   constructor(public editorService: EditorService) { }
 
