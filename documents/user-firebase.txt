@@ -1,0 +1,3 @@
+Used Firebase Tools & Backend for our user login and register process
+
+NPM-Packages: @angular/fire

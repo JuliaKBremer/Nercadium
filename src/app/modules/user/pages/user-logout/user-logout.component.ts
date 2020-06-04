@@ -4,8 +4,8 @@ import { FirebaseAuthService } from '../../services/firebase-auth.service';
 
 @Component({
   selector: 'app-user-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.css']
+  templateUrl: './user-logout.component.html',
+  styleUrls: ['./user-logout.component.css']
 })
 export class UserLogoutComponent implements OnInit {
 
