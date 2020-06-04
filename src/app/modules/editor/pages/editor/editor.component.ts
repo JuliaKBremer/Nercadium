@@ -19,6 +19,6 @@ export class EditorComponent implements OnInit {
   }
 
   setCurrentSidebar(entityType: EntityTypeEnum) {
-    this.editorService.currentSidebarLeft = entityType;
+    this.editorService.currentSelectedEntityType = entityType;
   }
 }

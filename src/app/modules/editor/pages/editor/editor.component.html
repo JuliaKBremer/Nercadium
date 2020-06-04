@@ -7,7 +7,7 @@
   <div>
     <i class="fas fa-folder"></i>
   </div>
-  <div>
+  <div (click)="editorService.SavePackage()">
     <i class="fas fa-save"></i>
   </div>
   <div>
@@ -29,7 +29,7 @@
     <div class="buttonsBar borderRight">
       <ng-container *ngFor="let entityType of buttonsLeft">
         <div class="button left"
-             [ngClass]="editorService.currentSidebarLeft === entityType ? 'selected' : ''"
+             [ngClass]="editorService.currentSelectedEntityType === entityType ? 'selected' : ''"
              (click)="setCurrentSidebar(entityType)">
           <span>{{entityTypeEnum[entityType]}}</span>
         </div>
@@ -37,16 +37,29 @@
     </div>
 
     <!-- List -->
-    <ng-container *ngIf="editorService.currentSidebarLeft !== null">
+    <ng-container *ngIf="editorService.currentSelectedEntityType !== null">
+      <!-- Head -->
       <div class="list borderRight">
         <div class="head borderBottom">
-          <div class="heading">{{editorService.currentSidebarLeft}}</div>
-          <div class="button">
+          <div class="heading">{{editorService.currentSelectedEntityType}}</div>
+          <div class="button" (click)="editorService.data[editorService.currentSelectedEntityType].service.New()">
             <i class="fas fa-plus"></i>
           </div>
         </div>
+        <!-- Content -->
         <div class="content">
-          {{editorService.data[editorService.currentSidebarLeft].bSubject.value | json}}
+<!--          {{editorService.data[editorService.currentSelectedEntityType].bSubject.value | json}}-->
+          <div class="listEntry" *ngFor="let entry of editorService.data[editorService.currentSelectedEntityType].bSubject.value">
+            <div class="entryName">{{entry.Name}}</div>
+            <div class="button"
+                 (click)="editorService.data[editorService.currentSelectedEntityType].service.Copy(entry)">
+              <i class="fas fa-copy"></i>
+            </div>
+            <div class="button"
+                 (click)="editorService.data[editorService.currentSelectedEntityType].service.Delete(entry)">
+              <i class="fas fa-trash"></i>
+            </div>
+          </div>
         </div>
       </div>
     </ng-container>

@@ -45,6 +45,7 @@ export class NewAdventureService {
 
     adventure.id = this.newAdventure.id;
     adventure.Name = this.newAdventure.name;
+    adventure.path = this.newAdventure.path;
     adventure.Description = this.newAdventure.description;
 
     this.libraryService.Clear();
