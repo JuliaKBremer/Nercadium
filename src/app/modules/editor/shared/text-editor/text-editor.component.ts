@@ -1,6 +1,7 @@
 import { ViewEncapsulation, Component, OnInit } from '@angular/core';
 import { IArticle } from './iarticle';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 @Component({
   selector: 'app-text-editor',
@@ -13,8 +14,8 @@ export class TextEditorComponent implements OnInit {
   article: IArticle;
   Editor = ClassicEditor;
   editorConfig = {
-
-  };
+    builtinPlugin : ['Base64UploadAdapter'],
+    };
 //   //  public onReady( editor ) {
 // //  public onReady( editor ) {
 // //    editor.ui.getEditableElement().parentElement.insertBefore(
