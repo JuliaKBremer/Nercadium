@@ -13,6 +13,7 @@ import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templat
 import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {IBaseGameEntity} from '../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 import {ChapterService} from './chapter.service';
+import {AdventuresManagerService} from '../../../core/service/adventures/adventures-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class EditorService {
 
   public togglePropertiesSidebar = false;
 
-  constructor(private libraryService: LibraryService) {
+  constructor(private libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
     this.data.Adventure.bSubject = this.Adventure = new BehaviorSubject<AdventureObject[]>(null);
     this.data.Character.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
@@ -77,10 +78,14 @@ export class EditorService {
     return (Date.now() * 1000) + Math.floor(Math.random() * 1000);
   }
 
-  public getSelectedObject(): Observable<IBaseGameEntity> {
+  public GetSelectedObjectAsObservable(): Observable<IBaseGameEntity> {
     return this.selectedObject.asObservable();
   }
-  public setSelectedObject(object: IBaseGameEntity) {
+  public GetSelectedObject(): IBaseGameEntity {
+    return this.selectedObject.value;
+  }
+  public SetSelectedObject(object: IBaseGameEntity) {
+    console.log(object);
     this.selectedObject.next(object);
   }
 
@@ -96,13 +101,32 @@ export class EditorService {
     this.CharacterTemplates.next(this.libraryService.CharacterTemplates);
   }
 
+  public LoadPackageByDialog(): boolean {
+    const adventurePathName: {path: string, name: string} = this.adventuresManagerService.GetAdventureByDialog();
+
+    if (adventurePathName === null) {
+      return false;
+    }
+
+    this.LoadPackage(adventurePathName.path, adventurePathName.name);
+
+    return true;
+  }
+
   public LoadPackage(path: string, name: string) {
     this.libraryService.LoadPackage(path, name);
 
     this.GetDataFromLibrary();
+    this.ResetEditor();
   }
 
   public SavePackage() {
     this.libraryService.SavePackage(this.Adventure.value[0].path, this.Adventure.value[0].Name);
+  }
+
+  private ResetEditor() {
+    this.selectedObject.next(null);
+    this.$currentSelectedEntityType = null;
+    this.togglePropertiesSidebar = false;
   }
 }

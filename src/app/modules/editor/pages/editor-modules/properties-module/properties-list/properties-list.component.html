@@ -1,55 +1,59 @@
-<div *ngFor="let property of properties | keyvalue: indexOrder">
-  <span>
-    {{property.key}}
-  </span>
+<div class="property" *ngFor="let property of properties | keyvalue: indexOrder">
 
-  <span *ngIf="properties[property.key].description">
-    {{property.value.description}}
-  </span>
+  <ng-container [ngSwitch]="property.value.type">
 
-  <div [ngSwitch]="properties[property.key].type">
-
-    <div *ngSwitchCase="propertyType.string">
+    <ng-container *ngSwitchCase="propertyType.string">
       <label>
+        <span class="heading">{{property.key}}</span>
         <input type="text"
-               [(ngModel)]="properties[property.key].value">
+               [(ngModel)]="property.value.value">
       </label>
-    </div>
+    </ng-container>
 
-    <div *ngSwitchCase="propertyType.number">
+    <ng-container *ngSwitchCase="propertyType.number">
       <label>
+        <span class="heading">{{property.key}}</span>
         <input type="number"
-               [(ngModel)]="properties[property.key].value">
+               [(ngModel)]="property.value.value">
       </label>
-    </div>
+    </ng-container>
 
-    <div *ngSwitchCase="propertyType.boolean">
+    <ng-container *ngSwitchCase="propertyType.boolean">
       <label>
+        <span class="heading">{{property.key}}</span>
         <input type="checkbox"
-               [(ngModel)]="properties[property.key].value">
+               [(ngModel)]="property.value.value">
       </label>
-    </div>
+    </ng-container>
 
-    <div *ngSwitchCase="propertyType.enum">
+    <ng-container *ngSwitchCase="propertyType.enum">
       <label>
-        <select (change)="CheckSelectChange(properties[property.key])"
-                [(ngModel)]="properties[property.key].value">
-          <option *ngFor="let type of properties[property.key].enum | keyvalue"
+        <span class="heading">{{property.key}}</span>
+        <select (change)="CheckSelectChange(property.value)"
+                [(ngModel)]="property.value.value">
+          <option *ngFor="let type of property.value.enum | keyvalue"
                   [ngValue]="type.value">{{type.key}}</option>
         </select>
       </label>
-    </div>
+    </ng-container>
 
-    <div *ngSwitchCase="propertyType.options">
-      <div *ngFor="let value of properties[property.key].value; index as i; trackBy:trackByFn">
-        <label>
+    <ng-container *ngSwitchCase="propertyType.options">
+      <span class="heading">{{property.key}}</span>
+      <div class="option" *ngFor="let value of property.value.value; index as i; trackBy:trackByFn">
+        <label>{{i+1 + '.'}}
           <input type="text"
-                 [(ngModel)]="properties[property.key].value[i]">
+                 [(ngModel)]="property.value.value[i]">
         </label>
-        <div (click)="DeleteFromArray(properties[property.key].value, i)">-</div>
+        <div class="button" (click)="DeleteFromArray(property.value.value, i)">
+          <i class="fas fa-minus"></i>
+        </div>
       </div>
-      <div (click)="AddToArray(properties[property.key].value)">+</div>
-    </div>
+      <div class="optionButtons">
+        <div class="button plus" (click)="AddToArray(property.value.value)">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </ng-container>
 
-  </div>
+  </ng-container>
 </div>

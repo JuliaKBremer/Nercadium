@@ -1,0 +1,66 @@
+:host {
+  display: flex;
+  flex-flow: column;
+
+  height: 100%;
+}
+
+input {
+  height: unset;
+}
+
+.property {
+  display: flex;
+  flex-flow: column;
+
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+
+  border-bottom: hsl(0, 0%, 12%) 1px solid;
+}
+
+.property > label {
+  display: flex;
+  flex-flow: column;
+}
+
+.option {
+  display: flex;
+  flex-flow: row;
+
+  margin-bottom: 3px;
+}
+
+.option input {
+  width: 100%;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.option label {
+  display: flex;
+  flex-flow: row;
+}
+
+.optionButtons {
+  display: flex;
+}
+
+.button {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.button:hover {
+  background-color: hsl(0, 0%, 14%);
+}
+
+.button.plus {
+  margin-left: auto;
+}
+
+span.heading {
+  font-size: small;
+  padding-bottom: 1px;
+}

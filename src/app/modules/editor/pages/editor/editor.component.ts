@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EditorService} from '../../services/editor.service';
 import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
 @Component({
   selector: 'app-editor',
@@ -20,5 +21,9 @@ export class EditorComponent implements OnInit {
 
   setCurrentSidebar(entityType: EntityTypeEnum) {
     this.editorService.currentSelectedEntityType = entityType;
+  }
+
+  setSelectedObject(entity: IBaseGameEntity) {
+    this.editorService.SetSelectedObject(entity);
   }
 }

@@ -70,10 +70,8 @@ export class EditorStartComponent implements OnInit, OnDestroy {
   }
 
   public OpenAdventureByDialog() {
-    const adventurePathName: {path: string, name: string} = this.adventuresManagerService.GetAdventureByDialog();
-
-    this.editorService.LoadPackage(adventurePathName.path, adventurePathName.name);
-
-    this.router.navigate(['/editor/editor']);
+    if (this.editorService.LoadPackageByDialog()) {
+      this.router.navigate(['/editor/editor']);
+    }
   }
 }

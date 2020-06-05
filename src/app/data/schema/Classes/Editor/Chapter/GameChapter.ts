@@ -32,5 +32,12 @@ export class GameChapter implements IGameChapter, IBaseGameEntity {
 
   constructor() {
     this.Properties.Name = {id: 0, value: 'New Object', type: PropertyTypes.string};
+
+    // Test
+    this.Properties.String = {id: 1, value: 'Lorem Ipsum', type: PropertyTypes.string};
+    this.Properties.Number = {id: 2, value: 1337, type: PropertyTypes.number};
+    this.Properties.Boolean = {id: 3, value: false, type: PropertyTypes.boolean};
+    this.Properties.Enum = {id: 4, value: 'asd', type: PropertyTypes.enum, enum: {asd: 'asd', qwe: 'qwe'}};
+    this.Properties.Options = {id: 5, value: [], type: PropertyTypes.options};
   }
 }

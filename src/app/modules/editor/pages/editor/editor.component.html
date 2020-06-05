@@ -4,7 +4,7 @@
   <div>
     <i class="fas fa-file"></i>
   </div>
-  <div>
+  <div (click)="editorService.LoadPackageByDialog()">
     <i class="fas fa-folder"></i>
   </div>
   <div (click)="editorService.SavePackage()">
@@ -48,9 +48,13 @@
         </div>
         <!-- Content -->
         <div class="content">
-<!--          {{editorService.data[editorService.currentSelectedEntityType].bSubject.value | json}}-->
-          <div class="listEntry" *ngFor="let entry of editorService.data[editorService.currentSelectedEntityType].bSubject.value">
-            <div class="entryName">{{entry.Properties.Name.value}}</div>
+          <div class="listEntry"
+               *ngFor="let entry of editorService.data[editorService.currentSelectedEntityType].bSubject.value">
+            <div class="entryName"
+                 (click)="setSelectedObject(entry)"
+                 [ngClass]="editorService.GetSelectedObject() === entry ? 'selected' : ''">
+              {{entry.Properties.Name.value}}
+            </div>
             <div class="button"
                  (click)="editorService.data[editorService.currentSelectedEntityType].service.Copy(entry)">
               <i class="fas fa-copy"></i>
@@ -67,7 +71,7 @@
 
   <!-- Maincontent -->
   <div class="mainContent">
-
+    <pre>{{editorService.GetSelectedObject() | json}}</pre>
   </div>
 
   <!-- Propertiesbar-->
@@ -75,10 +79,14 @@
     <!-- List -->
     <ng-container *ngIf="editorService.togglePropertiesSidebar !== false">
       <div class="list borderLeft">
+        <!-- Head -->
         <div class="head borderBottom">
           <div class="heading">Properties</div>
         </div>
-        <div class="content"></div>
+        <!-- Content -->
+        <div class="content">
+          <app-properties-list [properties]="editorService.GetSelectedObject().Properties"></app-properties-list>
+        </div>
       </div>
     </ng-container>
 

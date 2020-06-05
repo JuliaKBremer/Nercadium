@@ -53,9 +53,14 @@ export class AdventuresManagerService {
   }
 
   public GetAdventureByDialog(): { path: string, name: string } {
-    const fullPath = electron.remote.dialog.showOpenDialogSync(
-      {properties: ['openFile'], title: 'Load Project', filters: [{name: 'Paf', extensions: ['paf']}]})[0];
-    console.log(fullPath);
+    const fullPathArray = electron.remote.dialog.showOpenDialogSync(
+      {properties: ['openFile'], title: 'Load Project', filters: [{name: 'Paf', extensions: ['paf']}]});
+
+    if (fullPathArray === undefined) {
+      return null;
+    }
+
+    const fullPath = fullPathArray[0];
     const splittedPath = fullPath.split('\\');
 
     let path = '';

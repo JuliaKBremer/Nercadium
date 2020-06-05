@@ -30,14 +30,21 @@ export class NewAdventureService {
     this.newAdventure = {
       id: this.editorService.GetNewID(),
       name: 'New Adventure',
+      // TODO: Get default path from settings
       path: '',
       description: 'Hier könnte ihre Werbung stehen.'
     };
   }
 
   public GetPathByDialog() {
-    this.newAdventure.path = electron.remote.dialog.showOpenDialogSync(
-      {properties: ['openDirectory'], title: 'Chose Directory'})[0];
+     const path = electron.remote.dialog.showOpenDialogSync(
+      {properties: ['openDirectory'], title: 'Chose Directory'});
+
+     if (path === undefined) {
+       return;
+     }
+
+     this.newAdventure.path = path[0];
   }
 
   public CreateAdventure() {

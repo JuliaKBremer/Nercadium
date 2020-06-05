@@ -1,5 +1,6 @@
 :host {
   flex-grow: 1;
+  height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
@@ -33,6 +34,7 @@
 
 .editor {
   flex-grow: 1;
+  height: 100%;
 
   display: flex;
   flex-flow: row;
@@ -44,6 +46,7 @@
 
 .sidebar {
   width: fit-content;
+  height: 100%;
 
   display: flex;
   flex-flow: row;
@@ -51,6 +54,7 @@
 
 .sidebar > .list {
   width: 215px;
+  height: 100%;
 
   display: flex;
   flex-flow: column;
@@ -83,6 +87,7 @@
 
 .list > .content {
   height: 100%;
+  overflow: auto;
 }
 
 .listEntry {
@@ -99,7 +104,7 @@
 
 .listEntry > .entryName {
   font-size: small;
-  margin-right: auto;
+  flex-grow: 1;
   padding: 5px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -125,6 +130,9 @@
 
 .mainContent {
   flex-grow: 1;
+  height: 100%;
+
+  overflow: auto;
 }
 
 
