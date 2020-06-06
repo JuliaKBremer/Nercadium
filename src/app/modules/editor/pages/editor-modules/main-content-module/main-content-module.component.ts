@@ -40,7 +40,16 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
       this.result = 'Loading';
     }
     if (result !== StateEnum.Loading) {
-      this.result = 'Loaded!';
+      if (this.libraryService.Objects.length > 0) {
+        let output = '';
+        for (const entry of this.libraryService.Objects) {
+          output = output + entry.Name;
+        }
+        this.result = output;
+      } else {
+        this.result = 'Loaded, no Entries Found!!';
+      }
+
     }
   }
 

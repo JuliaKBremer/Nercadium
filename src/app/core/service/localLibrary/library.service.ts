@@ -313,19 +313,20 @@ export class LibraryService {
 
 
 
-  public LoadPackage(FilePath: string, FileName: string) {
+  public LoadPackage(FilePath: string, packageName: string) {
     this.State = StateEnum.Loading;
     const handler = new PAFHandler(this.FileAccessService);
-    const result = handler.LoadPAFFile(FilePath, FileName);
+    const result = handler.LoadPAFFile(FilePath, packageName);
     if (result != null) {
+      console.log('PAF not null! Loaded!');
       this.Clear();
       result.then( (entries) => {
         for (const entry of entries) {
           const newFile = new StorageFile();
-          newFile.filePath = entry.filePath;
-          console.log(newFile.filePath);
+          newFile.filePath = FilePath  + entry.filePath;
+          console.log('Loading Attempt for:' + newFile.filePath);
           newFile.fileName = entry.fileName;
-          console.log(newFile.fileName);
+          console.log('Loading Attempt for:' + newFile.fileName);
           this.FileAccessService.loadData(newFile).then( (objectRes => {
               if (objectRes != null) {
                 console.log('typing... ');
@@ -397,7 +398,7 @@ export class LibraryService {
 
     const handler = new PAFHandler(this.FileAccessService);
     const ppackage  = this.createPackage(FilePath, PackageName);
-    handler.SavePAFile(ppackage);
+    handler.SavePAFile(ppackage, FilePath + '/' + PackageName );
     this.saveObjectList(this.Objects, FilePath, PackageName);
     this.saveObjectList(this.Chapters, FilePath, PackageName);
     this.saveObjectList(this.Notes, FilePath, PackageName);
@@ -476,13 +477,13 @@ export class LibraryService {
       pafile.Description = this.Description;
     }
     pafile.fileName = 'main.paf';
-    pafile.filePath = Path + '/' + PackageName;
+    pafile.filePath =  '/' + PackageName;
     const pafEntries: PAFEntry[] = [];
 
     for (const entry of this.Notes) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName + '/Notes/';
+      newEnt.filePath =  '/' + PackageName + '/Notes/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -490,7 +491,7 @@ export class LibraryService {
     for (const entry of this.Objects) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/Objects/';
+      newEnt.filePath =  '/' + PackageName + '/Objects/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -498,7 +499,7 @@ export class LibraryService {
     for (const entry of this.Adventures) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/Adventures/';
+      newEnt.filePath =  '/' + PackageName + '/Adventures/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -506,7 +507,7 @@ export class LibraryService {
     for (const entry of this.Characters) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path  + '/' + PackageName +  '/Characters/';
+      newEnt.filePath =  '/' + PackageName + '/Characters/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -514,7 +515,7 @@ export class LibraryService {
     for (const entry of this.Scenes) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/Scenes/';
+      newEnt.filePath =  '/' + PackageName + '/Scenes/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -522,7 +523,7 @@ export class LibraryService {
     for (const entry of this.Scripts) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/Scripts/';
+      newEnt.filePath =  '/' + PackageName +  '/Scripts/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -530,7 +531,7 @@ export class LibraryService {
     for (const entry of this.Chapters) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/Chapters/';
+      newEnt.filePath =  '/' + PackageName + '/Chapters/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -538,7 +539,7 @@ export class LibraryService {
     for (const entry of this.CharacterTemplates) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path  + '/' + PackageName +  '/CharacterTemplates/';
+      newEnt.filePath = '/' + PackageName + '/CharacterTemplates/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }
@@ -546,7 +547,7 @@ export class LibraryService {
     for (const entry of this.ObjectTemplates) {
       const newEnt = new PAFEntry();
       newEnt.fileName = this.getNoSpecialString(entry.Name) + '.json';
-      newEnt.filePath = Path + '/' + PackageName +  '/ObjectTemplates/';
+      newEnt.filePath =  '/' + PackageName + '/ObjectTemplates/';
       newEnt.type = entry.EntityType;
       pafEntries.push(newEnt);
     }

@@ -25,14 +25,14 @@ export class PAFHandler {
     console.log('The time is: ' + e.detail);
   }
 
-  public SavePAFile(file: PAFile): boolean {
+  public SavePAFile(file: PAFile, filePath: string): boolean {
     const revtal = false;
     if (file != null) {
       const storageFile = new StorageFile();
       storageFile.Name = file.Name;
       storageFile.Description = file.Description;
       storageFile.fileName = file.fileName;
-      storageFile.filePath = file.filePath;
+      storageFile.filePath = filePath;
       storageFile.fileData = file;
       console.log('Saving: ' + storageFile.filePath);
       console.log('Saving: ' + storageFile.fileName);
@@ -50,12 +50,12 @@ export class PAFHandler {
 
   }
 
-  public LoadPAFFile(filePath: string, filename: string) {
-    this.Load(filePath, filename);
+  public LoadPAFFile(filePath: string, packageName: string) {
+    this.Load(filePath, packageName);
     // let aaf: PAFEntry[] = null as PAFEntry[];
     const storageFile = new StorageFile();
     storageFile.fileName = 'main.paf';
-    storageFile.filePath = filePath + '/' + filename ;
+    storageFile.filePath = filePath + '/' + packageName ;
 
     const asd = this.FileAccessService.loadData(storageFile)
       .then( (response) => {
