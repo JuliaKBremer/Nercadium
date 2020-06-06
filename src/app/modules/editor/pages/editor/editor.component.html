@@ -71,7 +71,7 @@
 
   <!-- Maincontent -->
   <div class="mainContent">
-    <pre>{{editorService.GetSelectedObject() | json}}</pre>
+    <app-main-content-module [selectedObject]="editorService.GetSelectedObject()"></app-main-content-module>
   </div>
 
   <!-- Propertiesbar-->

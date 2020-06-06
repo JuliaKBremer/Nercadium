@@ -14,22 +14,6 @@ const routes: Routes = [
     component: EditorStartComponent
   },
   {
-    path: 'chapter',
-    component: ChapterTabComponent
-  },
-  {
-    path: 'character',
-    component: CharacterTabComponent
-  },
-  {
-    path: 'object',
-    component: ObjectTabComponent
-  },
-  {
-    path: 'template',
-    component: TemplateTabComponent
-  },
-  {
     path: 'editor',
     component: EditorComponent
   }

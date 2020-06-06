@@ -71,7 +71,7 @@ export class EditorService {
     this.data.ObjectTemplate.bSubject = this.ObjectTemplates = new BehaviorSubject<GameObjectTemplate[]>([]);
     this.data.CharacterTemplate.bSubject = this.CharacterTemplates = new BehaviorSubject<GameCharacterTemplate[]>([]);
 
-    this.selectedObject = new BehaviorSubject<any>(null);
+    this.selectedObject = new BehaviorSubject<IBaseGameEntity>(null);
   }
 
   public GetNewID(): number {

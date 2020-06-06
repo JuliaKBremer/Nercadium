@@ -1,6 +1,8 @@
-import { ViewEncapsulation, Component, OnInit } from '@angular/core';
-import { IArticle } from './iarticle';
+import {ViewEncapsulation, Component, Input} from '@angular/core';
+import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
+
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 @Component({
   selector: 'app-text-editor',
@@ -9,30 +11,12 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   encapsulation: ViewEncapsulation.None // Use to disable CSS Encapsulation for this component
 })
 
-export class TextEditorComponent implements OnInit {
-  article: IArticle;
-  Editor = ClassicEditor;
-  editorConfig = {
+export class TextEditorComponent {
 
-  };
-//   //  public onReady( editor ) {
-// //  public onReady( editor ) {
-// //    editor.ui.getEditableElement().parentElement.insertBefore(
-//      editor.ui.view.toolbar.element,
-//      editor.ui.getEditableElement()
-//    );
-//  }
+  @Input() selectedObject: IBaseGameEntity;
+
+  public Editor = ClassicEditor;
+
   constructor() {
-    this.article = {
-      title: '',
-      text: '',
-    };
   }
-
-  ngOnInit() {}
-
-  onSubmit() {
-    console.log('dosomething');
-  }
-
 }

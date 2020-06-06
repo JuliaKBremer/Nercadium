@@ -1,6 +1,3 @@
-
-    <ckeditor
-      [config]="editorConfig" [editor]="Editor"
-      required [(ngModel)]="article.text"
-      data="" name="text"
-    ></ckeditor>
+<ckeditor [editor]="Editor"
+          [(ngModel)]="selectedObject.Text">
+</ckeditor>

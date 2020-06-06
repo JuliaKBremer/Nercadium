@@ -10,6 +10,7 @@ export class ChapterService implements IBaseService {
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
+    newChapter.Text = '';
     newChapter.Name = 'Chapter';
 
     chapters.push(newChapter);
@@ -20,6 +21,7 @@ export class ChapterService implements IBaseService {
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
+    newChapter.Text = chapterToCopy.Text;
     newChapter.Properties = JSON.parse(JSON.stringify(chapterToCopy.Properties));
 
     chapters.push(newChapter);
