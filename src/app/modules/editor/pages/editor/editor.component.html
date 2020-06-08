@@ -42,7 +42,7 @@
       <div class="list borderRight">
         <div class="head borderBottom">
           <div class="heading">{{editorService.currentSelectedEntityType}}</div>
-          <div class="button" (click)="editorService.data[editorService.currentSelectedEntityType].service.New()">
+          <div class="button" (click)="NewObject()">
             <i class="fas fa-plus"></i>
           </div>
         </div>
@@ -56,11 +56,11 @@
               {{entry.Properties.Name.value}}
             </div>
             <div class="button"
-                 (click)="editorService.data[editorService.currentSelectedEntityType].service.Copy(entry)">
+                 (click)="CopyObject(entry)">
               <i class="fas fa-copy"></i>
             </div>
             <div class="button"
-                 (click)="editorService.data[editorService.currentSelectedEntityType].service.Delete(entry)">
+                 (click)="DeleteObject(entry)">
               <i class="fas fa-trash"></i>
             </div>
           </div>
@@ -71,7 +71,7 @@
 
   <!-- Maincontent -->
   <div class="mainContent">
-    <app-main-content-module [selectedObject]="editorService.GetSelectedObject()"></app-main-content-module>
+    <app-main-content-module [selectedObjectObservable]="editorService.GetSelectedObjectAsObservable()"></app-main-content-module>
   </div>
 
   <!-- Propertiesbar-->
@@ -85,7 +85,7 @@
         </div>
         <!-- Content -->
         <div class="content">
-          <app-properties-list [properties]="editorService.GetSelectedObject().Properties"></app-properties-list>
+          <app-properties-list [selectedObjectObservable]="editorService.GetSelectedObjectAsObservable()"></app-properties-list>
         </div>
       </div>
     </ng-container>

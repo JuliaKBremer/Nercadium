@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {HotkeyService} from '../../../../core/service/hotkey/hotkey.service';
 import {Subscription} from 'rxjs';
 

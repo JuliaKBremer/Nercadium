@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObject} from '../../../../data/schema/Classes/Editor/Objects/GameObject';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {EventService} from '../../../../core/service/event/event.service';
 import {IProperties} from '../../../../data/schema/Interfaces/Editor/IProperty';

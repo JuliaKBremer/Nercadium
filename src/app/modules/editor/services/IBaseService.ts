@@ -1,10 +1,12 @@
-interface IBaseService {
+import {IBaseGameEntity} from '../../../data/schema/Interfaces/Editor/IBaseGameEntity';
+
+export interface IBaseService {
   // Create new BaseEntity
-  New();
+  New(): IBaseGameEntity;
 
   // Delete BaseEntity
   Delete(objectToDelete: any);
 
   // Copy BaseEntity
-  Copy(objectToCopy: any);
+  Copy(objectToCopy: any): IBaseGameEntity;
 }

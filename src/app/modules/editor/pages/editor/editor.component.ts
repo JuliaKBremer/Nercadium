@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
@@ -17,6 +17,18 @@ export class EditorComponent implements OnInit {
   constructor(public editorService: EditorService) { }
 
   ngOnInit() {
+  }
+
+  public NewObject() {
+    this.editorService.NewObject();
+  }
+
+  public CopyObject(entry: IBaseGameEntity) {
+    this.editorService.CopyObject(entry);
+  }
+
+  public DeleteObject(entry: IBaseGameEntity) {
+    this.editorService.DeleteObject(entry);
   }
 
   setCurrentSidebar(entityType: EntityTypeEnum) {

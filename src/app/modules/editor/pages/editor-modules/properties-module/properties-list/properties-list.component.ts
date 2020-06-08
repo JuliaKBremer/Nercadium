@@ -1,23 +1,37 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IProperties, IProperty} from '../../../../../../data/schema/Interfaces/Editor/IProperty';
 import {PropertyTypes} from '../../../../../../data/schema/Enums/property-types.enum';
 import {KeyValue} from '@angular/common';
 import {EventService} from '../../../../../../core/service/event/event.service';
+import {Observable, Subscription} from 'rxjs';
+import {IBaseGameEntity} from '../../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
 @Component({
   selector: 'app-properties-list',
   templateUrl: './properties-list.component.html',
   styleUrls: ['./properties-list.component.css']
 })
-export class PropertiesListComponent implements OnInit {
+export class PropertiesListComponent implements OnInit, OnDestroy {
 
-  @Input() properties: IProperties;
-
+  @Input() selectedObjectObservable: Observable<IBaseGameEntity>;
+  private selectedObjectSubscription: Subscription;
+  public properties: IProperties = null;
   public propertyType = PropertyTypes;
 
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+      if (next !== null) {
+        this.properties = next.Properties;
+      } else {
+        this.properties = null;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.selectedObjectSubscription.unsubscribe();
   }
 
   trackByFn(index: any) {

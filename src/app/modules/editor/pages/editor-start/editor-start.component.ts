@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {Router} from '@angular/router';
 import {AdventuresManagerService} from '../../../../core/service/adventures/adventures-manager.service';
 import {Subscription} from 'rxjs';

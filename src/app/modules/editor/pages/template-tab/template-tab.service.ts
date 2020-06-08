@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {IProperties} from '../../../../data/schema/Interfaces/Editor/IProperty';
 

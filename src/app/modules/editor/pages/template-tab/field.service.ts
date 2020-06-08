@@ -6,7 +6,7 @@ import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templat
 import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
 import {FieldTypes} from '../../../../data/schema/Enums/field-types.enum';
 import {TableStyles} from '../../../../data/schema/Enums/table-styles.enum';
-import {EditorService} from '../../services/editor.service';
+import {EditorService} from '../../services/editor/editor.service';
 import {EventService} from '../../../../core/service/event/event.service';
 import {IProperty} from '../../../../data/schema/Interfaces/Editor/IProperty';
 

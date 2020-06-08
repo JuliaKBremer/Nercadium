@@ -1,12 +1,14 @@
-import {EditorService} from './editor.service';
-import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {PropertyTypes} from '../../../data/schema/Enums/property-types.enum';
+import {EditorService} from '../editor/editor.service';
+import {GameChapter} from '../../../../data/schema/Classes/Editor/Chapter/GameChapter';
+import {PropertyTypes} from '../../../../data/schema/Enums/property-types.enum';
+import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
+import {IBaseService} from '../IBaseService';
 
 export class ChapterService implements IBaseService {
 
   constructor(private editorService: EditorService) { }
 
-  New() {
+  New(): IBaseGameEntity {
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
@@ -23,6 +25,7 @@ export class ChapterService implements IBaseService {
     };
 
     this.editorService.libraryService.Add(newChapter);
+    return newChapter;
   }
 
   Copy(chapterToCopy: GameChapter) {
@@ -33,6 +36,7 @@ export class ChapterService implements IBaseService {
     newChapter.Properties = JSON.parse(JSON.stringify(chapterToCopy.Properties));
 
     this.editorService.libraryService.Add(newChapter);
+    return newChapter;
   }
 
   Delete(chapterToDelete: GameChapter) {

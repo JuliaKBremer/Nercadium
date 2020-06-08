@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AdventuresManagerService} from './adventures-manager.service';
 import {AdventureObject} from '../../../data/schema/Classes/Editor/Adventure/AdventureObject';
 import {LibraryService} from '../localLibrary/library.service';
-import {EditorService} from '../../../modules/editor/services/editor.service';
+import {EditorService} from '../../../modules/editor/services/editor/editor.service';
 import * as Electron from 'electron';
 
 // @ts-ignore

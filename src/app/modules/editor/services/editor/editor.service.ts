@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import {LibraryService} from '../../../core/service/localLibrary/library.service';
-import {AdventureObject} from '../../../data/schema/Classes/Editor/Adventure/AdventureObject';
-import {CharacterObject} from '../../../data/schema/Classes/Editor/Character/CharacterObject';
-import {GameObject} from '../../../data/schema/Classes/Editor/Objects/GameObject';
-import {SceneObject} from '../../../data/schema/Classes/Editor/Scene/SceneObject';
-import {GameScript} from '../../../data/schema/Classes/Editor/Scripts/GameScript';
-import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
-import {NoteObject} from '../../../data/schema/Classes/Editor/Scene/SceneNote';
-import {GameObjectTemplate} from '../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
+import {LibraryService} from '../../../../core/service/localLibrary/library.service';
+import {AdventureObject} from '../../../../data/schema/Classes/Editor/Adventure/AdventureObject';
+import {CharacterObject} from '../../../../data/schema/Classes/Editor/Character/CharacterObject';
+import {GameObject} from '../../../../data/schema/Classes/Editor/Objects/GameObject';
+import {SceneObject} from '../../../../data/schema/Classes/Editor/Scene/SceneObject';
+import {GameScript} from '../../../../data/schema/Classes/Editor/Scripts/GameScript';
+import {GameChapter} from '../../../../data/schema/Classes/Editor/Chapter/GameChapter';
+import {NoteObject} from '../../../../data/schema/Classes/Editor/Scene/SceneNote';
+import {GameObjectTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {GameCharacterTemplate} from '../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
-import {EntityTypeEnum} from '../../../data/schema/Classes/Storage/EntityTypeEnum';
-import {IBaseGameEntity} from '../../../data/schema/Interfaces/Editor/IBaseGameEntity';
-import {ChapterService} from './chapter.service';
-import {AdventuresManagerService} from '../../../core/service/adventures/adventures-manager.service';
+import {GameCharacterTemplate} from '../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
+import {EntityTypeEnum} from '../../../../data/schema/Classes/Storage/EntityTypeEnum';
+import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
+import {ChapterService} from '../chapter/chapter.service';
+import {AdventuresManagerService} from '../../../../core/service/adventures/adventures-manager.service';
+import {IBaseService} from '../IBaseService';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,27 @@ export class EditorService {
   }
   public SetSelectedObject(object: IBaseGameEntity) {
     this.selectedObject.next(object);
+  }
+
+  public NewObject() {
+    const newObject = this.data[this.currentSelectedEntityType].service.New();
+
+    this.SetSelectedObject(newObject);
+  }
+
+  public CopyObject(entry: IBaseGameEntity) {
+    const newObject = this.data[this.currentSelectedEntityType].service.Copy(entry);
+
+    this.SetSelectedObject(newObject);
+  }
+
+  public DeleteObject(entry: IBaseGameEntity) {
+    if (entry === this.GetSelectedObject()) {
+      console.log('yap');
+      this.SetSelectedObject(null);
+    }
+
+    this.data[this.currentSelectedEntityType].service.Delete(entry);
   }
 
   private GetDataFromLibrary() {

@@ -1,6 +1,7 @@
 import {Component, Injectable, Input, OnInit, OnDestroy} from '@angular/core';
 import {EntityTypeEnum} from '../../../../../data/schema/Classes/Storage/EntityTypeEnum';
 import {IBaseGameEntity} from '../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
+import {Observable, Subscription} from 'rxjs';
 
 enum TypeEnum {
   text,
@@ -18,8 +19,27 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
   public objectType: TypeEnum;
   public TypeEnum = TypeEnum;
 
-  @Input() set selectedObject(selectedObject: IBaseGameEntity) {
+  @Input() selectedObjectObservable: Observable<IBaseGameEntity>;
+  private selectedObjectSubscription: Subscription;
+
+  get selectedObject(): IBaseGameEntity {
+    return this.$selectedObject;
+  }
+
+  constructor() { }
+
+  ngOnInit() {
+    this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => this.SetUp(next));
+  }
+
+  ngOnDestroy() {
+    this.selectedObjectSubscription.unsubscribe();
+  }
+
+  private SetUp(selectedObject: IBaseGameEntity) {
     if (selectedObject === null) {
+      this.$selectedObject = null;
+      this.objectType = null;
       return;
     }
 
@@ -52,14 +72,4 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
 
     this.$selectedObject = selectedObject;
   }
-
-  get selectedObject(): IBaseGameEntity {
-    return this.$selectedObject;
-  }
-
-  constructor() { }
-
-  ngOnInit() { }
-
-  ngOnDestroy() { }
 }
