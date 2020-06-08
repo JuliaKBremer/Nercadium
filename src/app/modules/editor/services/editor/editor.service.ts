@@ -15,6 +15,7 @@ import {IBaseGameEntity} from '../../../../data/schema/Interfaces/Editor/IBaseGa
 import {ChapterService} from '../chapter/chapter.service';
 import {AdventuresManagerService} from '../../../../core/service/adventures/adventures-manager.service';
 import {IBaseService} from '../IBaseService';
+import {NoteService} from '../note/note.service';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,7 @@ export class EditorService {
     this.data.Chapter.bSubject = this.Chapters = new BehaviorSubject<GameChapter[]>([]);
     this.data.Chapter.service = new ChapterService(this);
     this.data.Note.bSubject = this.Notes = new BehaviorSubject<NoteObject[]>([]);
+    this.data.Note.service = new NoteService(this);
     this.data.ObjectTemplate.bSubject = this.ObjectTemplates = new BehaviorSubject<GameObjectTemplate[]>([]);
     this.data.CharacterTemplate.bSubject = this.CharacterTemplates = new BehaviorSubject<GameCharacterTemplate[]>([]);
 

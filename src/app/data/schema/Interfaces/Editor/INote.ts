@@ -1,11 +1,14 @@
-// tslint:disable-next-line:no-empty-interface
+import {IProperties} from './IProperty';
+
 export interface INote {
-  // ID der Notiz
+  // ID des Kapitel
   id: number;
 
-  // Name / Titel der Notiz
+  // Name / Bezeichung des Kapitel
   Name: string;
 
-  // Beschreibung der Notiz / eigentliche Notiz
-  Description: string;
+  // Text / Inhalt
+  Text: string;
+
+  Properties: IProperties;
 }

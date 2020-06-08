@@ -14,7 +14,7 @@ export class ChapterService implements IBaseService {
     newChapter.id = this.editorService.GetNewID();
     newChapter.Text = '';
     newChapter.Properties = {
-      Name : {id: 0, value: 'New Object', type: PropertyTypes.string},
+      Name : {id: 0, value: 'New Object', type: PropertyTypes.string}
 
       //// Test
       // String : {id: 1, value: 'Lorem Ipsum', type: PropertyTypes.string},
@@ -28,7 +28,7 @@ export class ChapterService implements IBaseService {
     return newChapter;
   }
 
-  Copy(chapterToCopy: GameChapter) {
+  Copy(chapterToCopy: GameChapter): IBaseGameEntity {
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();

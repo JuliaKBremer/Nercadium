@@ -5,19 +5,23 @@ import {IProperties} from '../../../Interfaces/Editor/IProperty';
 
 export class NoteObject implements INote, IBaseGameEntity {
 
-  // ID der Notiz
+  // ID
   id: number;
 
-  // Entity's Tags
-  public Tags: string[];
+  // Get Filename
+  get Name(): string {
+    return this.Properties.Name.value + ' ' + this.id;
+  }
+  set Name(name: string) {
+    this.Properties.Name.value = name;
+  }
 
-  // Name ... notwendig?!
-  Name: string;
+  // Text des Kapitel
+  Text: string;
 
-  // Text der Notiz
-  Description: string;
-
+  // Discriminator
   EntityType: EntityTypeEnum = EntityTypeEnum.Note;
-  Properties: IProperties;
 
+  // Properties
+  Properties: IProperties;
 }
