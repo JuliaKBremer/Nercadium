@@ -12,7 +12,7 @@ import { PlayStartComponent } from './pages/play-start/play-start.component';
   ],
   imports: [
     CommonModule,
-    PlayRoutingModule
+    PlayRoutingModule,
   ]
 })
 export class PlayModule { }

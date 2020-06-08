@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule, FirebaseApp} from '@angular/fire';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserStartComponent implements OnInit {
   userIsLoggedIn = false;
 
-  constructor(private loginService: FirebaseAuthService, private router: Router) {
+  constructor(private loginService: FirebaseAuthService, private firebase: FirebaseApp, private router: Router) {
     /*console.log(this.loginService.isLoggedIn);
     this.userIsLoggedIn = this.loginService.isLoggedIn ? this.userIsLoggedIn = true : this.userIsLoggedIn = false;*/
   }
@@ -22,5 +24,4 @@ export class UserStartComponent implements OnInit {
   async logout() {
     await this.router.navigate(['/user/logout']);
   }
-
 }
