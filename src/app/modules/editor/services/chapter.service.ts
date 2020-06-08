@@ -1,35 +1,41 @@
 import {EditorService} from './editor.service';
 import {GameChapter} from '../../../data/schema/Classes/Editor/Chapter/GameChapter';
+import {PropertyTypes} from '../../../data/schema/Enums/property-types.enum';
 
 export class ChapterService implements IBaseService {
 
   constructor(private editorService: EditorService) { }
 
   New() {
-    const chapters = this.editorService.data.Chapter.bSubject.value;
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
     newChapter.Text = '';
-    newChapter.Name = 'Chapter';
+    newChapter.Properties = {
+      Name : {id: 0, value: 'New Object', type: PropertyTypes.string},
 
-    chapters.push(newChapter);
+      //// Test
+      // String : {id: 1, value: 'Lorem Ipsum', type: PropertyTypes.string},
+      // Number : {id: 2, value: 1337, type: PropertyTypes.number},
+      // Boolean : {id: 3, value: false, type: PropertyTypes.boolean},
+      // Enum : {id: 4, value: 'asd', type: PropertyTypes.enum, enum: {asd: 'asd', qwe: 'qwe'}},
+      // Options : {id: 5, value: [], type: PropertyTypes.options}
+    };
+
+    this.editorService.libraryService.Add(newChapter);
   }
 
   Copy(chapterToCopy: GameChapter) {
-    const chapters = this.editorService.data.Chapter.bSubject.value;
     const newChapter: GameChapter = new GameChapter();
 
     newChapter.id = this.editorService.GetNewID();
     newChapter.Text = chapterToCopy.Text;
     newChapter.Properties = JSON.parse(JSON.stringify(chapterToCopy.Properties));
 
-    chapters.push(newChapter);
+    this.editorService.libraryService.Add(newChapter);
   }
 
   Delete(chapterToDelete: GameChapter) {
-    const chapters = this.editorService.data.Chapter.bSubject.value;
-    const indexOfChapterToDelete = chapters.indexOf(chapterToDelete);
-    chapters.splice(indexOfChapterToDelete, 1);
+    this.editorService.libraryService.Remove(chapterToDelete);
   }
 }

@@ -51,8 +51,6 @@ export class MainContentModuleComponent implements OnInit, OnDestroy {
     }
 
     this.$selectedObject = selectedObject;
-    console.log(this.$selectedObject);
-    console.log(this.objectType);
   }
 
   get selectedObject(): IBaseGameEntity {

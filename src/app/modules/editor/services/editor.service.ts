@@ -59,7 +59,7 @@ export class EditorService {
 
   public togglePropertiesSidebar = false;
 
-  constructor(private libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
+  constructor(public libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
     this.data.Adventure.bSubject = this.Adventure = new BehaviorSubject<AdventureObject[]>(null);
     this.data.Character.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
@@ -85,7 +85,6 @@ export class EditorService {
     return this.selectedObject.value;
   }
   public SetSelectedObject(object: IBaseGameEntity) {
-    console.log(object);
     this.selectedObject.next(object);
   }
 

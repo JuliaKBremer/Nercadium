@@ -1,4 +1,5 @@
-// tslint:disable-next-line:no-empty-interface
+import {IProperties} from './IProperty';
+
 export interface IGameChapter {
   // ID des Kapitel
   id: number;
@@ -6,9 +7,8 @@ export interface IGameChapter {
   // Name / Bezeichung des Kapitel
   Name: string;
 
-  // Beschreibung
-  Description: string;
-
   // Text / Inhalt
   Text: string;
+
+  Properties: IProperties;
 }
