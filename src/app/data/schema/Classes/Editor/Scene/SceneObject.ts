@@ -7,29 +7,29 @@ import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
 import {IProperties} from '../../../Interfaces/Editor/IProperty';
 
 export class SceneObject implements IGameScene, IBaseGameEntity {
-  // ID der Szene
+
+  // ID
   id: number;
 
-  // Entity's Tags
-  public Tags: string[];
+  // Get Filename
+  get Name(): string {
+    return this.Properties.Name.value + ' ' + this.id;
+  }
+  set Name(name: string) {
+    this.Properties.Name.value = name;
+  }
 
-  // Name der Szene
-  Name: string;
+  // Text des Kapitel
+  Text: string;
 
-  // Beschreibung der Szene
-  Description: string;
-
-  // Notizen der Szene
-  Notes: INote[];
-
-  // Characters / NPCs in der Szene
-  Characters: IGameCharacter[];
-
-  // Objekte / Gegendstände in der Szene
-  Objects: IGameObject[];
-
+  // Discriminator
   EntityType: EntityTypeEnum = EntityTypeEnum.Scene;
+
+  // Properties
   Properties: IProperties;
 
-
+  Characters: IGameCharacter[];
+  Description: string;
+  Notes: INote[];
+  Objects: IGameObject[];
 }

@@ -16,6 +16,7 @@ import {ChapterService} from '../chapter/chapter.service';
 import {AdventuresManagerService} from '../../../../core/service/adventures/adventures-manager.service';
 import {IBaseService} from '../IBaseService';
 import {NoteService} from '../note/note.service';
+import {SceneService} from '../scene/scene.service';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,7 @@ export class EditorService {
     this.data.Character.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
     this.data.Scene.bSubject = this.Scenes = new BehaviorSubject<SceneObject[]>([]);
+    this.data.Scene.service = new SceneService(this);
     this.data.Script.bSubject = this.Scripts = new BehaviorSubject<GameScript[]>([]);
     this.data.Chapter.bSubject = this.Chapters = new BehaviorSubject<GameChapter[]>([]);
     this.data.Chapter.service = new ChapterService(this);
