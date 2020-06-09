@@ -15,23 +15,27 @@ export class PropertiesListComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<IBaseGameEntity>;
   private selectedObjectSubscription: Subscription;
-  public properties: IProperties = null;
+  @Input() properties: IProperties = null;
   public propertyType = PropertyTypes;
 
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
-      if (next !== null) {
-        this.properties = next.Properties;
-      } else {
-        this.properties = null;
-      }
-    });
+    if (this.selectedObjectObservable) {
+      this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
+        if (next !== null) {
+          this.properties = next.Properties;
+        } else {
+          this.properties = null;
+        }
+      });
+    }
   }
 
   ngOnDestroy() {
-    this.selectedObjectSubscription.unsubscribe();
+    if (this.selectedObjectSubscription) {
+      this.selectedObjectSubscription.unsubscribe();
+    }
   }
 
   trackByFn(index: any) {

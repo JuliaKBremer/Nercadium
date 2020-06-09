@@ -5,9 +5,6 @@ export interface IProperty {
   // ID der Property / Eigenschaft
   id: number;
 
-  // parent template of the property
-  parentTemplateID?: number;
-
   // parent field of the property
   parentFieldID?: number;
 

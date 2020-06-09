@@ -23,14 +23,16 @@
 
 <!-- Editor -->
 <div class="editor">
+
   <!-- Projectbar -->
   <div class="sidebar">
+
     <!-- Buttons Left -->
     <div class="buttonsBar borderRight">
       <ng-container *ngFor="let entityType of buttonsLeft">
         <div class="button left"
              [ngClass]="editorService.currentSelectedEntityType === entityType ? 'selected' : ''"
-             (click)="setCurrentSidebar(entityType)">
+             (click)="setCurrentSidebarLeft(entityType)">
           <span>{{entityTypeEnum[entityType]}}</span>
         </div>
       </ng-container>
@@ -38,14 +40,16 @@
 
     <!-- List -->
     <ng-container *ngIf="editorService.currentSelectedEntityType !== null">
-      <!-- Head -->
       <div class="list borderRight">
+
+        <!-- Head -->
         <div class="head borderBottom">
           <div class="heading">{{editorService.currentSelectedEntityType}}</div>
           <div class="button" (click)="NewObject()">
             <i class="fas fa-plus"></i>
           </div>
         </div>
+
         <!-- Content -->
         <div class="content">
           <div class="listEntry"
@@ -65,8 +69,10 @@
             </div>
           </div>
         </div>
+
       </div>
     </ng-container>
+
   </div>
 
   <!-- Maincontent -->
@@ -76,27 +82,37 @@
 
   <!-- Propertiesbar-->
   <div class="sidebar">
+
     <!-- List -->
-    <ng-container *ngIf="editorService.togglePropertiesSidebar !== false">
+    <ng-container *ngIf="editorService.currentSelectedRightState !== rightSidebarStateEnum.none">
       <div class="list borderLeft">
+
         <!-- Head -->
         <div class="head borderBottom">
-          <div class="heading">Properties</div>
+          <div class="heading">{{editorService.currentSelectedRightState}}</div>
         </div>
+
         <!-- Content -->
         <div class="content">
-          <app-properties-list [selectedObjectObservable]="editorService.GetSelectedObjectAsObservable()"></app-properties-list>
+          <app-properties-list *ngIf="editorService.currentSelectedRightState === rightSidebarStateEnum.Properties"
+                               [selectedObjectObservable]="editorService.GetSelectedObjectAsObservable()"></app-properties-list>
+          <app-fields-list *ngIf="editorService.currentSelectedRightState === rightSidebarStateEnum.Fields"
+                           [selectedObjectObservable]="editorService.GetSelectedObjectAsObservable()"></app-fields-list>
         </div>
+
       </div>
     </ng-container>
 
     <!-- Buttons Right -->
     <div class="buttonsBar borderLeft">
-      <div class="button"
-           [ngClass]="editorService.togglePropertiesSidebar === true ? 'selected' : ''"
-           (click)="editorService.togglePropertiesSidebar = !editorService.togglePropertiesSidebar">
-        <span>Properties</span>
-      </div>
+      <ng-container *ngFor="let state of buttonsRight">
+        <div class="button"
+             [ngClass]="editorService.currentSelectedRightState === state ? 'selected' : ''"
+             (click)="setCurrentSidebarRight(state)">
+          <span>{{rightSidebarStateEnum[state]}}</span>
+        </div>
+      </ng-container>
     </div>
+
   </div>
 </div>

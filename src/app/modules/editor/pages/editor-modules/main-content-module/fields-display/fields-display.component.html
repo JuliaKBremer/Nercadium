@@ -1,7 +1,8 @@
-<div *ngIf="fields">
+<ng-container *ngIf="fields">
   <div *ngFor="let field of fields"
        [ngSwitch]="field.Properties.Type.value"
        [style.position]="'relative'"
+       [style.width]="'fit-content'"
        [style.top]="field.Properties.Top.value + 'px'"
        [style.left]="field.Properties.Left.value + 'px'">
 
@@ -113,4 +114,4 @@
       <button (click)="fileInput.click()">Select File</button>
     </div>
   </div>
-</div>
+</ng-container>

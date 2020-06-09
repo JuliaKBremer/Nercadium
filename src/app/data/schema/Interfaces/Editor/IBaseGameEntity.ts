@@ -1,5 +1,6 @@
 import {EntityTypeEnum} from '../../Classes/Storage/EntityTypeEnum';
 import {IProperties} from './IProperty';
+import {IField} from './IField';
 
 
 export interface IBaseGameEntity {
@@ -14,4 +15,7 @@ export interface IBaseGameEntity {
   EntityType: EntityTypeEnum;
 
   Properties: IProperties;
+
+  Fields?: IField[];
+  FieldValues?: {[fieldID: string]: any};
 }

@@ -1,13 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FieldTypes} from '../../../../../../data/schema/Enums/field-types.enum';
-import {GameObjectTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameObjectTemplate';
-import {GameCharacterTemplate} from '../../../../../../data/schema/Classes/Editor/Templates/GameCharacterTemplate';
 import {GetTableStyleFromEnum, TableStyles} from '../../../../../../data/schema/Enums/table-styles.enum';
 import {IField} from '../../../../../../data/schema/Interfaces/Editor/IField';
-import {GameObject} from '../../../../../../data/schema/Classes/Editor/Objects/GameObject';
-import {EntityTypeEnum} from '../../../../../../data/schema/Classes/Storage/EntityTypeEnum';
-import {TemplateTabService} from '../../../template-tab/template-tab.service';
 import {Observable, Subscription} from 'rxjs';
+import {IBaseGameEntity} from '../../../../../../data/schema/Interfaces/Editor/IBaseGameEntity';
 
 @Component({
   selector: 'app-fields-display',
@@ -18,37 +14,21 @@ export class FieldsDisplayComponent implements OnInit, OnDestroy {
 
   @Input() selectedObjectObservable: Observable<any>;
 
-  public selectedObject: any;
+  public selectedObject: IBaseGameEntity;
   private selectedObjectSubscription: Subscription;
 
   public fieldTypes = FieldTypes;
 
   public fields: IField[] = [];
 
-  constructor(private templateTabService: TemplateTabService) { }
+  constructor() { }
 
   ngOnInit() {
     if (this.selectedObjectObservable !== undefined) {
       this.selectedObjectSubscription = this.selectedObjectObservable.subscribe(next => {
         this.selectedObject = next;
-        if (this.selectedObject !== null) {
-          switch (this.selectedObject.EntityType) {
-            case EntityTypeEnum.Object:
-              const sO = this.selectedObject as GameObject;
-              const template: GameObjectTemplate = this.templateTabService.FindTemplateByID(sO.Properties.Template.value);
-              if (template) {
-                this.fields = template.Fields;
-              }
-              break;
-            case EntityTypeEnum.Character:
-              break;
-            case EntityTypeEnum.CharacterTemplate:
-              this.fields = (this.selectedObject as GameCharacterTemplate).Fields;
-              break;
-            case EntityTypeEnum.ObjectTemplate:
-              this.fields = (this.selectedObject as GameObjectTemplate).Fields;
-              break;
-          }
+        if (this.selectedObject !== null && this.selectedObject.Fields) {
+          this.fields = this.selectedObject.Fields;
         }
       });
     }

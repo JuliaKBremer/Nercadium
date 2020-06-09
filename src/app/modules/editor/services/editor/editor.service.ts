@@ -17,6 +17,13 @@ import {AdventuresManagerService} from '../../../../core/service/adventures/adve
 import {IBaseService} from '../IBaseService';
 import {NoteService} from '../note/note.service';
 import {SceneService} from '../scene/scene.service';
+import {CharacterService} from '../character/character.service';
+
+export enum RightSidebarStateEnum {
+  Properties = 'Properties',
+  Fields = 'Fields',
+  none = 'none'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +42,6 @@ export class EditorService {
 
   private selectedObject: BehaviorSubject<IBaseGameEntity>;
 
-  // TODO: create editor ui service
   public data: {[key in EntityTypeEnum]?: {bSubject?: BehaviorSubject<IBaseGameEntity[]>, service?: IBaseService}} = {
     [EntityTypeEnum.Adventure] : {},
     [EntityTypeEnum.Character] : {},
@@ -60,11 +66,22 @@ export class EditorService {
     }
   }
 
-  public togglePropertiesSidebar = false;
+  private $currentSelectedRightState: RightSidebarStateEnum = RightSidebarStateEnum.none;
+  public get currentSelectedRightState(): RightSidebarStateEnum {
+    return this.$currentSelectedRightState;
+  }
+  public set currentSelectedRightState(state: RightSidebarStateEnum) {
+    if (this.$currentSelectedRightState === state) {
+      this.$currentSelectedRightState = RightSidebarStateEnum.none;
+    } else {
+      this.$currentSelectedRightState = state;
+    }
+  }
 
   constructor(public libraryService: LibraryService, private adventuresManagerService: AdventuresManagerService) {
     this.data.Adventure.bSubject = this.Adventure = new BehaviorSubject<AdventureObject[]>(null);
     this.data.Character.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
+    this.data.Character.service = new CharacterService(this);
     this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
     this.data.Scene.bSubject = this.Scenes = new BehaviorSubject<SceneObject[]>([]);
     this.data.Scene.service = new SceneService(this);
@@ -114,6 +131,17 @@ export class EditorService {
     this.data[this.currentSelectedEntityType].service.Delete(entry);
   }
 
+  public FindObjectByID(objectID: number): IBaseGameEntity {
+    for (const dataKey in this.data) {
+      if (this.data[dataKey]) {
+        if (this.data[dataKey].bSubject.value.find((obj: IBaseGameEntity) => obj.id === objectID)) {
+          return this.data[dataKey].bSubject.value.find((obj: IBaseGameEntity) => obj.id === objectID);
+        }
+      }
+    }
+    return null;
+  }
+
   private GetDataFromLibrary() {
     this.Adventure.next(this.libraryService.Adventures);
     this.Characters.next(this.libraryService.Characters);
@@ -152,6 +180,6 @@ export class EditorService {
   private ResetEditor() {
     this.selectedObject.next(null);
     this.$currentSelectedEntityType = null;
-    this.togglePropertiesSidebar = false;
+    this.$currentSelectedRightState = RightSidebarStateEnum.none;
   }
 }

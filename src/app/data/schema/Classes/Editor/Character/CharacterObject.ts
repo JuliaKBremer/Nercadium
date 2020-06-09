@@ -1,33 +1,31 @@
 import {IGameCharacter} from '../../../Interfaces/Editor/IGameCharacter';
-import {IGameCharacterTemplate} from '../../../Interfaces/Editor/IGameCharacterTemplate';
 import {IProperties} from '../../../Interfaces/Editor/IProperty';
-import {IGameObject} from '../../../Interfaces/Editor/IGameObject';
 import {IBaseGameEntity} from '../../../Interfaces/Editor/IBaseGameEntity';
 import {EntityTypeEnum} from '../../Storage/EntityTypeEnum';
+import {IField} from '../../../Interfaces/Editor/IField';
 
 export class CharacterObject implements IGameCharacter, IBaseGameEntity {
 
-  // ID des Objektes.
+  // ID
   id: number;
 
-  // Entity's Tags
-  public Tags: string[];
+  // Get Filename
+  get Name(): string {
+    return this.Properties.Name.value + ' ' + this.id;
+  }
+  set Name(name: string) {
+    this.Properties.Name.value = name;
+  }
 
-  // Charakter/Heldenname.
-  Name: string;
-
-  // Beschreibung zu dem Charakter.
-  Description: string;
-
-  // Das zu ladene Template
-  CharacterTemplate: IGameCharacterTemplate;
-
-  // Zugewiesene Werte/Eigenschaften.
-  Properties: IProperties;
-
-  // Items die dem Charakter zugewiesen sind.
-  Items: IGameObject[];
-
+  // Discriminator
   EntityType: EntityTypeEnum = EntityTypeEnum.Character;
 
+  // Properties
+  Properties: IProperties;
+
+  // Fields
+  Fields: IField[];
+
+  // Fieldvalues
+  FieldValues: {[fieldID: string]: any};
 }

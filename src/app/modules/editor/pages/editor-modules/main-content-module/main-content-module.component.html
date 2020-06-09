@@ -1,3 +1,7 @@
 <ng-container *ngIf="objectType === TypeEnum.text">
   <app-text-editor [selectedObject]="selectedObject"></app-text-editor>
 </ng-container>
+
+<ng-container *ngIf="objectType === TypeEnum.fields">
+  <app-fields-display [selectedObjectObservable]="selectedObjectObservable"></app-fields-display>
+</ng-container>

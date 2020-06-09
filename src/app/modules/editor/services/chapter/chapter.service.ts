@@ -13,6 +13,8 @@ export class ChapterService implements IBaseService {
 
     newChapter.id = this.editorService.GetNewID();
     newChapter.Text = '';
+    // newChapter.Fields = [];
+    // newChapter.FieldValues = {};
     newChapter.Properties = {
       Name : {id: 0, value: 'New Object', type: PropertyTypes.string}
 

@@ -1,20 +1,17 @@
-import {IGameCharacterTemplate} from './IGameCharacterTemplate';
-import {IGameObject} from './IGameObject';
+import {IProperties} from './IProperty';
+import {IField} from './IField';
 
 export interface IGameCharacter {
 
-  // ID des Charakter
+  // ID des Chars
   id: number;
 
-  // Name
+  // Name / Bezeichung des Kapitel
   Name: string;
 
-  // Beschreibung
-  Description: string;
+  Properties: IProperties;
 
-  // Zugewiesenes Template
-  CharacterTemplate: IGameCharacterTemplate;
+  Fields: IField[];
 
-  // Zugewiesene Items
-  Items: IGameObject[];
+  FieldValues: {[fieldId: string]: any};
 }
