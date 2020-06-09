@@ -116,6 +116,11 @@ button {
   color: red;
 }
 
+.navbar_toolbarDropdown a:any-link {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar_toolbarDropdownInformations i {
   font-size: 33px;
   margin: 23px 7px 0 0;
@@ -207,7 +212,7 @@ mat-grid-tile{
   width: 100%;
 }
 
-.userAreaSpace .bannerOnSuccess {
+.userAreaSpace .bannerOnSuccnavbar_toolbarDropdowness {
   background-color: green;
 }
 
