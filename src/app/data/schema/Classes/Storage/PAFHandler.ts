@@ -17,22 +17,23 @@ export class PAFHandler {
   tempFile: object = null;
   public event: Event = new Event('Loaded');
 
-  constructor(private FileAccessService: StorageSystemService) {
-
-  }
+  constructor(private FileAccessService: StorageSystemService) { }
 
   public eventHandler(e) {
     console.log('The time is: ' + e.detail);
   }
 
-  public SavePAFile(file: PAFile): boolean {
+  // Speichert die übergebene PAF-Datei unter dem angegeben Ort ab.
+  // Dabei Differenzieren zwischen FilePath und dem FilePath der PAF-Datei selbst
+  // um so einen relativen Dateipfad bilden zu können.
+  public SavePAFile(file: PAFile, filePath: string): boolean {
     const revtal = false;
     if (file != null) {
       const storageFile = new StorageFile();
       storageFile.Name = file.Name;
       storageFile.Description = file.Description;
       storageFile.fileName = file.fileName;
-      storageFile.filePath = file.filePath;
+      storageFile.filePath = filePath;
       storageFile.fileData = file;
       console.log('Saving: ' + storageFile.filePath);
       console.log('Saving: ' + storageFile.fileName);
@@ -47,30 +48,31 @@ export class PAFHandler {
     const storageFile = new StorageFile();
     storageFile.fileName = 'main.paf';
     storageFile.filePath = filePath + '/' + filename ;
-
   }
 
-  public LoadPAFFile(filePath: string, filename: string) {
-    this.Load(filePath, filename);
+  // Lädt aus dem angegebenen Pfad und Paketnamen eine PAF-Datei
+  // und gibt diese zurück.
+  public LoadPAFFile(filePath: string, packageName: string) {
+    this.Load(filePath, packageName);
     // let aaf: PAFEntry[] = null as PAFEntry[];
     const storageFile = new StorageFile();
     storageFile.fileName = 'main.paf';
-    storageFile.filePath = filePath + '/' + filename ;
+    storageFile.filePath = filePath + '/' + packageName ;
 
-    const asd = this.FileAccessService.loadData(storageFile)
+    const loadedFile = this.FileAccessService.loadData(storageFile)
       .then( (response) => {
         const result = (response as PAFile);
         if (result != null) {
-          const awfq: PAFEntry[] = [];
+          const pafEntries: PAFEntry[] = [];
           for (const entry of result.Entries) {
             console.log(entry.type);
-            awfq.push(entry);
+            pafEntries.push(entry);
           }
-          return awfq;
+          return pafEntries;
         }
     });
 
-    return asd;
+    return loadedFile;
   }
 
 
