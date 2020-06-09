@@ -18,6 +18,7 @@ import {IBaseService} from '../IBaseService';
 import {NoteService} from '../note/note.service';
 import {SceneService} from '../scene/scene.service';
 import {CharacterService} from '../character/character.service';
+import {ObjectService} from '../Object/object.service';
 
 export enum RightSidebarStateEnum {
   Properties = 'Properties',
@@ -83,6 +84,7 @@ export class EditorService {
     this.data.Character.bSubject = this.Characters = new BehaviorSubject<CharacterObject[]>([]);
     this.data.Character.service = new CharacterService(this);
     this.data.Object.bSubject = this.Objects = new BehaviorSubject<GameObject[]>([]);
+    this.data.Object.service = new ObjectService(this);
     this.data.Scene.bSubject = this.Scenes = new BehaviorSubject<SceneObject[]>([]);
     this.data.Scene.service = new SceneService(this);
     this.data.Script.bSubject = this.Scripts = new BehaviorSubject<GameScript[]>([]);

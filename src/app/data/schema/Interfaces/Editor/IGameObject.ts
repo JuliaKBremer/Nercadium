@@ -1,22 +1,17 @@
 import {IProperties} from './IProperty';
-import {IGameObjectTemplate} from './IGameObjectTemplate';
+import {IField} from './IField';
 
 export interface IGameObject {
-  // ID des Objekt / Item .. whatever
+
+  // ID des Chars
   id: number;
 
-  // Name des Objekts
+  // Name / Bezeichung des Kapitel
   Name: string;
 
-  // Beschreibung
-  Description: string;
-
-  // Zugewiesenen Werte / Stats .. whatever
   Properties: IProperties;
 
-  // Das zugewiesene Template
-  ObjectTemplateID: number;
+  Fields: IField[];
 
-  // Field values
-  FieldValues: {[key: string]: any};
+  FieldValues: {[fieldId: string]: any};
 }

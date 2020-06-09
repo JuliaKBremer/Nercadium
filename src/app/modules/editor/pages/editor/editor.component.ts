@@ -12,8 +12,7 @@ import {Subscription} from 'rxjs';
 export class EditorComponent implements OnInit, OnDestroy {
 
   public entityTypeEnum = EntityTypeEnum;
-  public buttonsLeft = [EntityTypeEnum.Chapter, EntityTypeEnum.Scene, EntityTypeEnum.Object, EntityTypeEnum.Character, EntityTypeEnum.Note,
-    EntityTypeEnum.ObjectTemplate];
+  public buttonsLeft = [EntityTypeEnum.Chapter, EntityTypeEnum.Scene, EntityTypeEnum.Object, EntityTypeEnum.Character, EntityTypeEnum.Note];
 
   public rightSidebarStateEnum = RightSidebarStateEnum;
   public buttonsRight = [RightSidebarStateEnum.Properties, RightSidebarStateEnum.Fields];
