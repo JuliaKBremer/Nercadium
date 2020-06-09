@@ -1,3 +1,7 @@
+// Author: Mirco Hölzenbein
+// Klasse zur vereinheitlichung des Datenzugriff des storageSystem,
+// somit wird nur eine Klasse anstelle jeweils seperate benötigt.
+
 import {IStorageAppend} from '../../Interfaces/storage/IStorageAppend';
 import {IStorageDelete} from '../../Interfaces/storage/IStorageDelete';
 import {IStorageLoad} from '../../Interfaces/storage/IStorageLoad';

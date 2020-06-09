@@ -1,3 +1,6 @@
+// Author: Mirco Hölzenbein
+// Enum zur Definition aller Objekttypen.
+
 export enum EntityTypeEnum {
   Object = 'Object' ,
   Adventure = 'Adventure' ,

@@ -22,6 +22,7 @@ import {StateEnum} from '../../../data/schema/Classes/Storage/StateEnum';
 })
 export class LibraryService {
 
+  // Privates..
   Adventures: AdventureObject[];
   Characters: CharacterObject[];
   Objects: GameObject[];
@@ -31,19 +32,55 @@ export class LibraryService {
   Notes: NoteObject[];
   ObjectTemplates: GameObjectTemplate[];
   CharacterTemplates: GameObjectTemplate[];
+
   Description: string;
   Name: string;
-  public State: StateEnum;
 
+  // Aktueller Status der Library z.B. Laden usw.
+  public State: StateEnum;
 
   constructor(private FileAccessService: StorageSystemService) {
     this.Clear();
   }
 
+  // doppelt.. besser nicht rausnehmen für den Fall, dass
+  // jemand die Methode verwendet ( weil früher geaddet ).
   public GetLoadedObjects() {
     return this.Objects;
   }
 
+  // Getter der jeweiligen Objekte. Bewusst nur Getter, aus Zugriffsgründen.
+
+  // Gibt alle im Cache befindlichen Abenteuer als Array zurück.
+  public GetAdventures() { return this.Adventures; }
+
+  // Gibt alle im Cache befindlichen Charaktere als Array zurück.
+  public GetCharacters() { return this.Characters; }
+
+  // Gibt alle im Cache befindlichen Objekte als Array zurück.
+  public GetObjects() { return this.Objects; }
+
+  // Gibt alle im Cache befindlichen Szenen als Array zurück.
+  public GetScenes() { return this.Scenes; }
+
+  // Gibt alle im Cache befindlichen Skripte als Array zurück.
+  public GetScripts() { return this.Scripts; }
+
+  // Gibt alle im Cache befindlichen Kapitel als Array zurück.
+  public GetChapters() { return this.Chapters; }
+
+  // Gibt alle im Cache befindlichen Notes als Array zurück.
+  public GetNotes() { return this.Notes; }
+
+  // Gibt alle im Cache befindlichen Objekt-Templates als Array zurück.
+  public GetObjectTemplates() { return this.ObjectTemplates; }
+
+  // Gibt alle im Cache befindlichen Charakter-Templates als Array zurück.
+  public GetCharacterTemplates() { return this.CharacterTemplates; }
+
+
+
+  // Leert die Einträge / setzt die Datenbank zurück.
   public Clear(): void {
     this.State = StateEnum.Default;
     this.Objects = [];
@@ -58,6 +95,9 @@ export class LibraryService {
   }
 
   // General Methods
+
+  // Void.
+  // Fügt eine neue IBaseGameEntity der Datenbank hinzu.
   public Add(gameObject: IBaseGameEntity) {
 
     if (gameObject.EntityType === EntityTypeEnum.Object) {
@@ -97,6 +137,8 @@ export class LibraryService {
     }
   }
 
+  // Defaultwert : FALSE
+  // Entfernt das angegebene IBaseGameEnitity aus der Datenbank.
   public Remove(gameObject: IBaseGameEntity): boolean {
   let removed = false;
 
@@ -189,6 +231,8 @@ export class LibraryService {
   return removed;
   }
 
+  // Defaultwert : FALSE
+  // Ersetzt das IBaseGameEntity anhand der angegebenen ID.
   public Replace(id: number, newGameObjectValue: IBaseGameEntity): boolean {
     let replaced = false;
 
@@ -279,6 +323,8 @@ export class LibraryService {
     return replaced;
   }
 
+  // Defaultwert : NULL
+  // Gibt anhand des angegebenen EntityTypeEnum und Index das gesuchte Object zurück.
   public GetEntityByIndex(index: number, type: EntityTypeEnum ) {
     let found = null;
 
@@ -289,9 +335,67 @@ export class LibraryService {
         console.log('Item found:' + found);
       }
     }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Note && index <= this.Notes.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Notes[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Adventure && index <= this.Adventures.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Adventures[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Chapter && index <= this.Chapters.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Chapters[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Character && index <= this.Characters.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Characters[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.CharacterTemplate && index <= this.CharacterTemplates.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.CharacterTemplates[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.ObjectTemplate && index <= this.ObjectTemplates.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.ObjectTemplates[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Script && index <= this.Scripts.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Scripts[index];
+        console.log('Item found:' + found);
+      }
+    }
+    if (index > -1) {
+      if (type === EntityTypeEnum.Scene && index <= this.Scenes.length) {
+        // tslint:disable-next-line:no-shadowed-variable
+        found = this.Scenes[index];
+        console.log('Item found:' + found);
+      }
+    }
     return found;
   }
 
+  // Defaultwert : NULL
+  // Gibt anhand des angegebenen EntityTypeEnum und Namen den gesuchten Index zurück.
   public FindIndexByName(name: string, type: EntityTypeEnum ) {
     let found = -1;
 
@@ -303,24 +407,73 @@ export class LibraryService {
         found = this.Objects.findIndex((object) => object === indexx);
         console.log('Index found:' + found);
       }
-
+      if (type === EntityTypeEnum.Chapter) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Chapters.find(item => item.Name === name);
+        found = this.Chapters.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.Scene) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Scenes.find(item => item.Name === name);
+        found = this.Scenes.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.Script) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Scripts.find(item => item.Name === name);
+        found = this.Scripts.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.ObjectTemplate) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.ObjectTemplates.find(item => item.Name === name);
+        found = this.ObjectTemplates.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.CharacterTemplate) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.CharacterTemplates.find(item => item.Name === name);
+        found = this.CharacterTemplates.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.Character) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Characters.find(item => item.Name === name);
+        found = this.Characters.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.Adventure) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Adventures.find(item => item.Name === name);
+        found = this.Adventures.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
+      if (type === EntityTypeEnum.Note) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const indexx = this.Notes.find(item => item.Name === name);
+        found = this.Notes.findIndex((object) => object === indexx);
+        console.log('Index found:' + found);
+      }
 
     }
     return found;
   }
 
-
-
-
-
+  // Lädt aus dem angegebenen Ordner den angegebenen Paketnamen.
+  // Die geladenen Objekte sind anschließend in der Library verfügbar.
   public LoadPackage(FilePath: string, packageName: string) {
     this.State = StateEnum.Loading;
     const handler = new PAFHandler(this.FileAccessService);
     const result = handler.LoadPAFFile(FilePath, packageName);
+
     if (result != null) {
       console.log('PAF not null! Loaded!');
+      // Leeren der im cache befindlichen Objekte, damit diese mit dem Paket ersetzt werden.
       this.Clear();
       result.then( (entries) => {
+        // Aus den Einträgen in der PAF Datei die Dateipfade generieren und die jeweiligen Objekte
+        // einzeln laden.
         for (const entry of entries) {
           const newFile = new StorageFile();
           newFile.filePath = FilePath  + entry.filePath;
@@ -342,6 +495,7 @@ export class LibraryService {
       } ) .catch( () => { this.State = StateEnum.Failure; })
         .finally( () => { const state = this.State; return state; } );
 
+      // Sehr Dirty.. allerdings, allerdings klappt es um so den Status korrekt zu setzten..
       while (this.State === StateEnum.Loading) {
       }
 
@@ -352,6 +506,7 @@ export class LibraryService {
     return this.State;
   }
 
+  // Typed das ungetypte IBaseGameEntity anhand des typedstr (TypeString)
   private getTypedEntity(obj: object, typedstr: string): IBaseGameEntity {
     let retVal = null as IBaseGameEntity;
     console.log('got: ' + typedstr);
@@ -394,6 +549,11 @@ export class LibraryService {
     return retVal;
   }
 
+  // Erstellt ein PAF-Paket (PAF - Package Allocation File), welches als Hauptindex die "Main.paf"-Datei verwendet
+  // in der alle verweise auf andere Objekte enthalten sind.
+  // Die SavePackage Methode nimmt num alle (aktuell) in der Datenbank enthaltenden Objekte, Kapitel usw.
+  // und erstellt unter dem angegebenen eine PAF Datei und die dazugehörigen Unterordner, in die dann die jeweiligen Objekte
+  // als .json Datei gespeichert wird.
   public SavePackage(FilePath: string, PackageName: string) {
 
     const handler = new PAFHandler(this.FileAccessService);
@@ -410,6 +570,10 @@ export class LibraryService {
     this.saveObjectList(this.Scenes, FilePath, PackageName);
   }
 
+  // Speichert alle angegebenen IBaseGameEntity abhängig von dem angegebenen Pfad (Path)
+  // und ihrem EntityType in einen jeweiligen Unterort ab.
+  // Beispiel Pfad:/Users/sample/ , EntityType: Object  und PackageName: Test
+  // würde unter '/Users/sample/Test/Object/$Object_Name.json' gespeichert werden.
   private saveObjectList(objects: IBaseGameEntity[], Path: string, PackageName: string) {
       for (const entry of objects) {
         const file = new StorageFile();
@@ -468,6 +632,7 @@ export class LibraryService {
       }
   }
 
+  // Erstellt eine PAF-Datei mit jeweiligen Einträgen von allen aktuellen in der Datenbank befindlichen Objekten
   private createPackage(Path: string, PackageName: string, Description?: string) {
 
     console.log('asd');
@@ -558,13 +723,10 @@ export class LibraryService {
     return pafile;
   }
 
+  // Entfernt alle Specialzeichen um Dateinamen entsprechend laden und speichern zu können.
   private getNoSpecialString(value: string) {
     const val = value.replace(/[^a-zA-Z0-9 ]/g, '');
     return val.split(' ').join('_');
-  }
-
-  public SavePackageByFilePath(FilePath: string) {
-
   }
 
 }
