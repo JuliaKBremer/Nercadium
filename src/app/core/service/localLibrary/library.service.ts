@@ -512,39 +512,39 @@ export class LibraryService {
     console.log('got: ' + typedstr);
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Object) {
-      retVal = obj as GameObject;
+      retVal = Object.assign(new GameObject(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Adventure) {
-      retVal = obj as  AdventureObject;
+      retVal = Object.assign(new AdventureObject(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Character) {
-      retVal = obj as  CharacterObject;
+      retVal = Object.assign(new CharacterObject(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.CharacterTemplate) {
-      retVal = obj as  GameCharacterTemplate;
+      retVal = Object.assign(new GameCharacterTemplate(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.ObjectTemplate) {
-      retVal = obj as  GameObjectTemplate;
+      retVal = Object.assign(new GameObjectTemplate(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Script) {
-      retVal = obj as  GameScript;
+      retVal = Object.assign(new GameScript(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Scene) {
-      retVal = obj as  SceneObject;
+      retVal = Object.assign(new SceneObject(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Chapter) {
-      retVal = obj as  GameChapter;
+      retVal = Object.assign(new GameChapter(), obj);
     }
     // tslint:disable-next-line:triple-equals
     if (typedstr == EntityTypeEnum.Note) {
-      retVal = obj as  NoteObject;
+      retVal = Object.assign(new NoteObject(), obj);
     }
     return retVal;
   }
