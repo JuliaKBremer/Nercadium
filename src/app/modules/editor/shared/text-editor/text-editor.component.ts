@@ -14,7 +14,7 @@ import Base64UploadAdapter from './Base64Upload';
 
 export class TextEditorComponent {
 
-  @Input() selectedObject: IBaseGameEntity;
+  @Input() selectedObject: IBaseGameEntity | any;
 
   public Editor = ClassicEditor;
   public editorConfig = { extraPlugins: [Base64UploadAdapter] };

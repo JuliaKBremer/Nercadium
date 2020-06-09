@@ -9,23 +9,23 @@
     <!-- Text Box -->
     <div *ngSwitchCase="fieldTypes.TextBox">
       <label>{{field.Properties.Label.value}}
-        <!-- <input type="text"
+        <input type="text"
                [maxLength]="field.Properties.MaxLength.value"
                [placeholder]="field.Properties.Placeholder.value"
                [readOnly]="field.Properties.ReadOnly.value"
                [size]="field.Properties.Size.value"
-               [(ngModel)]="selectedObject.FieldValues[field.ID]"> -->
+               [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
     <!-- Number -->
     <div *ngSwitchCase="fieldTypes.Number">
       <label>{{field.Properties.Label.value}}
-        <!-- <input [min]="field.Properties.Min.value"
+        <input [min]="field.Properties.Min.value"
                [max]="field.Properties.Max.value"
                [step]="field.Properties.Step.value"
                [readOnly]="field.Properties.ReadOnly.value"
-               type="number" [(ngModel)]="selectedObject.FieldValues[field.ID]"> -->
+               type="number" [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
@@ -33,9 +33,9 @@
     <div *ngSwitchCase="fieldTypes.Select">
       <div *ngIf="field.Properties.Options.value.length > 0">
         <label>{{field.Properties.Label.value}}
-          <!-- <select [(ngModel)]="selectedObject.FieldValues[field.ID]">
+          <select [(ngModel)]="selectedObject.FieldValues[field.ID]">
             <option *ngFor="let value of field.Properties.Options.value" [ngValue]="value">{{value}}</option>
-          </select> -->
+          </select>
         </label>
       </div>
     </div>
@@ -44,39 +44,39 @@
     <!-- Text Area -->
     <div *ngSwitchCase="fieldTypes.TextArea">
       <label>{{field.Properties.Label.value}}
-       <!-- <textarea [cols]="field.Properties.Cols.value"
+       <textarea [cols]="field.Properties.Cols.value"
                   [rows]="field.Properties.Rows.value" [style.height]="'unset'"
                   [maxLength]="field.Properties.MaxLength.value"
                   [placeholder]="field.Properties.Placeholder.value"
                   [readOnly]="field.Properties.ReadOnly.value"
                   [style.resize]="field.Properties.Resize.value ? '': 'none'"
-                  [(ngModel)]="selectedObject.FieldValues[field.ID]"></textarea> -->
+                  [(ngModel)]="selectedObject.FieldValues[field.ID]"></textarea>
       </label>
     </div>
 
     <!-- Checkbox -->
     <div *ngSwitchCase="fieldTypes.CheckBox">
       <label>{{field.Properties.Label.value}}
-       <!-- <input type="checkbox" [(ngModel)]="selectedObject.FieldValues[field.ID]"> -->
+       <input type="checkbox" [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
     <!-- Radio -->
     <div *ngSwitchCase="fieldTypes.Radio">
       <label>{{field.Properties.Label.value}}
-        <!-- <input type="radio" [(ngModel)]="selectedObject.FieldValues[field.ID]"> -->
+        <input type="radio" [(ngModel)]="selectedObject.FieldValues[field.ID]">
       </label>
     </div>
 
     <!-- Range -->
     <div *ngSwitchCase="fieldTypes.Range">
       <label>{{field.Properties.Label.value}}
-        <!-- <input [min]="field.Properties.Min.value"
+        <input [min]="field.Properties.Min.value"
                [max]="field.Properties.Max.value"
                [step]="field.Properties.Step.value"
                [readOnly]="field.Properties.ReadOnly.value"
                type="range" [(ngModel)]="selectedObject.FieldValues[field.ID]">
-        {{selectedObject.FieldValues[field.ID]}} -->
+        {{selectedObject.FieldValues[field.ID]}}
       </label>
     </div>
 
@@ -91,10 +91,10 @@
               [ngStyle]="getTableStyle(field.Properties.TableStyle.value).td">
             {{checkTable(field.ID, row, col)}}
             <!--suppress TypeScriptUnresolvedVariable -->
-           <!-- <div contenteditable="true"
+           <div contenteditable="true"
                  (input)="changeTableContent(field.ID, row, col, $event.target.innerHTML)">
               {{selectedObject.FieldValues[field.ID][row][col]}}
-            </div> -->
+            </div>
           </td>
         </tr>
       </table>
@@ -102,11 +102,11 @@
 
     <!-- Image -->
     <div *ngSwitchCase="fieldTypes.Image">
-      <!-- <img *ngIf="selectedObject.FieldValues[field.ID]"
+      <img *ngIf="selectedObject.FieldValues[field.ID]"
            [src]="selectedObject.FieldValues[field.ID]"
            [style.width]="field.Properties.Width.value"
            [style.height]="field.Properties.Height.value"
-           alt="image..."> -->
+           alt="image...">
       <input
         style="display: none"
         type="file" (change)="onFileChanged(field.ID, $event)"
