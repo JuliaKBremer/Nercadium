@@ -90,6 +90,11 @@
         <!-- Head -->
         <div class="head borderBottom">
           <div class="heading">{{editorService.currentSelectedRightState}}</div>
+          <ng-container *ngIf="editorService.currentSelectedRightState === rightSidebarStateEnum.Fields">
+            <div class="button" (click)="fieldService.AddField(editorService.GetSelectedObject())">
+              <i class="fas fa-plus"></i>
+            </div>
+          </ng-container>
         </div>
 
         <!-- Content -->

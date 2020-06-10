@@ -1,18 +1,22 @@
-<ng-container *ngIf="selectedObject">
-  <ng-container *ngIf="selectedObjectFields">
-
-    <div *ngFor="let field of selectedObjectFields">
-      <span (click)="field.IsCollapsed = !field.IsCollapsed">
+<ng-container *ngIf="selectedObjectFields">
+  <div *ngFor="let field of selectedObjectFields">
+    <div class="listEntry">
+      <div class="entryName"
+           (click)="field.IsCollapsed = !field.IsCollapsed"
+           [ngClass]="field.IsCollapsed === false ? 'selected' : ''">
         {{field.Properties.Name.value}}
-      </span>
-      <span (click)="fieldService.CopyFieldInSelectedObject(field)">Copy</span>
-      <span (click)="fieldService.DeleteField(field)">Delete</span>
-
-      <div [hidden]="field.IsCollapsed">
-        <app-properties-list [properties]="field.Properties"></app-properties-list>
+      </div>
+      <div class="button"
+           (click)="fieldService.CopyFieldInSelectedObject(field)">
+        <i class="fas fa-copy"></i>
+      </div>
+      <div class="button"
+           (click)="fieldService.DeleteField(field)">
+        <i class="fas fa-trash"></i>
       </div>
     </div>
+    <app-properties-list *ngIf="!field.IsCollapsed"
+                         [properties]="field.Properties"></app-properties-list>
+  </div>
 
-  </ng-container>
-  <span (click)="fieldService.AddField(selectedObject)">Add</span>
 </ng-container>
