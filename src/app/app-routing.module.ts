@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'startpage', loadChildren: () => import('./modules/startpage/startpage.module').then(m => m.StartpageModule) },
+  { path: 'user', loadChildren: () => import('./modules/user/user.module').then(m => m.UserModule) },
   { path: '', pathMatch: 'full', loadChildren: () => import('./modules/startpage/startpage.module').then(m => m.StartpageModule) },
   { path: 'editor', loadChildren: () => import('./modules/editor/editor.module').then(m => m.EditorModule) },
   { path: 'play', loadChildren: () => import('./modules/play/play.module').then(m => m.PlayModule) },

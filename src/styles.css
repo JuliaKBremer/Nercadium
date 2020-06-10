@@ -120,8 +120,8 @@ button {
 .navbar__listItem:hover,
 .navbar__listItem:active,
 .navbar__listItem--Active {
-  /*background-color: #c9ab53 !important;*/
-  text-shadow: 0 0 8px hsl(45, 52%, 56%); }
+  background-color: #c9ab53 !important;
+  text-shadow: 0 0 8px white; }
 
 .navbar__logo {
   margin: -3px 0 -7px 10px;
@@ -166,6 +166,11 @@ button {
   color: red;
 }
 
+.navbar_toolbarDropdown a:any-link {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar_toolbarDropdownInformations i {
   font-size: 33px;
   margin: 23px 7px 0 0;
@@ -203,5 +208,73 @@ button {
 mat-grid-tile{
   background-color: dimgrey;
 }
+
+/* USER AREA */
+.alignContent {
+  flex-direction: column;
+}
+
+.errorField {
+  color: red;
+}
+
+.userAreaSpace {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  width:30vw;
+  margin: 35px auto;
+}
+
+.userAreaSpace button,
+.userAreaFormButton,
+.userAreaSpace input,
+.userAreaSpace mat-form-field {
+  width: 100%;
+  margin: 10px auto 5px;
+  height: 45px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 1px;
+  background-color: rgb(201, 171, 83);
+  margin: -12px 0 0 0;
+}
+
+.userAreaSpace button:hover,
+.userAreaFormButton:hover {
+  text-shadow: 0 0 8px #fff;
+}
+
+.disabledBecauseWasSuccess {
+  display: none;
+  background-color: gray;
+  color: black;
+}
+
+.userAreaSpace .bannerOnSuccess,
+.userAreaSpace .bannerOnFail {
+  padding: 5px 10px;
+  color: #fff;
+  word-wrap: break-word;
+  border-radius: 4px;
+  margin: 0 auto 20px auto;
+  width: 100%;
+}
+
+.userAreaSpace .bannerOnSuccnavbar_toolbarDropdowness {
+  background-color: green;
+}
+
+.userAreaSpace .bannerOnFail {
+  background-color: red;
+}
+
+.userAreaSpace a:any-link {
+  margin: 10px auto;
+  text-decoration: none;
+  color: rgb(201, 171, 83);
+}
+
 
 /*# sourceMappingURL=styles.css.map */
