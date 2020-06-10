@@ -276,5 +276,26 @@ mat-grid-tile{
   color: rgb(201, 171, 83);
 }
 
+.formHeadline {
+  margin: 49px auto 24px auto;
+  font-size: 35pt;
+}
+
+.comingSoonBanner {
+  min-width: 500px;
+  max-width: 1000px;
+  width: 50vw;
+  margin: auto;
+}
+
+/* Startpage */
+
+.startpageContainer__hr {
+  color: #fff;
+  width: 60vw;
+  min-width: 701px;
+  max-width: 1216px;
+  margin: 90px auto 45px auto;
+}
 
 /*# sourceMappingURL=styles.css.map */
