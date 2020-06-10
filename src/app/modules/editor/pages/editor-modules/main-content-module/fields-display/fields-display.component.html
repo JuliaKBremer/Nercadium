@@ -1,7 +1,7 @@
 <ng-container *ngIf="fields">
   <div *ngFor="let field of fields"
        [ngSwitch]="field.Properties.Type.value"
-       [style.position]="'relative'"
+       [style.position]="'absolute'"
        [style.width]="'fit-content'"
        [style.top]="field.Properties.Top.value + 'px'"
        [style.left]="field.Properties.Left.value + 'px'">
