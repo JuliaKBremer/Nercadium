@@ -92,7 +92,7 @@
             {{checkTable(field.ID, row, col)}}
             <!--suppress TypeScriptUnresolvedVariable -->
            <div contenteditable="true"
-                 (input)="changeTableContent(field.ID, row, col, $event.target.innerHTML)">
+                 (blur)="changeTableContent(field.ID, row, col, $event.target.innerHTML)">
               {{selectedObject.FieldValues[field.ID][row][col]}}
             </div>
           </td>
