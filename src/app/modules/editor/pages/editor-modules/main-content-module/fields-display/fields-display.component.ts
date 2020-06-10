@@ -43,12 +43,12 @@ export class FieldsDisplayComponent implements OnInit, OnDestroy {
   }
 
   checkTable(fieldID: number, row: number, col: number) {
-    if (this.selectedObject.FieldValues[fieldID][row] !== 'undefined') {
+    if (this.selectedObject.FieldValues[fieldID][row] === undefined) {
       this.selectedObject.FieldValues[fieldID][row] = [];
+    }
 
-      if (this.selectedObject.FieldValues[fieldID][row][col] !== 'undefined') {
-        this.selectedObject.FieldValues[fieldID][row][col] = row.toString() + ',' + col.toString();
-      }
+    if (this.selectedObject.FieldValues[fieldID][row][col] === undefined) {
+      this.selectedObject.FieldValues[fieldID][row][col] = row.toString() + ',' + col.toString();
     }
   }
 
