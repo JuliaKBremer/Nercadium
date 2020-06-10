@@ -56,6 +56,7 @@ export class NewAdventureService {
     adventure.Description = this.newAdventure.description;
 
     this.libraryService.Clear();
+    this.editorService.GetDataFromLibrary();
     this.libraryService.Add(adventure);
     this.libraryService.SavePackage(this.newAdventure.path, this.newAdventure.name);
 

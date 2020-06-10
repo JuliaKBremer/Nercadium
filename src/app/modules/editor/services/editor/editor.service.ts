@@ -144,7 +144,7 @@ export class EditorService {
     return null;
   }
 
-  private GetDataFromLibrary() {
+  public GetDataFromLibrary() {
     this.Adventure.next(this.libraryService.Adventures);
     this.Characters.next(this.libraryService.Characters);
     this.Objects.next(this.libraryService.Objects);
